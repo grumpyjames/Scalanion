@@ -42,16 +42,18 @@ package org {
       protected def formatter() : Formatter;
     }
 
+    object Magic {
+      val returnValue = 5;
+    }
+
     class PrompterWithFormatter(formatted: List[String], cannedFormatter: Formatter) extends Promptable {
       def prompt(options: Seq[String]) : Int = {
 	options should equal (formatted)
-	5
+	Magic.returnValue;
       }
 
       protected def formatter() : Formatter = { cannedFormatter }
     }
-
-    class FormattedPrompter(formatted: List[String], cannedFormatter: Formatter) extends PrompterWithFormatter(formatted, cannedFormatter) with FormattedPrompts {}
 
     class FormattedPromptableTest extends WordSpec {
       val unformatted = List("some", "bloody", "strings")
@@ -63,18 +65,14 @@ package org {
 	  formatted
 	}
       }
-      val prompter = new FormattedPrompter(formatted, cannedFormatter)
-      prompter.prompt(unformatted)
+      val prompter = new PrompterWithFormatter(formatted, cannedFormatter) with FormattedPrompts
+      prompter.prompt(unformatted) should equal (Magic.returnValue)
     }
 
 
-    class Prompter(input: UserInput, output: Printer, optionFormatter: Formatter) extends Promptable {
+    class Prompter(input: UserInput, output: Printer) extends Promptable {
       def prompt(options : Seq[String]) : Int = {
 	readNext(options).dropWhile({response => validReturn(options, response)}).head		
-      }
-
-      protected def formatter() : Formatter = {
-	optionFormatter
       }
 
       private def validReturn(options : Seq[String], result : Int) : Boolean = {
@@ -89,6 +87,12 @@ package org {
       private def doPrompt(options: Seq[String]) : Unit = {
 	output.println("Choose from:")	
 	options.foreach(output.println(_))
+      }
+    }
+
+    class FormattedPrompter(input: UserInput, output: Printer, optionFormatter: Formatter) extends Prompter(input, output) with FormattedPrompts {
+      protected def formatter() : Formatter = {
+	optionFormatter
       }
     }
 
@@ -118,7 +122,7 @@ package org {
       def createFixture(inputs: Stack[Int]) : (FakeUserInput, FakePrinter, Prompter) = {
 	val printer = new FakePrinter()
 	val user = new FakeUserInput(inputs)
-	(user, printer, new Prompter(user, printer, new OptionFormatter) with FormattedPrompts)
+	(user, printer, new FormattedPrompter(user, printer, new OptionFormatter))
       }
 
       "a command line player" when {
