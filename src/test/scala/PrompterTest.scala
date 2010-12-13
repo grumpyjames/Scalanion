@@ -26,7 +26,7 @@ package org {
     }
 
     trait Promptable {
-      def prompt(options : Seq[String]) : Unit;
+      def prompt(options : Seq[String]) : Int;
     }
 
     trait Formatter {
@@ -34,7 +34,7 @@ package org {
     }
 
     trait FormattedPrompts extends Promptable {
-      abstract override def prompt(options: Seq[String]) : Unit = {
+      abstract override def prompt(options: Seq[String]) : Int = {
 	val formattedOptions = formatter.format(options)
 	super.prompt(formattedOptions)
       }
@@ -43,8 +43,9 @@ package org {
     }
 
     class PrompterWithFormatter(formatted: List[String], cannedFormatter: Formatter) extends Promptable {
-      def prompt(options: Seq[String]) = {
+      def prompt(options: Seq[String]) : Int = {
 	options should equal (formatted)
+	5
       }
 
       protected def formatter() : Formatter = { cannedFormatter }
@@ -67,9 +68,13 @@ package org {
     }
 
 
-    class Prompter(input: UserInput, output: Printer) {
+    class Prompter(input: UserInput, output: Printer, optionFormatter: Formatter) extends Promptable {
       def prompt(options : Seq[String]) : Int = {
 	readNext(options).dropWhile({response => validReturn(options, response)}).head		
+      }
+
+      protected def formatter() : Formatter = {
+	optionFormatter
       }
 
       private def validReturn(options : Seq[String], result : Int) : Boolean = {
@@ -82,12 +87,26 @@ package org {
       }
       
       private def doPrompt(options: Seq[String]) : Unit = {
-	output.println("Choose from:")
-	options.indices.zip(options).foreach(promptOne(_))
+	output.println("Choose from:")	
+	options.foreach(output.println(_))
       }
+    }
 
-      private def promptOne(optionWithIndex : (Int, String)) : Unit = {
-	output.println((optionWithIndex._1 + 1) + ". " + optionWithIndex._2)
+    class OptionFormatter extends Formatter {
+      def format(options: Seq[String]) : Seq[String] = {
+	options.indices.zip(options).map(tuple => (tuple._1 + 1) + ". " + tuple._2)
+      }
+    }
+
+    class OptionFormatterTest extends WordSpec {
+      val unformatted = List("forum","quorum","no")
+      "an option formatter" when {
+	"asked to format some options" should {
+	  "number and format them nicely" in {
+	    val formatted = new OptionFormatter().format(unformatted)
+	    formatted should equal (List("1. forum", "2. quorum", "3. no"))	    
+	  }
+	}
       }
     }
 
@@ -99,7 +118,7 @@ package org {
       def createFixture(inputs: Stack[Int]) : (FakeUserInput, FakePrinter, Prompter) = {
 	val printer = new FakePrinter()
 	val user = new FakeUserInput(inputs)
-	(user, printer, new Prompter(user, printer))
+	(user, printer, new Prompter(user, printer, new OptionFormatter) with FormattedPrompts)
       }
 
       "a command line player" when {
