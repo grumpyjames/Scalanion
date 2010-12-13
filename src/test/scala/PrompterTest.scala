@@ -1,7 +1,7 @@
 import scala.collection.mutable.Stack
 
 import org.scalatest.WordSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.matchers.ShouldMatchers._
 
 package org {
   package grumpysoft {
@@ -25,15 +25,53 @@ package org {
       }
     }
 
+    trait Promptable {
+      def prompt(options : Seq[String]) : Unit;
+    }
+
+    trait Formatter {
+      def format(options: Seq[String]) : Seq[String];
+    }
+
+    trait FormattedPrompts extends Promptable {
+      abstract override def prompt(options: Seq[String]) : Unit = {
+	val formattedOptions = formatter.format(options)
+	super.prompt(formattedOptions)
+      }
+
+      protected def formatter() : Formatter;
+    }
+
+    class FormattedPrompter(formatted: List[String], cannedFormatter: Formatter) extends Promptable {
+      def prompt(options: Seq[String]) = {
+	options should equal (formatted)
+      }
+
+      protected def formatter() : Formatter = { cannedFormatter }
+    }
+
+    class FormattedPromptableTest extends WordSpec {
+      val unformatted = List("some", "bloody", "strings")
+      val formatted = List("formatted", "strings")
+
+      val cannedFormatter = new Formatter() {
+	def format(options: Seq[String]) = {
+	  assert(options == unformatted)
+	  formatted
+	}
+      }
+      val prompter = new FormattedPrompter(formatted, cannedFormatter) with FormattedPrompts
+      prompter.prompt(unformatted)
+    }
+
+
     class Prompter(input: UserInput, output: Printer) {
       def prompt(options : Seq[String]) : Int = {
 	readNext(options).dropWhile({response => validReturn(options, response)}).head		
       }
 
       private def validReturn(options : Seq[String], result : Int) : Boolean = {
-	val valid = result > options.size || result <= 0
-	println(result + " was " + valid)
-	valid
+	result > options.size || result <= 0
       }
 
       private def readNext(options: Seq[String]) : Stream[Int] = {
@@ -53,6 +91,9 @@ package org {
 
     class PrompterTest extends WordSpec {
 
+      val options = List("one","two","three")
+      val expectedOutput = List("Choose from:","1. one","2. two","3. three")
+
       def createFixture(inputs: Stack[Int]) : (FakeUserInput, FakePrinter, Prompter) = {
 	val printer = new FakePrinter()
 	val user = new FakeUserInput(inputs)
@@ -63,27 +104,26 @@ package org {
 	"prompted to choose from some options" should {
 	  val (user, printer, player) = createFixture(Stack(1))
 	  "ask the provided stream to choose, then print those options to the supplied printstream" in {
-	    val index = player.prompt(List("one","two","three"))
-	    assert(printer.printedLines.reverse === List("Choose from:","1. one", "2. two", "3. three"))
+	    val index = player.prompt(options)
+	    assert(printer.printedLines.reverse === expectedOutput)
 	    assert(index === 1)
 	    assert(user.cannedInputs.isEmpty)
 	  }
 	}
       }      
 
-      val expectedOutput = List("Choose from:","1. one","2. two")
-
       "a command line player" when {
 	"prompted to choose from some options" should {
-	  val (user, printer, player) = createFixture(Stack(2,3,4))
+	  val (user, printer, player) = createFixture(Stack(2,5,4))
 	  "reject reads that don't match an option, and retry until a valid option is given" in {
-	    val index = player.prompt(List("one","two"))
-	    assert(printer.printedLines.reverse === (expectedOutput ++ expectedOutput ++ expectedOutput))
+	    val index = player.prompt(options)
 	    assert(index === 2)
+	    assert(printer.printedLines.reverse === (expectedOutput ++ expectedOutput ++ expectedOutput))
 	    assert(user.cannedInputs.isEmpty)
 	  } 
 	}
       }
+
     }
   }  
 }
