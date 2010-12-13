@@ -6,14 +6,6 @@ import org.scalatest.matchers.ShouldMatchers._
 package org {
   package grumpysoft {
 
-    trait Printer {
-      def println(s: String) : Unit; 
-    }
-
-    trait UserInput {
-      def read() : Int;
-    }
-
     class FakePrinter extends Printer {
       var printedLines : List[String] = List()
       def println(s: String) : Unit = { printedLines = s :: printedLines }
@@ -23,23 +15,6 @@ package org {
       def read() : Int = {
 	cannedInputs.pop
       }
-    }
-
-    trait Promptable {
-      def prompt(options : Seq[String]) : Int;
-    }
-
-    trait Formatter {
-      def format(options: Seq[String]) : Seq[String];
-    }
-
-    trait FormattedPrompts extends Promptable {
-      abstract override def prompt(options: Seq[String]) : Int = {
-	val formattedOptions = formatter.format(options)
-	super.prompt(formattedOptions)
-      }
-
-      protected def formatter() : Formatter;
     }
 
     object Magic {
@@ -67,39 +42,6 @@ package org {
       }
       val prompter = new PrompterWithFormatter(formatted, cannedFormatter) with FormattedPrompts
       prompter.prompt(unformatted) should equal (Magic.returnValue)
-    }
-
-
-    class Prompter(input: UserInput, output: Printer) extends Promptable {
-      def prompt(options : Seq[String]) : Int = {
-	readNext(options).dropWhile({response => validReturn(options, response)}).head		
-      }
-
-      private def validReturn(options : Seq[String], result : Int) : Boolean = {
-	result > options.size || result <= 0
-      }
-
-      private def readNext(options: Seq[String]) : Stream[Int] = {
-	doPrompt(options)
-	Stream.cons(input.read, readNext(options))
-      }
-      
-      private def doPrompt(options: Seq[String]) : Unit = {
-	output.println("Choose from:")	
-	options.foreach(output.println(_))
-      }
-    }
-
-    class FormattedPrompter(input: UserInput, output: Printer, optionFormatter: Formatter) extends Prompter(input, output) with FormattedPrompts {
-      protected def formatter() : Formatter = {
-	optionFormatter
-      }
-    }
-
-    class OptionFormatter extends Formatter {
-      def format(options: Seq[String]) : Seq[String] = {
-	options.indices.zip(options).map(tuple => (tuple._1 + 1) + ". " + tuple._2)
-      }
     }
 
     class OptionFormatterTest extends WordSpec {
