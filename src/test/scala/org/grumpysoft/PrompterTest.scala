@@ -22,8 +22,9 @@ package org {
     }
 
     class PrompterWithFormatter(formatted: List[String], cannedFormatter: Formatter) extends Promptable {
-      def prompt(options: Seq[String]) : Int = {
-	options should equal (formatted)
+      def prompt(options: Seq[SelfDescribing]) : Int = {
+	val stringOptions = options.map(_.describe)
+	stringOptions should equal (formatted)
 	Magic.returnValue;
       }
 
@@ -31,25 +32,29 @@ package org {
     }
 
     class FormattedPromptableTest extends WordSpec {
-      val unformatted = List("some", "bloody", "strings")
+      val unformatted = List(StringDescription("some"), StringDescription("bloody"), StringDescription("strings"))
       val formatted = List("formatted", "strings")
 
       val cannedFormatter = new Formatter() {
-	def format(options: Seq[String]) = {
+	def format(options: Seq[SelfDescribing]) = {
 	  options should equal (unformatted)
-	  formatted
+	  formatted.map(StringDescription(_))
 	}
       }
       val prompter = new PrompterWithFormatter(formatted, cannedFormatter) with FormattedPrompts
       prompter.prompt(unformatted) should equal (Magic.returnValue)
     }
 
+    case class StringDescription(val desc: String) extends SelfDescribing {
+      def describe() : String = { desc }
+    }
+
     class OptionFormatterTest extends WordSpec {
-      val unformatted = List("forum","quorum","no")
+      val unformatted = List(StringDescription("forum"),StringDescription("quorum"),StringDescription("no"))
       "an option formatter" when {
 	"asked to format some options" should {
 	  "number and format them nicely" in {
-	    val formatted = new OptionFormatter().format(unformatted)
+	    val formatted = new OptionFormatter().format(unformatted).map(_.describe)
 	    formatted should equal (List("1. forum", "2. quorum", "3. no"))	    
 	  }
 	}
@@ -58,7 +63,7 @@ package org {
 
     class PrompterTest extends WordSpec {
 
-      val options = List("one","two","three")
+      val options = List(StringDescription("one"),StringDescription("two"),StringDescription("three"))
       val expectedOutput = List("Choose from:","1. one","2. two","3. three")
 
       def createFixture(inputs: Stack[Int]) : (FakeUserInput, FakePrinter, Prompter) = {

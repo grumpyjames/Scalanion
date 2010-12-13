@@ -1,7 +1,8 @@
 package org {
   package grumpysoft {
+  
     trait Formatter {
-      def format(options: Seq[String]) : Seq[String];
+      def format(options: Seq[SelfDescribing]) : Seq[SelfDescribing];
     }
   }
 }
