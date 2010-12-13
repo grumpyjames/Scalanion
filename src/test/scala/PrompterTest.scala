@@ -42,7 +42,7 @@ package org {
       protected def formatter() : Formatter;
     }
 
-    class FormattedPrompter(formatted: List[String], cannedFormatter: Formatter) extends Promptable {
+    class PrompterWithFormatter(formatted: List[String], cannedFormatter: Formatter) extends Promptable {
       def prompt(options: Seq[String]) = {
 	options should equal (formatted)
       }
@@ -50,17 +50,19 @@ package org {
       protected def formatter() : Formatter = { cannedFormatter }
     }
 
+    class FormattedPrompter(formatted: List[String], cannedFormatter: Formatter) extends PrompterWithFormatter(formatted, cannedFormatter) with FormattedPrompts {}
+
     class FormattedPromptableTest extends WordSpec {
       val unformatted = List("some", "bloody", "strings")
       val formatted = List("formatted", "strings")
 
       val cannedFormatter = new Formatter() {
 	def format(options: Seq[String]) = {
-	  assert(options == unformatted)
+	  options should equal (unformatted)
 	  formatted
 	}
       }
-      val prompter = new FormattedPrompter(formatted, cannedFormatter) with FormattedPrompts
+      val prompter = new FormattedPrompter(formatted, cannedFormatter)
       prompter.prompt(unformatted)
     }
 
