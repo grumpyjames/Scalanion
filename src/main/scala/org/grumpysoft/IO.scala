@@ -5,7 +5,7 @@ package org {
     }
 
     trait UserInput {
-      def read() : Int;
+      def read() : Seq[Int];
     }
   }
 }

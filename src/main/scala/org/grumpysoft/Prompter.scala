@@ -1,22 +1,31 @@
 package org {
   package grumpysoft {
     class Prompter(input: UserInput, output: Printer) extends Promptable {
-      def prompt(options : Seq[SelfDescribing]) : Int = {
-	readNext(options).dropWhile({response => validReturn(options, response)}).head		
+      def prompt(greeting: SelfDescribing, options : Seq[SelfDescribing]) : Seq[Int] = {
+	uniquery.toSet(readNext(greeting, options).dropWhile({response => invalidReturn(options, response)}).head)
       }
 
-      private def validReturn(options : Seq[SelfDescribing], result : Int) : Boolean = {
-	result > options.size || result <= 0
+      private def invalidReturn(options : Seq[SelfDescribing], result : Seq[Int]) : Boolean = {
+	result.exists({one => one > options.size || one <= 0})
       }
 
-      private def readNext(options: Seq[SelfDescribing]) : Stream[Int] = {
-	doPrompt(options)
-	Stream.cons(input.read, readNext(options))
+      private def readNext(greeting: SelfDescribing, options: Seq[SelfDescribing]) : Stream[Seq[Int]] = {
+	doPrompt(greeting, options)
+	Stream.cons(input.read, readNext(greeting, options))
       }
       
-      private def doPrompt(options: Seq[SelfDescribing]) : Unit = {
-	output.println("Choose from:")	
+      private def doPrompt(greeting: SelfDescribing, options: Seq[SelfDescribing]) : Unit = {
+	output.println(greeting.describe)	
 	options.foreach(selfDescribing => output.println(selfDescribing.describe))
+      }
+    }
+
+    object uniquery {
+      def toSet[A](stream : Seq[A]) : Seq[A] = {
+	val aList : List[A] = List()
+	stream.foldLeft(aList) ( (acc,el) =>
+	  if (acc.contains(el)) acc else el :: acc
+			       ).reverse
       }
     }
 

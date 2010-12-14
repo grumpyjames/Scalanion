@@ -1,7 +1,11 @@
 package org {
   package grumpysoft {
     trait Promptable {
-      def prompt(options : Seq[SelfDescribing]) : Int;
+      /**
+       * Choose some values from a series of options. Indices will be within the desired range,
+       * but callers must validate whether the correct number of indices is returned.
+       */
+      def prompt(greeting: SelfDescribing, options : Seq[SelfDescribing]) : Seq[Int];
     }
   }
 }
