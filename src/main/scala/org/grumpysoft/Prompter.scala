@@ -20,6 +20,7 @@ package org {
       }
     }
 
+    // TODO: this must be useful elsewhere!
     object uniquery {
       def toSet[A](stream : Seq[A]) : Seq[A] = {
 	val aList : List[A] = List()

@@ -1,7 +1,7 @@
 import scala.collection.mutable.Stack
 
 import org.scalatest.WordSpec
-import org.scalatest.matchers.ShouldMatchers._
+import org.scalatest.matchers.ShouldMatchers
 
 package org {
   package grumpysoft {
@@ -21,7 +21,7 @@ package org {
       val returnValue = 5;
     }
 
-    class TestPrompterWithFormatter(expectedGreeting: String, formatted: List[String], cannedFormatter: Formatter) extends Promptable {
+    class TestPrompterWithFormatter(expectedGreeting: String, formatted: List[String], cannedFormatter: Formatter) extends Promptable with ShouldMatchers{
       def prompt(greeting: SelfDescribing, options: Seq[SelfDescribing]) : Seq[Int] = {
 	val stringOptions = options.map(_.describe)
 	greeting.describe should equal (expectedGreeting)
@@ -32,7 +32,7 @@ package org {
       protected def formatter() : Formatter = { cannedFormatter }
     }
 
-    class FormattedPromptableTest extends WordSpec {
+    class FormattedPromptableTest extends WordSpec with ShouldMatchers {
       val unformatted = List(StringDescription("some"), StringDescription("bloody"), StringDescription("strings"))
       val formatted = List("formatted", "strings")
       val greeting = "Hello"
@@ -51,11 +51,11 @@ package org {
       def describe() : String = { desc }
     }
 
-    class UniquererTest extends WordSpec {
+    class UniquererTest extends WordSpec with ShouldMatchers {
       uniquery.toSet(List(1,1,1,3,4,5,4,6)) should equal (List(1,3,4,5,6))
     }
 
-    class PrompterTest extends WordSpec {
+    class PrompterTest extends WordSpec with ShouldMatchers {
 
       val options = List(StringDescription("one"),StringDescription("two"),StringDescription("three"))
       val greeting = "Good day to you, sir!"
