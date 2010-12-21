@@ -20,6 +20,3 @@ trait GenericPlayer[T] extends SelfDescribing {
   def playerEvent(player: Player, action: Verb, cards: Seq[Card]) : Unit;
   
 }
-
-trait Player extends GenericPlayer[Int] {}
-   
