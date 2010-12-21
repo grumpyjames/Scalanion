@@ -27,6 +27,10 @@ class CommandLinePlayerTest extends WordSpec with ShouldMatchers {
     prompter.received.head._2 should equal (options)
   }
 
+  def checkReceived(description: String, options: Seq[SelfDescribing], prompter: FakePrompter, count: Int) : Unit = {
+    prompter.received.map(a => (a._1.describe, a._2)) should equal (List.fill(4)(description, options))
+  }
+
   def makeTestWith(responses : Stack[Seq[Int]]) : (CommandLinePlayer, FakePrompter) = {
     val prompt = new FakePrompter(responses)
     val player = new CommandLinePlayer("geoff", prompt)
@@ -54,4 +58,25 @@ class CommandLinePlayerTest extends WordSpec with ShouldMatchers {
       }
     }
   }				  
+
+  "a command line player" when {
+    val (player, prompt) = makeTestWith(Stack(List()))
+    "asked to choose up to one card" should {
+      "print the correct instructions, and then return a well formed input" in {
+	player.chooseFrom(threeOptions, Play, 0, 1) should equal (List())
+	checkReceived("Choose up to 1 card to play", threeOptions, prompt)
+      }
+    }
+  }
+
+  "a command line player" when {
+    val (player, prompt) = makeTestWith(Stack(List(1,2,3), List(1,2), List(), List(1,2,3,4)))
+    "asked to choose exactly three cards" should {
+      "badger the user until they get it right" in {
+	player.chooseFrom(threeOptions, Trash, 3, 3) should equal (List(1,2,3))
+	checkReceived("Choose 3 cards to trash", threeOptions, prompt, 4)
+      }
+    }					
+  }
+					
 }
