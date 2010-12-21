@@ -20,11 +20,6 @@ class FakePrompter(var responses : Stack[Seq[Int]]) extends Promptable {
   }
 }
 
-case class StringCard(val desc: String) extends Card {
-  def cost() : Int = { 2 }
-  def describe() : String = { desc }
-}
-
 class CommandLinePlayerTest extends WordSpec with ShouldMatchers {
 
   def checkReceived(description: String, options: Seq[SelfDescribing], prompter: FakePrompter) : Unit = {

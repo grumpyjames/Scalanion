@@ -5,7 +5,7 @@ trait GenericPlayer[T] extends SelfDescribing {
    * Choose minChoices <= n <= maxChoices cards from the given sequence, for the given purpose
    * @return the index or indices of the chosen cards.
    */
-  def chooseFrom(cards: Seq[Card], purpose: Verb, maxChoices: Int, minChoices: Int) : Seq[T];
+  def chooseFrom(cards: Seq[Card], purpose: Verb, minChoices: Int, maxChoices: Int) : Seq[T];
 
   /**
    * Notify player of current hand contents. Called whenever cards
