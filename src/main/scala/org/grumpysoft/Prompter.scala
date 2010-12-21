@@ -5,6 +5,10 @@ package org {
 	uniquery.toSet(readNext(greeting, options).dropWhile({response => invalidReturn(options, response)}).head)
       }
 
+      def prompt(message: SelfDescribing) : Unit = {
+	output.println(message.describe)
+      }
+
       private def invalidReturn(options : Seq[SelfDescribing], result : Seq[Int]) : Boolean = {
 	result.exists({one => one > options.size || one <= 0})
       }

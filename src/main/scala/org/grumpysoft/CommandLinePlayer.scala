@@ -1,13 +1,22 @@
 package org.grumpysoft
 
-class CommandLinePlayer(private val name: String, private val userInterface: Promptable) extends Player with SelfDescribing {
+class CommandLinePlayer(private val name: String, private val userInterface: Promptable) extends Player {
 
   def describe() : String = {
-    "player named " + name
+    "The player " + name
   }
 
   def chooseFrom(cards: Seq[Card], purpose: Verb, minChoices: Int, maxChoices: Int) : Seq[Int] = {
     nextInput(buildDescription(purpose, minChoices, maxChoices), cards).dropWhile(invalid(minChoices, maxChoices, _)).head
+  }
+
+  def newHand(hand: Seq[Card]) : Unit = {
+    userInterface.prompt(QuickDescription("Your hand now contains: " + hand.map(_.describe).reduceLeft(_ + ", " + _)))
+  }
+  
+  def playerEvent(player: Player, action: Verb, cards: Seq[Card]) : Unit = {
+    if (!(player eq this)) 
+      userInterface.prompt(QuickDescription(player.describe() + " " + action.past + ": " + cards.map(_.describe).reduceLeft(_ + ", " + _)))
   }
 
   private def nextInput(greeting: SelfDescribing, options: Seq[SelfDescribing]) : Stream[Seq[Int]] = {
@@ -15,7 +24,6 @@ class CommandLinePlayer(private val name: String, private val userInterface: Pro
   }
 
   private def invalid(minChoices: Int, maxChoices: Int, choices: Seq[Int]) : Boolean = {
-    println("min: " + minChoices + ", max: " + maxChoices + ", choices: " + choices)
     choices.size match {
       case x if x < minChoices => true
       case x if x > maxChoices => true

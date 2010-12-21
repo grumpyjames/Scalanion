@@ -21,7 +21,13 @@ package org {
       val returnValue = 5;
     }
 
-    class TestPrompterWithFormatter(expectedGreeting: String, formatted: List[String], cannedFormatter: Formatter) extends Promptable with ShouldMatchers{
+    trait DevNullPrompter extends Promptable {
+      def prompt(message: SelfDescribing) : Unit = {
+
+      }
+    }
+
+    class TestPrompterWithFormatter(expectedGreeting: String, formatted: List[String], cannedFormatter: Formatter) extends DevNullPrompter with ShouldMatchers{
       def prompt(greeting: SelfDescribing, options: Seq[SelfDescribing]) : Seq[Int] = {
 	val stringOptions = options.map(_.describe)
 	greeting.describe should equal (expectedGreeting)
@@ -94,6 +100,12 @@ package org {
 	user.cannedInputs should be ('empty)
       }
 
+      def expectPromptOf(message: String) : Unit = {
+	val (user, printer, player) = createFixture(Stack(Nil))
+	player.prompt(StringDescription(message))
+	printer.printedLines should equal (List(message))
+      }
+
       "a prompter" when {
 	"prompted to choose from some options" should {
 	  val expectedReturn = List(2,3)
@@ -110,6 +122,14 @@ package org {
 	  "merge identical results" in {
 	    promptExpectingReturn(greeting, options, expectedReturn, Stack(List(2,2,1,1), List(4,5,1), List(2,9)))
 	  }	  
+	}
+      }
+
+      "a prompter" when {
+	"given an update message" should {
+	  "just print it verbatim" in {
+	    expectPromptOf("hello\nworld") 
+	  }
 	}
       }
     }

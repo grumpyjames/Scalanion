@@ -8,10 +8,15 @@ import org.scalatest.WordSpec
 
 class FakePrompter(var responses : Stack[Seq[Int]]) extends Promptable {
   var received : List[(SelfDescribing, Seq[SelfDescribing])] = Nil
+  var messages : List[SelfDescribing] = Nil
 
   def prompt(greeting: SelfDescribing, options : Seq[SelfDescribing]) : Seq[Int] = {
     received = received ++ List((greeting, options))
     responses.pop
+  }
+
+  def prompt(message: SelfDescribing) : Unit = {
+    messages = messages ++ List(message)
   }
 }
 
@@ -78,5 +83,36 @@ class CommandLinePlayerTest extends WordSpec with ShouldMatchers {
       }
     }					
   }
+
+  "a command line player" when {
+    "given a new hand" should {
+      "tell the user what the hand contains" in {
+	val (player, prompt) = makeTestWith(Stack(List()))
+	player.newHand(threeOptions)
+	prompt.messages.map(_.describe) should equal (List("Your hand now contains: Remodel, Copper, Gold"))
+      }
+    }
+  }
+
+  "a command line player" when {
+    "notified of an event he caused" should {
+      "ignore it" in {
+	val (player, prompt) = makeTestWith(Stack(List()))
+	player.playerEvent(player, Discard, List())
+	prompt.messages should be ('empty)
+      }
+    }
+  }
+
+  "a command line player" when {
+    "notified of another's events" should {
+      "tell the user" in {
+	val (player, prompt) = makeTestWith(Stack(List()))
+	player.playerEvent(new CommandLinePlayer("Peter", prompt), Discard, threeOptions)
+	prompt.messages.map(_.describe) should be (List("The player Peter discarded: Remodel, Copper, Gold"))
+      }
+    }
+  }
+
 					
 }
