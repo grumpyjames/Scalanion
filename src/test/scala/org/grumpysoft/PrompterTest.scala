@@ -47,10 +47,6 @@ package org {
       prompter.prompt(StringDescription(greeting), unformatted).head should equal (Magic.returnValue)
     }
 
-    case class StringDescription(val desc: String) extends SelfDescribing {
-      def describe() : String = { desc }
-    }
-
     class UniquererTest extends WordSpec with ShouldMatchers {
       uniquery.toSet(List(1,1,1,3,4,5,4,6)) should equal (List(1,3,4,5,6))
     }

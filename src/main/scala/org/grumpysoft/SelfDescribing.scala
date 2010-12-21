@@ -1,7 +1,5 @@
-package org {
-  package grumpysoft {
-    trait SelfDescribing {
-      def describe() : String;
-    }
-  }
+package org.grumpysoft
+
+trait SelfDescribing {
+  def describe() : String;
 }
