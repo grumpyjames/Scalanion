@@ -19,7 +19,7 @@ class SinkPlayer extends GenericPlayer[Card] {
 
   }
 
-  def describe() : String = { "" }
+  def describe() : String = { "test player" }
 }
 
 class GameTest extends WordSpec with ShouldMatchers {
