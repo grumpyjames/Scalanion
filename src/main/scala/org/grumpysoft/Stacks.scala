@@ -8,7 +8,7 @@ import VictoryCards.Estate
 
 case class Stacks(deck: Stack[Card], hand: Stack[Card], discard: Stack[Card]) {
 
-  def end() : Stacks = {
+  def endTurn() : Stacks = {
     Stacks(deck, Stack(), discard ++ hand).addCards(5)
   }
 
@@ -33,6 +33,6 @@ case class Stacks(deck: Stack[Card], hand: Stack[Card], discard: Stack[Card]) {
 object Stacks {
   def base() : Stacks = {
     val deck = List(Copper(), Copper(), Copper(), Copper(), Copper(), Copper(), Copper(), Estate(), Estate(), Estate())
-    Stacks(Stack() ++ shuffle(deck), Stack(), Stack()).end
+    Stacks(Stack() ++ shuffle(deck), Stack(), Stack()).endTurn
   }
 }

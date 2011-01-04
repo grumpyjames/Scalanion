@@ -22,7 +22,7 @@ class Game(val players: List[GenericPlayer[Card]], private val allStacks:List[St
     val currentStacks = allStacks.head
     val currentPlayer = players.head
     currentPlayer.newHand(currentStacks.hand)
-    new Game(players.drop(1) ++ List(currentPlayer), allStacks.drop(1) ++ List(currentStacks.end))
+    new Game(players.drop(1) ++ List(currentPlayer), allStacks.drop(1) ++ List(currentStacks.endTurn))
   }
 
   override def toString() : String = {

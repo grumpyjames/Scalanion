@@ -17,7 +17,7 @@ class StacksTest extends WordSpec with ShouldMatchers {
     "told to end" should {
       "ensure the new hand has five cards in it" in {
 	var stacks = Stacks(cards, Stack(), Stack())
-	stacks.end.end.hand.size should equal (5) 
+	stacks.endTurn.endTurn.hand.size should equal (5) 
       }
     }
   }
