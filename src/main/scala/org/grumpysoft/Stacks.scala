@@ -7,16 +7,17 @@ import TreasureCards.Copper
 import VictoryCards.Estate
 
 case class Stacks(deck: Stack[Card], hand: Stack[Card], discard: Stack[Card]) {
+
   def end() : Stacks = {
-    val newHand = deck.take(5)
-    if (newHand.size == 5) {
-      Stacks(deck.drop(5), newHand, discard ++ hand)
-    } else {
-      val newDeck = shuffle(discard ++ hand)
-      val moreCards = 5 - newHand.size
-      val newNewHand = newHand ++ newDeck.take(moreCards)
-      Stacks(newDeck.drop(moreCards), newNewHand, Stack())
-    }
+    Stacks(deck, Stack(), discard ++ hand).addCards(5)
+  }
+
+  def addCards(count: Int) : Stacks = {
+    val newHand = deck.take(count) ++ hand
+    if (deck.size < count)
+      Stacks(shuffle(discard), newHand, Stack()).addCards(count - deck.size)
+    else
+      Stacks(deck.drop(count), newHand, discard)
   }
 
   override def toString() : String = {
@@ -26,6 +27,7 @@ case class Stacks(deck: Stack[Card], hand: Stack[Card], discard: Stack[Card]) {
   private def asString(stack: Stack[Card], name: String) : String = {
     stack.map(_.describe).foldLeft(name + ":")(_ + " " + _)
   }
+
 }
 
 object Stacks {
