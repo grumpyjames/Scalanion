@@ -20,6 +20,23 @@ case class Stacks(deck: Stack[Card], hand: Stack[Card], discard: Stack[Card]) {
       Stacks(deck.drop(count), newHand, discard)
   }
 
+  def gain(cards: Seq[Card]) : Stacks = {
+    Stacks(deck, hand, discard ++ cards)
+  }
+
+  def replace(cards: Seq[Card]) : Stacks = {
+    Stacks(deck ++ hand.intersect(cards), hand.diff(cards), discard)
+  }
+
+  def trash(cards: Seq[Card]) : (Seq[Card], Stacks) = {
+    (hand.intersect(cards), Stacks(deck, hand.diff(cards), discard))
+  }
+
+  def discardCard(card: Card) : Stacks = hand.find(_ == card) match {
+    case Some(a) => Stacks(deck, hand.filter(_ != a), discard ++ Stack(a))
+    case None => error("argh")
+  }
+
   override def toString() : String = {
     asString(deck, "deck") + " " + asString(hand, "hand") + " " + asString(discard, "discard")
   }
