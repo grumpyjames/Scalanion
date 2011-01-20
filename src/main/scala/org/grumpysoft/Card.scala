@@ -1,7 +1,7 @@
 package org.grumpysoft
 
 sealed abstract class Card(cost: Int) extends SelfDescribing {
-  def price() : Int ={ cost }
+  def price() : Int = { cost }
 }
 
 abstract case class ActionCard(cost: Int) extends Card(cost) {

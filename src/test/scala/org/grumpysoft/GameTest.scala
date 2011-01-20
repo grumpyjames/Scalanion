@@ -15,9 +15,7 @@ class SinkPlayer extends GenericPlayer[Card] {
     hands = hand :: hands
   }
 
-  def playerEvent(player: Player, action: Verb, cards: Seq[Card]) : Unit = {
-
-  }
+  def playerEvent(player: Player, action: Verb, cards: Seq[Card]) : Unit = {}
 
   def describe() : String = { "test player" }
 }

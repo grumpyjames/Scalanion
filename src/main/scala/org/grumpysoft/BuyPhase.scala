@@ -1,11 +1,7 @@
 package org.grumpysoft
 
+import annotation.tailrec
 import scala.collection.immutable.Stack
-
-trait Supply {
-  def availableCards(treasure : Int) : Seq[Card];
-  def buy(cards : Card) : Supply;
-}
 
 object Trader {
   def valueHand(hand: Seq[Card]) : Int = {
@@ -17,12 +13,11 @@ object Trader {
 }
 
 object BuyPhase {
-
   def apply(buys: Int, treasure: Int, player: GenericPlayer[Card], supply: Supply) : (Supply, Seq[Card]) = {
     trGo(buys, treasure, player, supply, List())
   }
 
-
+  @tailrec
   def trGo(buys: Int, treasure: Int, player: GenericPlayer[Card], supply: Supply, bought: List[Card])
   : (Supply, Seq[Card]) = {
     if (buys == 0) return (supply, bought)

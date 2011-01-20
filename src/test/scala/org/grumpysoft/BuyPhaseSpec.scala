@@ -9,7 +9,7 @@ import scala.collection.immutable.Stack
 import TreasureCards._
 import VictoryCards._
 
-object BuyPhaseTest extends Specification with Mockito {
+object BuyPhaseSpec extends Specification with Mockito {
 
   val deck = Stack(Copper(), Copper(), Copper(), Estate(), Estate())
   val hand = Stack(Copper(), Copper(), Copper(), Copper(), Estate())
