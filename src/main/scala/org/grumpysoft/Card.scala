@@ -1,17 +1,13 @@
 package org.grumpysoft
 
-trait Card extends SelfDescribing {
-  def cost() : Int;
+sealed abstract class Card(cost: Int) extends SelfDescribing {
+  def price() : Int ={ cost }
 }
 
-trait ActionCard extends Card {
+abstract case class ActionCard(cost: Int) extends Card(cost) {
   def play() : Unit;
 }
 
-trait TreasureCard extends Card {
-  def value() : Int;
-}
+abstract case class TreasureCard(cost: Int, value: Int) extends Card(cost) {}
 
-trait VictoryCard extends Card {
-  def victoryPoints() : Int;
-}
+abstract case class VictoryCard(cost: Int, victoryPoints: Int) extends Card(cost) {}

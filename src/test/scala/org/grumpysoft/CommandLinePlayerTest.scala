@@ -6,6 +6,10 @@ import scala.collection.mutable.Stack
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.WordSpec
 
+import TreasureCards._
+import ActionCards._
+import VictoryCards._
+
 class FakePrompter(var responses : Stack[Seq[Int]]) extends Promptable {
   var received : List[(SelfDescribing, Seq[SelfDescribing])] = Nil
   var messages : List[SelfDescribing] = Nil
@@ -37,7 +41,7 @@ class CommandLinePlayerTest extends WordSpec with ShouldMatchers {
     (player, prompt)
   }
 
-  val threeOptions = List(StringCard("Remodel"), StringCard("Copper"), StringCard("Gold"))
+  val threeOptions = List(Remodel(), Copper(), Gold())
 
   "a command line player" when {
     val (player, prompt) = makeTestWith(Stack(List(2)))

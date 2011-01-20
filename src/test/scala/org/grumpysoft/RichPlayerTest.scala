@@ -3,6 +3,9 @@ package org.grumpysoft
 import org.scalatest.WordSpec
 import org.scalatest.matchers.ShouldMatchers
 
+import ActionCards._
+import VictoryCards._
+
 class FakePlayer extends GenericPlayer[Int] with ShouldMatchers {
   def chooseFrom(cards: Seq[Card], purpose: Verb, minChoices: Int, maxChoices: Int) : Seq[Int] = {
     purpose should be (Discard)
@@ -22,7 +25,7 @@ class RichPlayerTest extends WordSpec with ShouldMatchers {
     "prompted" should {
       "upcast responses back to rich types" in {
 	val richie = new RichPlayer(new FakePlayer)
-	val cards = List(StringCard("Witch"), StringCard("Militia"), StringCard("Province"))
+	val cards = List(Witch(), Militia(), Province())
 	richie.chooseFrom(cards, Discard, 2, 2) should be (cards.take(2))
       }
     }
