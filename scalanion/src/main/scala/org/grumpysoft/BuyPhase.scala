@@ -21,8 +21,12 @@ object BuyPhase {
   def trGo(buys: Int, treasure: Int, player: GenericPlayer[Card], supply: Supply, bought: List[Card])
   : (Supply, Seq[Card]) = {
     if (buys == 0) return (supply, bought)
+
     val choices = player.chooseFrom(supply.availableCards(treasure), Buy, 0, 1)
+    if (choices.size == 0)
+      return (supply, bought)
+    
     val boughtCard = choices.head
-    trGo(buys - 1, treasure - boughtCard.price, player, supply.buy(boughtCard), boughtCard :: bought)
+    return trGo(buys - 1, treasure - boughtCard.price, player, supply.buy(boughtCard), boughtCard :: bought)
   }
 }

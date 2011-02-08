@@ -22,7 +22,7 @@ object BuyPhaseSpec extends Specification with Mockito {
   val justCopper = List(Copper())
   val justSilver = List(Silver())
 
-  "a turn" should {
+  "the buy phase" should {
     "immediately offer the actionless player buy choices from the supply" in {
       supply.availableCards(4) returns copperAndSilver
       player.chooseFrom(copperAndSilver, Buy, 0, 1) returns justCopper
@@ -35,7 +35,7 @@ object BuyPhaseSpec extends Specification with Mockito {
   val copperSupply = mock[Supply]
   val emptySupply = mock[Supply]
 
-  "a turn" should {
+  "the buy phase" should {
     "offer the player a buy for each one available" in {
       supply.availableCards(4) returns copperAndSilver
       supply.buy(Silver()) returns copperSupply
@@ -48,4 +48,12 @@ object BuyPhaseSpec extends Specification with Mockito {
     }
   }
 
+  "the buy phase" should {
+    "be ok with absolutely no buys" in {
+      supply.availableCards(4) returns justCopper
+      player.chooseFrom(justCopper, Buy, 0, 1) returns List()
+      val (newSupply, bought) = BuyPhase(1, 4, player, supply)
+      bought must_==List()
+    }
+  }
 }
