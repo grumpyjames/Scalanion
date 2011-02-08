@@ -2,7 +2,6 @@ package org.grumpysoft
 
 import org.specs.Specification
 import org.specs.mock.Mockito
-import org.mockito.Matchers._
 
 import scala.collection.immutable.Stack
 
