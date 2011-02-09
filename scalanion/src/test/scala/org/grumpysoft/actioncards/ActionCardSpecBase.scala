@@ -15,12 +15,17 @@ abstract class ActionCardSpecBase extends Specification with Mockito {
 
   protected val threeCoppersAndAnEstate = List(Copper(), Copper(), Copper(), Estate())
   protected val twoCoppers = List(Copper(), Copper())
-  protected var oneRemodel = List(Remodel())
+  protected val oneRemodel = List(Remodel())
   protected val copperAndSilver = List(Copper(), Silver())
   protected val silverRemodelAndTwoCoppers = Copper() :: Remodel() :: copperAndSilver
   protected val twoEstates = List(Estate(), Estate())
   protected val estateAndDuchy = List(Estate(), Duchy())
   protected val estateDuchyAndCopper = Copper() :: estateAndDuchy
+  protected val copperEstateAndGold = List(Copper(), Estate(), Gold())
+
+  protected val mixOfAllTypes = List(Remodel(), Copper(), Witch(), Gold(), Estate(), Copper(), Copper())
+
+  val fourCardHand = List(Copper(), Copper(), Estate(), Copper())
 
   protected val supply = mock[Supply]
   protected val anotherSupply = mock[Supply]
@@ -40,6 +45,23 @@ abstract class ActionCardSpecBase extends Specification with Mockito {
 
   def checkEventReceived(player: GenericPlayer[Card], verb: Verb, cards: Seq[Card], players: Seq[GenericPlayer[Card]]) : Unit = {
     players.foreach(otherPlayer => there was one(otherPlayer).playerEvent(player, verb, cards))
+  }
+
+  def actionCardFilter(wantActions : Boolean) : Card => Boolean = {
+    { a =>
+      a match {
+        case b: ActionCard => wantActions
+        case _ => !wantActions
+      }
+    }
+  }
+
+  def actionsOf(cards: List[Card]) : List[Card] = {
+    cards.filter(actionCardFilter(true))
+  }
+
+  def withoutActions(cards: List[Card]) : List[Card] = {
+    cards.filter(actionCardFilter(false))
   }
 
 }

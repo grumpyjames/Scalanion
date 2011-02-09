@@ -16,9 +16,7 @@ object ActionCards {
     def apply() : Bureaucrat = { new Bureaucrat }
   }
 
-
   class Bureaucrat extends ActionCard(4) {
-
     type stacksWithPlayer = Tuple2[Stacks, GenericPlayer[Card]]
     val oneSilver: List[Silver] = List(Silver())
 
@@ -54,6 +52,7 @@ object ActionCards {
       table.map(_._2.playerEvent(player, PlaceOnDeck, oneSilver))
       ActionResult(0, Stacks(oneSilver ++ stacks.deck, stacks.hand, stacks.discard), supply.buy(Silver()), performAttack(table, player))
     }
+
     def describe() = { "Bureaucrat" }
   }
 
@@ -92,6 +91,35 @@ object ActionCards {
       ActionResult(0, Stacks(stacks.deck, stacks.hand.filter(anyEqTo(toTrash, _)), stacks.discard), supply, table)
     }
     def describe() : String = { "Chapel" }
+  }
+
+  object Library {
+    def apply() : Library = { new Library }
+  }
+
+  def isActionCard(card: Card) : Boolean = card match {
+    case ac: ActionCard => true
+    case _ => false
+  }
+
+  class Library extends ActionCard(2) {
+    def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
+        ActionResult(0, goUntilSeven(stacks), supply, table)
+    }
+
+    def goUntilSeven(stacks: Stacks) : Stacks = {
+      if (stacks.hand.length == 7) {
+        stacks
+      } else {
+        val numberToTake: Int = 7 - stacks.hand.length
+        val (actions, others) = stacks.deck.take(numberToTake).partition(isActionCard(_))
+        goUntilSeven(Stacks(stacks.deck.drop(numberToTake), stacks.hand ++ others, stacks.discard ++ actions))
+      }
+    }
+
+    def describe() = {
+      "Library"
+    }
   }
 
   object Remodel {
