@@ -27,19 +27,17 @@ class GameTest extends WordSpec with ShouldMatchers {
   }
 
   "a game" when {
-    val player = new SinkPlayer 
     "started with a single player" should {
+      val player = new SinkPlayer
       "after two turns, updated the player with 7 coppers and 3 estates" in {
 	val game = new Game(List(player))
 	game.takeTurn.takeTurn
 	checkStandardHand(player)
       }
     }
-  }
 
-  "a game" when {
-    val players = List.fill(4)(new SinkPlayer())
     "given four players" should {
+      val players = List.fill(4)(new SinkPlayer())
       "after eight turns, have given seven coppers and estates to each" in {
 	var game = new Game(players)
 	0.until(8).foreach(a => game = game.takeTurn)

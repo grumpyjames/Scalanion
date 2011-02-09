@@ -95,10 +95,46 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StacksTest.scala" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="StacksTest.scala" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/StacksTest.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="26" selection-start="408" selection-end="408" vertical-scroll-proportion="0.35601267">
+            <state line="56" column="52" selection-start="2032" selection-end="2032" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OptionFormatterTest.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/OptionFormatterTest.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="6" selection-start="106" selection-end="106" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameTest.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/GameTest.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="45" column="5" selection-start="1339" selection-end="1339" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CommandLineInputTest.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/CommandLineInputTest.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="6" selection-start="208" selection-end="208" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CommandLinePlayerTest.scala" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/CommandLinePlayerTest.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="92" column="48" selection-start="3399" selection-end="3399" vertical-scroll-proportion="1.329114">
               <folding />
             </state>
           </provider>
@@ -108,42 +144,6 @@
         <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state line="53" column="3" selection-start="1581" selection-end="1581" vertical-scroll-proportion="-31.8">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="package.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/scala-2.8.1.final/src/scala-library-src.jar!/scala/package.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="41" selection-start="2281" selection-end="2281" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="List.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/scala-2.8.1.final/src/scala-library-src.jar!/scala/collection/immutable/List.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="437" column="7" selection-start="12870" selection-end="12870" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GenericPlayer.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/GenericPlayer.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="6" selection-start="240" selection-end="240" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Verbs.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Verbs.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="22" selection-start="46" selection-end="46" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -169,7 +169,9 @@
         <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ChapelSpec.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/BuyPhaseSpec.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/ActionCards.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/GameTest.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/StacksTest.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/CommandLinePlayerTest.scala" />
       </list>
     </option>
   </component>
@@ -257,6 +259,36 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="grumpysoft" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Scalanion" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scalanion" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scala" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grumpysoft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameTest.scala" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -879,18 +911,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Supply.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="6" selection-start="30" selection-end="30" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/IO.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="10" selection-start="47" selection-end="47" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/BuyPhase.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state line="24" column="6" selection-start="689" selection-end="689" vertical-scroll-proportion="0.0">
@@ -968,9 +988,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/GameTest.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="5" selection-start="1339" selection-end="1339" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/CommandLineInputTest.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="6" selection-start="208" selection-end="208" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/OptionFormatterTest.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="6" selection-start="106" selection-end="106" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/StacksTest.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="26" selection-start="408" selection-end="408" vertical-scroll-proportion="0.35601267">
+        <state line="56" column="52" selection-start="2032" selection-end="2032" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/CommandLinePlayerTest.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="92" column="48" selection-start="3399" selection-end="3399" vertical-scroll-proportion="1.329114">
           <folding />
         </state>
       </provider>

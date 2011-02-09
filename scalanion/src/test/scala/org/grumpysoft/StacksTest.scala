@@ -54,7 +54,7 @@ class StacksTest extends WordSpec with ShouldMatchers {
         val stacks = Stacks(List(), List(Copper(), Estate()), List())
         val (trashed, newStacks) = stacks.trash(List(Copper()))
         trashed should equal (List(Copper()))
-        newStacks.hand should be (List(Estate()))
+        newStacks.hand should equal (List(Estate()))
       }
     }
 
