@@ -1,11 +1,18 @@
 package org.grumpysoft
 
 trait Supply {
+  def available(card: Card) : Boolean;
   def availableCards(treasure: Int) : Seq[Card];
   def buy(card: Card) : Supply;
 }
 
 case class SimpleSupply(choices : List[List[Card]]) extends Supply {
+
+  def available(card: Card) : Boolean ={
+    // TODO: implement
+    true
+  }
+
   def availableCards(treasure: Int) : Seq[Card] = {
     choices.filter(_.size > 0).map(_.head)
   }

@@ -9,8 +9,8 @@ object ActionCards {
   }
 
   class Bureaucrat extends ActionCard(4) {
-    def play(stacks: Stacks, player: GenericPlayer[Card]) : ActionResult = {
-      ActionResult(0, Stacks(List(Silver()) ++ stacks.deck, stacks.hand, stacks.discard))
+    def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply) : ActionResult = {
+      ActionResult(0, Stacks(List(Silver()) ++ stacks.deck, stacks.hand, stacks.discard), supply.buy(Silver()))
     }
     def describe() = { "Bureaucrat" }
   }
@@ -20,10 +20,10 @@ object ActionCards {
   }
 
   class Chancellor extends ActionCard(3) {
-    def play(stacks: Stacks, player: GenericPlayer[Card]) : ActionResult = {
+    def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply) : ActionResult = {
       player.query(DiscardYourDeck) match {
-        case true => ActionResult(2, Stacks(List(), stacks.hand, stacks.discard ++ stacks.deck))
-        case false => ActionResult(2, stacks)
+        case true => ActionResult(2, Stacks(List(), stacks.hand, stacks.discard ++ stacks.deck), supply)
+        case false => ActionResult(2, stacks, supply)
       }
     }
 
@@ -41,9 +41,9 @@ object ActionCards {
   }
 
   class Chapel extends ActionCard(2) {
-    def play(stacks: Stacks, player: GenericPlayer[Card]) : ActionResult = {
+    def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply) : ActionResult = {
       val toTrash = player.chooseFrom(stacks.hand, Trash, 0, 4)
-      ActionResult(0, Stacks(stacks.deck, stacks.hand.filter(anyEqTo(toTrash, _)), stacks.discard))
+      ActionResult(0, Stacks(stacks.deck, stacks.hand.filter(anyEqTo(toTrash, _)), stacks.discard), supply)
     }
     def describe() : String = { "Chapel" }
   }
@@ -55,7 +55,7 @@ object ActionCards {
   }
 
   class Remodel extends ActionCard(4) {
-    def play(stacks: Stacks, player: GenericPlayer[Card]) : ActionResult = { ActionResult(0, Stacks.base()) }
+    def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply) : ActionResult = { ActionResult(0, Stacks.base(), supply) }
     def describe() : String = { "Remodel" }
   }
 
@@ -64,7 +64,7 @@ object ActionCards {
   }
 
   class Witch extends ActionCard(5) {
-    def play(stacks: Stacks, player: GenericPlayer[Card]) : ActionResult = { ActionResult(0, Stacks.base()) }
+    def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply) : ActionResult = { ActionResult(0, Stacks.base(), supply) }
     def describe() : String = { "Witch" }
   }
 
@@ -73,7 +73,7 @@ object ActionCards {
   }
 
   class Militia extends ActionCard(4) {
-    def play(stacks: Stacks, player: GenericPlayer[Card]) : ActionResult = { ActionResult(0, Stacks.base()) }
+    def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply) : ActionResult = { ActionResult(0, Stacks.base(), supply) }
     def describe() : String = { "Militia" }
   }
 
