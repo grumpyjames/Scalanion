@@ -8,7 +8,12 @@ trait GenericPlayer[T] extends SelfDescribing {
   def chooseFrom(cards: Seq[Card], purpose: Verb, minChoices: Int, maxChoices: Int) : Seq[T];
 
   /**
-   * Notify player of current hand contents. Called whenever cards
+   * Ask this player a question
+   */
+  def query(question: Query) : Boolean;
+
+  /**
+   *  Notify player of current hand contents. Called whenever cards
    * are added or removed from the hand due to the actions of other
    * players
    */

@@ -18,6 +18,8 @@ class SinkPlayer extends GenericPlayer[Card] {
   def playerEvent(player: Player, action: Verb, cards: Seq[Card]) : Unit = {}
 
   def describe() : String = { "test player" }
+
+  def query(question: Query) = true
 }
 
 class GameTest extends WordSpec with ShouldMatchers {

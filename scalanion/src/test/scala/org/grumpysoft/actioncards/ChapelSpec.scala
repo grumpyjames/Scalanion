@@ -17,14 +17,16 @@ object ChapelSpec extends Specification with Mockito {
   "chapel" should {
     "offer the player the chance to trash up to four cards from their current hand" in {
       player.chooseFrom(hand, Trash, 0, 4) returns List()
-      val newStacks = Chapel().play(stacks, player)
-      newStacks must_==(stacks)
+      val actionResult = Chapel().play(stacks, player)
+      actionResult.stacks must_==(stacks)
+      actionResult.treasure must_==0
     }
 
     "trash the selected cards" in {
       player.chooseFrom(hand, Trash, 0, 4) returns willGetTrashed
-      val newStacks = Chapel().play(stacks, player)
-      newStacks.hand must_==List(Copper(), Remodel())
+      val actionResult = Chapel().play(stacks, player)
+      actionResult.stacks.hand must_==List(Copper(), Remodel())
+      actionResult.treasure must_==0
     }
   }
 

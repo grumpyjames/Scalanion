@@ -49,6 +49,10 @@ class CommandLinePlayer(private val name: String, private val userInterface: Pro
     case a => a.toString + " cards"
   }
 
+  def query(question: Query) : Boolean = {
+    //TODO: implement
+    true
+  }
 }
 
 private case class QuickDescription(val desc: String) extends SelfDescribing {

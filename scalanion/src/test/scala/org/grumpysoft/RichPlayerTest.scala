@@ -14,6 +14,8 @@ class FakePlayer extends GenericPlayer[Int] with ShouldMatchers {
     List(1,2)
   }
 
+  def query(question: Query) = true
+
   def newHand(hand: Seq[Card]) : Unit = {}
   def playerEvent(player: Player, action: Verb, cards: Seq[Card]) : Unit = {}
   def describe() : String = {""}
@@ -24,9 +26,9 @@ class RichPlayerTest extends WordSpec with ShouldMatchers {
   "rich player" when {
     "prompted" should {
       "upcast responses back to rich types" in {
-	val richie = new RichPlayer(new FakePlayer)
-	val cards = List(Witch(), Militia(), Province())
-	richie.chooseFrom(cards, Discard, 2, 2) should be (cards.take(2))
+        val richie = new RichPlayer(new FakePlayer)
+        val cards = List(Witch(), Militia(), Province())
+        richie.chooseFrom(cards, Discard, 2, 2) should equal (cards.take(2))
       }
     }
   }
