@@ -5,10 +5,12 @@ sealed abstract class Card(cost: Int) extends SelfDescribing {
   override def toString() : String = { describe() }
 }
 
-case class ActionResult(treasure: Int, stacks: Stacks, supply: Supply) {}
+case class ActionResult(treasure: Int, stacks: Stacks, supply: Supply, table: Seq[(Stacks, GenericPlayer[Card])]) {}
+
 
 abstract case class ActionCard(cost: Int) extends Card(cost) {
-  def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply) : ActionResult;
+  type Table = Sequence[Tuple2[Stacks, GenericPlayer[Card]]]
+  def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult;
 }
 
 abstract case class TreasureCard(cost: Int, value: Int) extends Card(cost) {}

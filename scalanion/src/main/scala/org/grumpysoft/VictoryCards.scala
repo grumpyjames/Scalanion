@@ -9,6 +9,14 @@ object VictoryCards {
     def describe() : String = { "Estate" }
   }
 
+  object Duchy {
+    def apply() : Duchy = { new Duchy }
+  }
+
+  class Duchy extends VictoryCard(5,3) {
+    def describe() : String = { "Duchy" }
+  }
+
   object Province {
     def apply() : Province = { new Province }
   }
