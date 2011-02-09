@@ -5,6 +5,7 @@ import org.scalatest.matchers.ShouldMatchers
 
 import TreasureCards._
 import VictoryCards._
+import collection.immutable.List
 
 class StacksTest extends WordSpec with ShouldMatchers {
 
@@ -42,10 +43,11 @@ class StacksTest extends WordSpec with ShouldMatchers {
 
     "replacing some cards" should {
       "move them from the hand into the deck" in {
-        val stacks = Stacks(List(), List(Copper(), Estate(), Estate()), List())
-        val replaced = stacks.replace(List(Estate(), Estate()))
-        replaced.deck should equal (List(Estate(), Estate()))
-        replaced.hand should equal (List(Copper()))
+        val currentHand: List[Card] = List(Copper(), Estate(), Estate())
+        val stacks = Stacks(List(), currentHand, List())
+        val replaced = stacks.replace(currentHand.init)
+        replaced.deck should equal (List(Copper(), Estate()))
+        replaced.hand should equal (List(Estate()))
       }
     }
 

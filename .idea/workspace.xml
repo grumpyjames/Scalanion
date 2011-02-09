@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="335121ac-d150-4852-93e9-f0488d7c3091" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/specs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/ActionCards.scala" afterPath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/ActionCards.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala" afterPath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Verbs.scala" afterPath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Verbs.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ActionCardSpecBase.scala" afterPath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ActionCardSpecBase.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/BureaucratSpec.scala" afterPath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/BureaucratSpec.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ChancellorSpec.scala" afterPath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ChancellorSpec.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/StacksTest.scala" afterPath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/StacksTest.scala" />
     </list>
     <ignored path="Scalanion.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -113,15 +107,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BureaucratSpec.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/BureaucratSpec.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="61" selection-start="358" selection-end="358" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Verbs.scala" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Verbs.scala">
           <provider selected="true" editor-type-id="text-editor">
@@ -140,10 +125,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Stacks.scala" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Stacks.scala" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="28" selection-start="926" selection-end="926" vertical-scroll-proportion="0.55309033">
+            <state line="42" column="24" selection-start="1245" selection-end="1245" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StacksTest.scala" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/StacksTest.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="47" column="55" selection-start="1664" selection-end="1664" vertical-scroll-proportion="0.9572108">
               <folding />
             </state>
           </provider>
@@ -172,7 +166,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Supply.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/VictoryCards.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Card.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/ActionPhaseSpec.scala" />
@@ -188,6 +181,7 @@
         <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Verbs.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/ActionCards.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/StacksTest.scala" />
       </list>
     </option>
   </component>
@@ -891,7 +885,7 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
   </component>
-  <component name="RunManager" selected="Application.BureaucratSpec">
+  <component name="RunManager" selected="ScalaTest.All ScalaTests in Scalanion">
     <configuration default="false" name="ActionPhaseSpec" type="SpecsRunConfiguration" factoryName="Specs" temporary="true">
       <module name="scalanion" />
       <setting name="path" value="" />
@@ -1219,7 +1213,7 @@
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="start checking that events are received from actions, given they can now see other players." />
+    <option name="LAST_COMMIT_MESSAGE" value="check correct events are seen from actions. delegate to stacks where necessary, fix a resulting bug in stacks." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1238,6 +1232,7 @@
     <MESSAGE value="modify interface of actioncard once more, to provide access to the supply" />
     <MESSAGE value="give actions access to the other players. add more specifications for bureaucrat" />
     <MESSAGE value="start checking that events are received from actions, given they can now see other players." />
+    <MESSAGE value="check correct events are seen from actions. delegate to stacks where necessary, fix a resulting bug in stacks." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1247,13 +1242,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/PlayerAdapter.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="43" selection-start="501" selection-end="501" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Queries.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="12" selection-start="84" selection-end="84" vertical-scroll-proportion="0.0">
@@ -1354,7 +1342,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="28" selection-start="926" selection-end="926" vertical-scroll-proportion="0.55309033">
+        <state line="42" column="24" selection-start="1245" selection-end="1245" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/StacksTest.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="55" selection-start="1664" selection-end="1664" vertical-scroll-proportion="0.9572108">
           <folding />
         </state>
       </provider>
