@@ -1,6 +1,7 @@
 package org.grumpysoft
 
 import org.grumpysoft.TreasureCards.Silver
+import collection.immutable.List
 
 object ActionCards {
 
@@ -18,24 +19,40 @@ object ActionCards {
 
   class Bureaucrat extends ActionCard(4) {
 
+    type stacksWithPlayer = Tuple2[Stacks, GenericPlayer[Card]]
+    val oneSilver: List[Silver] = List(Silver())
+
     // TODO: must this return a Tuple?
     def addRedTape(stacks: Stacks, player: GenericPlayer[Card], victoryCards: List[Card])
-    : (Stacks, GenericPlayer[Card]) = {
-      val toReplace = player.chooseFrom(victoryCards, PlaceOnDeck, 1, 1).head
-      (Stacks(toReplace :: stacks.deck, stacks.hand.filter(a => a.ne(toReplace)), stacks.discard), player)
+      : (Stacks, Card) = {
+      val toReplace = player.chooseFrom(victoryCards, PlaceOnDeck, 1, 1)
+      (stacks.replace(toReplace), toReplace.head)
     }
 
-    def attack(stacksAndPlayer: (Stacks, GenericPlayer[Card])) : (Stacks, GenericPlayer[Card]) = {
-      val stacks = stacksAndPlayer._1
+    def attack(stacksAndPlayer: stacksWithPlayer, otherPlayers: Seq[GenericPlayer[Card]]) : stacksWithPlayer = {
+      val (stacks, player) = stacksAndPlayer
       val victoryCards = stacks.hand.filter(isVictoryCard(_))
-      if (victoryCards.size > 0)
-        addRedTape(stacks, stacksAndPlayer._2, victoryCards)
-      else
-        return stacksAndPlayer
+      if (victoryCards.size > 0) {
+        val (newStacks, replaced) = addRedTape(stacks, player, victoryCards)
+        otherPlayers.map(_.playerEvent(player, PlaceOnDeck, List(replaced)))
+        return (newStacks, player)
+      } else {
+        otherPlayers.map(_.playerEvent(player, RevealHand, stacks.hand))
+        stacksAndPlayer
+      }
+    }
+
+    def performAttack(table: Table, player: GenericPlayer[Card]) : Table = {
+      table.map(a => attack(a, otherPlayers(player, table, a)))
+    }
+
+    def otherPlayers(player: GenericPlayer[Card], table: Table, a: stacksWithPlayer) : List[GenericPlayer[Card]] = {
+      player :: table.filter(_.ne(a)).map(_._2).toList
     }
 
     def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
-      ActionResult(0, Stacks(List(Silver()) ++ stacks.deck, stacks.hand, stacks.discard), supply.buy(Silver()), table.map(attack(_)))
+      table.map(_._2.playerEvent(player, PlaceOnDeck, oneSilver))
+      ActionResult(0, Stacks(oneSilver ++ stacks.deck, stacks.hand, stacks.discard), supply.buy(Silver()), performAttack(table, player))
     }
     def describe() = { "Bureaucrat" }
   }
@@ -47,7 +64,10 @@ object ActionCards {
   class Chancellor extends ActionCard(3) {
     def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
       player.query(DiscardYourDeck) match {
-        case true => ActionResult(2, Stacks(List(), stacks.hand, stacks.discard ++ stacks.deck), supply, table)
+        case true => {
+          table.map(_._2.playerEvent(player, DeckDiscard, stacks.deck))
+          ActionResult(2, Stacks(List(), stacks.hand, stacks.discard ++ stacks.deck), supply, table)
+        }
         case false => ActionResult(2, stacks, supply, table)
       }
     }

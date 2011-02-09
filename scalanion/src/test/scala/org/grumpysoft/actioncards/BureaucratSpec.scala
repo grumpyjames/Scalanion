@@ -4,7 +4,7 @@ import org.grumpysoft.Stacks._
 import org.grumpysoft.ActionCards.Bureaucrat
 import org.grumpysoft.TreasureCards._
 import org.grumpysoft.VictoryCards._
-import org.grumpysoft.{Stacks, PlaceOnDeck}
+import org.grumpysoft.{RevealHand, ActionResult, Stacks, PlaceOnDeck}
 
 object BureaucratSpec extends ActionCardSpecBase {
 
@@ -15,7 +15,13 @@ object BureaucratSpec extends ActionCardSpecBase {
 
   val table = makeTable(stacksTwo, stacksThree)
 
+
   "bureaucrat" should {
+
+    def playBureaucrat: ActionResult = {
+      playerTwo.chooseFrom(estateAndDuchy, PlaceOnDeck, 1, 1) returns estateAndDuchy.take(1)
+      Bureaucrat().play(stacks, playerOne, supply, table)
+    }
 
     doBefore {
       supply.available(Silver()) returns true
@@ -32,10 +38,16 @@ object BureaucratSpec extends ActionCardSpecBase {
     }
 
     "force each other player to either reveal their hand (containing no victory cards) or place a victory card back on top of their deck" in {
-      playerTwo.chooseFrom(estateAndDuchy, PlaceOnDeck, 1, 1) returns estateAndDuchy.take(1)
-      val actionResult = Bureaucrat().play(stacks, playerOne, supply, table)
+      val actionResult = playBureaucrat
       actionResult.table.head._1 must_==Stacks(Estate() :: stacksTwo.deck, List(Copper(), Duchy()), List())
       actionResult.table.last._1 must_==stacksThree
+    }
+
+    "correctly transmit events to other players" in {
+      val actionResult = playBureaucrat
+      checkEventReceived(playerOne, PlaceOnDeck, List(Silver()), table.map(_._2))
+      checkEventReceived(playerTwo, PlaceOnDeck, estateAndDuchy.take(1), List(playerOne, playerThree))
+      checkEventReceived(playerThree, RevealHand, twoCoppers, List(playerOne, playerTwo))
     }
 
   }

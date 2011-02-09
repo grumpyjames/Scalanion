@@ -9,9 +9,9 @@ import org.grumpysoft._
 
 abstract class ActionCardSpecBase extends Specification with Mockito {
 
-  protected val playerOne = mock[GenericPlayer[Card]]
-  protected val playerTwo = mock[GenericPlayer[Card]]
-  protected val playerThree = mock[GenericPlayer[Card]]
+  protected val playerOne = mockAs[GenericPlayer[Card]]("Player One")
+  protected val playerTwo = mockAs[GenericPlayer[Card]]("Player Two")
+  protected val playerThree = mockAs[GenericPlayer[Card]]("Player Three")
 
   protected val threeCoppersAndAnEstate = List(Copper(), Copper(), Copper(), Estate())
   protected val twoCoppers = List(Copper(), Copper())
@@ -25,7 +25,7 @@ abstract class ActionCardSpecBase extends Specification with Mockito {
   protected val supply = mock[Supply]
   protected val anotherSupply = mock[Supply]
 
-  type Table = Sequence[Tuple2[Stacks, GenericPlayer[Card]]]
+  type Table = Seq[Tuple2[Stacks, GenericPlayer[Card]]]
 
   protected val emptyTable: Table = List()
 

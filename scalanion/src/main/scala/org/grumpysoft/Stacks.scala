@@ -24,7 +24,8 @@ case class Stacks(deck: List[Card], hand: List[Card], discard: List[Card]) {
   }
 
   def replace(cards: Seq[Card]) : Stacks = {
-    Stacks(deck ++ hand.intersect(cards), hand.diff(cards), discard)
+    val (deckAdditions, newHand) = hand.partition(card => cards.exists(_.eq(card)))
+    Stacks(deckAdditions ++ deck, newHand, discard)
   }
 
   def trash(cards: Seq[Card]) : (Seq[Card], Stacks) = {
