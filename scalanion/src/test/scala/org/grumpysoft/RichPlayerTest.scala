@@ -17,7 +17,7 @@ class FakePlayer extends GenericPlayer[Int] with ShouldMatchers {
   def query(question: Query) = true
 
   def newHand(hand: Seq[Card]) : Unit = {}
-  def playerEvent(player: Player, action: Verb, cards: Seq[Card]) : Unit = {}
+  def playerEvent(player: GenericPlayer[Any], action: Verb, cards: Seq[Card]) : Unit = {}
   def describe() : String = {""}
 }
 

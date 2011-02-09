@@ -1,6 +1,6 @@
 package org.grumpysoft
 
-trait GenericPlayer[T] extends SelfDescribing {
+trait GenericPlayer[+T] extends SelfDescribing {
   /**
    * Choose minChoices <= n <= maxChoices cards from the given sequence, for the given purpose
    * @return the index or indices of the chosen cards.
@@ -22,6 +22,6 @@ trait GenericPlayer[T] extends SelfDescribing {
   /**
    * Notify player of a game event caused by someone (possibly themselves)
    */
-  def playerEvent(player: Player, action: Verb, cards: Seq[Card]) : Unit;
+  def playerEvent(player: GenericPlayer[Any], action: Verb, cards: Seq[Card]) : Unit;
   
 }

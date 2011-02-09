@@ -68,6 +68,7 @@ object ActionCards {
   class Chapel extends ActionCard(2) {
     def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
       val toTrash = player.chooseFrom(stacks.hand, Trash, 0, 4)
+      table.map(_._2.playerEvent(player, Trash, toTrash))
       ActionResult(0, Stacks(stacks.deck, stacks.hand.filter(anyEqTo(toTrash, _)), stacks.discard), supply, table)
     }
     def describe() : String = { "Chapel" }

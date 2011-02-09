@@ -14,7 +14,7 @@ class PlayerAdapter[U](val adaptTo: GenericPlayer[U], lift: ((Seq[Card],Seq[U]) 
     adaptTo.newHand(hand)
   }
 
-  def playerEvent(player: Player, action: Verb, cards: Seq[Card]) : Unit = {
+  def playerEvent(player: GenericPlayer[Any], action: Verb, cards: Seq[Card]) : Unit = {
     adaptTo.playerEvent(player, action, cards)
   }
 

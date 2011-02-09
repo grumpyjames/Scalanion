@@ -29,11 +29,17 @@ abstract class ActionCardSpecBase extends Specification with Mockito {
 
   protected val emptyTable: Table = List()
 
+  protected val eventOnlyTable = makeTable(Stacks.empty(), Stacks.empty())
+
   /**
    * make a table of player two and player three, giving them the appropriate stacks
    */
   protected def makeTable(stacksTwo: Stacks, stacksThree: Stacks) : Table = {
     return List(stacksTwo, stacksThree).zip(List(playerTwo, playerThree))
+  }
+
+  def checkEventReceived(player: GenericPlayer[Card], verb: Verb, cards: Seq[Card], players: Seq[GenericPlayer[Card]]) : Unit = {
+    players.foreach(otherPlayer => there was one(otherPlayer).playerEvent(player, verb, cards))
   }
 
 }
