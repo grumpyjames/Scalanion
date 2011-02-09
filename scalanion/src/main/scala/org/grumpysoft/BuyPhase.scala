@@ -1,13 +1,12 @@
 package org.grumpysoft
 
 import annotation.tailrec
-import scala.collection.immutable.Stack
 
 object Trader {
   def valueHand(hand: Seq[Card]) : Int = {
     hand.foldLeft(0)((left, right) => right match {
-	case TreasureCard(a, b) => left + b
-	case _ => left
+	    case TreasureCard(a, b) => left + b
+	    case _ => left
     })
   }
 }
