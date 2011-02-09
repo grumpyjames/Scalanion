@@ -50,7 +50,7 @@ object Stacks {
 
   def base() : Stacks = {
     val deck = List(Copper(), Copper(), Copper(), Copper(), Copper(), Copper(), Copper(), Estate(), Estate(), Estate())
-    Stacks(List() ++ shuffle(deck), List(), List()).endTurn
+    deckOnly(shuffle(deck)).endTurn
   }
 
   def empty() : Stacks = {
@@ -59,5 +59,9 @@ object Stacks {
 
   def handOnly(hand: List[Card]) = {
     Stacks(List(), hand, List())
+  }
+
+  def deckOnly(deck: List[Card]) = {
+    Stacks(deck, List(), List())
   }
 }

@@ -1,6 +1,19 @@
 package org.grumpysoft
 
+import org.grumpysoft.TreasureCards.Silver
+
 object ActionCards {
+
+  object Bureaucrat {
+    def apply() : Bureaucrat = { new Bureaucrat }
+  }
+
+  class Bureaucrat extends ActionCard(4) {
+    def play(stacks: Stacks, player: GenericPlayer[Card]) : ActionResult = {
+      ActionResult(0, Stacks(List(Silver()) ++ stacks.deck, stacks.hand, stacks.discard))
+    }
+    def describe() = { "Bureaucrat" }
+  }
 
   object Chancellor {
     def apply() : Chancellor = { new Chancellor }
