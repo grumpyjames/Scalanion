@@ -2,6 +2,16 @@ package org.grumpysoft
 
 object ActionCards {
 
+  object Chapel {
+    def apply() : Chapel = { new Chapel }
+  }
+
+  class Chapel extends ActionCard(2) {
+    def play() : Unit = {}
+    def describe() : String = { "Chapel" }
+  }
+
+
   object Remodel {
     def apply() : Remodel = {
       new Remodel

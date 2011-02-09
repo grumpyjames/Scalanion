@@ -10,9 +10,9 @@ import VictoryCards._
 
 object BuyPhaseSpec extends Specification with Mockito {
 
-  val deck = Stack(Copper(), Copper(), Copper(), Estate(), Estate())
-  val hand = Stack(Copper(), Copper(), Copper(), Copper(), Estate())
-  val actionlessStacks = Stacks(deck, hand, Stack())
+  val deck = List(Copper(), Copper(), Copper(), Estate(), Estate())
+  val hand = List(Copper(), Copper(), Copper(), Copper(), Estate())
+  val actionlessStacks = Stacks(deck, hand, List())
 
   val player = mock[GenericPlayer[Card]]
   val supply = mock[Supply]
