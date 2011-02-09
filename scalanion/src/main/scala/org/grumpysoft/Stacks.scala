@@ -1,6 +1,5 @@
 package org.grumpysoft
 
-import scala.collection.immutable.Stack
 import scala.util.Random._
 
 import TreasureCards.Copper
@@ -48,8 +47,17 @@ case class Stacks(deck: List[Card], hand: List[Card], discard: List[Card]) {
 }
 
 object Stacks {
+
   def base() : Stacks = {
     val deck = List(Copper(), Copper(), Copper(), Copper(), Copper(), Copper(), Copper(), Estate(), Estate(), Estate())
     Stacks(List() ++ shuffle(deck), List(), List()).endTurn
+  }
+
+  def empty() : Stacks = {
+    Stacks(List(), List(), List())
+  }
+
+  def handOnly(hand: List[Card]) = {
+    Stacks(List(), hand, List())
   }
 }

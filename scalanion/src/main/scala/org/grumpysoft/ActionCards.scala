@@ -7,10 +7,13 @@ object ActionCards {
   }
 
   class Chapel extends ActionCard(2) {
-    def play() : Unit = {}
+    def play(stacks: Stacks, player: GenericPlayer[Card]) : Stacks = {
+      val toTrash = player.chooseFrom(stacks.hand, Trash, 0, 4)
+      // want object equality here.
+      return Stacks(stacks.deck, stacks.hand.filter(a => !toTrash.find(b => b.eq(a)).isDefined), stacks.discard)
+    }
     def describe() : String = { "Chapel" }
   }
-
 
   object Remodel {
     def apply() : Remodel = {
@@ -19,7 +22,7 @@ object ActionCards {
   }
 
   class Remodel extends ActionCard(4) {
-    def play() : Unit = {}
+    def play(stacks: Stacks, player: GenericPlayer[Card]) : Stacks = { Stacks.base() }
     def describe() : String = { "Remodel" }
   }
 
@@ -28,7 +31,7 @@ object ActionCards {
   }
 
   class Witch extends ActionCard(5) {
-    def play() : Unit = {}
+    def play(stacks: Stacks, player: GenericPlayer[Card]) : Stacks = { Stacks.base() }
     def describe() : String = { "Witch" }
   }
 
@@ -37,7 +40,7 @@ object ActionCards {
   }
 
   class Militia extends ActionCard(4) {
-    def play() : Unit = {}
+    def play(stacks: Stacks, player: GenericPlayer[Card]) : Stacks = { Stacks.base() }
     def describe() : String = { "Militia" }
   }
 

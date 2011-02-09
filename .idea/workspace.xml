@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="335121ac-d150-4852-93e9-f0488d7c3091" name="Default" comment="" />
+    <list default="true" id="335121ac-d150-4852-93e9-f0488d7c3091" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ChapelSpec.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/ActionCards.scala" afterPath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/ActionCards.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Card.scala" afterPath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Card.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala" afterPath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/ActionPhaseSpec.scala" afterPath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/ActionPhaseSpec.scala" />
+    </list>
     <ignored path="Scalanion.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -59,10 +66,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="BuyPhaseSpec.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/BuyPhaseSpec.scala">
+      <file leaf-file-name="ActionCards.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/ActionCards.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="49" selection-start="411" selection-end="416" vertical-scroll-proportion="0.0">
+            <state line="12" column="58" selection-start="379" selection-end="379" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -71,25 +78,52 @@
       <file leaf-file-name="ActionPhaseSpec.scala" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/ActionPhaseSpec.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="29" selection-start="382" selection-end="382" vertical-scroll-proportion="0.0">
+            <state line="12" column="45" selection-start="341" selection-end="341" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ActionCards.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/ActionCards.scala">
+      <file leaf-file-name="Stacks.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="39" selection-start="216" selection-end="216" vertical-scroll-proportion="0.0">
+            <state line="7" column="45" selection-start="153" selection-end="153" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChapelSpec.scala" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="package.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/scala-2.8.1.final/src/scala-library-src.jar!/scala/package.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="49" column="48" selection-start="2235" selection-end="2235" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="List.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/scala-2.8.1.final/src/scala-library-src.jar!/scala/collection/immutable/List.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="44" column="22" selection-start="1725" selection-end="1725" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Card.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Card.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="51" selection-start="169" selection-end="169" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ChapelSpec.scala" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ChapelSpec.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="10" selection-start="312" selection-end="312" vertical-scroll-proportion="0.0">
+            <state line="14" column="60" selection-start="493" selection-end="493" vertical-scroll-proportion="0.33280507">
               <folding />
             </state>
           </provider>
@@ -98,7 +132,7 @@
       <file leaf-file-name="StacksTest.scala" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/StacksTest.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="52" selection-start="2032" selection-end="2032" vertical-scroll-proportion="0.0">
+            <state line="58" column="5" selection-start="2046" selection-end="2046" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -113,37 +147,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameTest.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/GameTest.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="5" selection-start="1339" selection-end="1339" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CommandLineInputTest.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/CommandLineInputTest.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="6" selection-start="208" selection-end="208" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CommandLinePlayerTest.scala" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="CommandLinePlayerTest.scala" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/CommandLinePlayerTest.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="92" column="48" selection-start="3399" selection-end="3399" vertical-scroll-proportion="1.329114">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Stacks.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="3" selection-start="1581" selection-end="1581" vertical-scroll-proportion="-31.8">
+            <state line="92" column="48" selection-start="3399" selection-end="3399" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -164,14 +171,15 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/BuyPhase.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/ActionPhaseSpec.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ChapelSpec.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/BuyPhaseSpec.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/ActionCards.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/GameTest.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/StacksTest.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/CommandLinePlayerTest.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/ActionPhaseSpec.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/StacksTest.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Card.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/ActionCards.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ChapelSpec.scala" />
       </list>
     </option>
   </component>
@@ -541,36 +549,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Card.scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="grumpysoft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="BuyPhase.scala" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </PATH_ELEMENT>
@@ -605,7 +583,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="fileTemplates" />
+    <property name="options.lastSelected" value="project.propVCSSupport.VCSs.Git" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -615,7 +593,7 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
   </component>
-  <component name="RunManager" selected="ScalaTest.All ScalaTests in Scalanion">
+  <component name="RunManager" selected="Application.ChapelSpec">
     <configuration default="false" name="BuyPhaseSpec" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="org.grumpysoft.BuyPhaseSpec" />
       <option name="VM_PARAMETERS" />
@@ -641,6 +619,22 @@
       <setting name="workingDirectory" value="$PROJECT_DIR$" />
       <setting name="sysFilter" value=".*" />
       <setting name="exampleFilter" value=".*" />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="ChapelSpec" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="org.grumpysoft.actioncards.ChapelSpec" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="scalanion" />
+      <envs />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
@@ -814,11 +808,12 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Application.BuyPhaseSpec" />
       <item index="1" class="java.lang.String" itemvalue="ScalaTest.All ScalaTests in Scalanion" />
       <item index="2" class="java.lang.String" itemvalue="Specs.ActionPhaseSpec" />
       <item index="3" class="java.lang.String" itemvalue="Specs.All Specs in Scalanion" />
+      <item index="4" class="java.lang.String" itemvalue="Application.ChapelSpec" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -859,15 +854,15 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="SBT Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937685" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32937685" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937685" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17530732" sideWeight="0.67161226" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17530732" sideWeight="0.6706231" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32838774" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32838774" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -918,13 +913,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Card.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="20" selection-start="204" selection-end="204" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Verbs.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="22" selection-start="46" selection-end="46" vertical-scroll-proportion="0.0">
@@ -939,51 +927,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/scala-2.8.1.final/src/scala-library-src.jar!/scala/package.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="41" selection-start="2281" selection-end="2281" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/scala-2.8.1.final/src/scala-library-src.jar!/scala/collection/immutable/List.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="437" column="7" selection-start="12870" selection-end="12870" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/ActionPhaseSpec.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="29" selection-start="382" selection-end="382" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="3" selection-start="1581" selection-end="1581" vertical-scroll-proportion="-31.8">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/BuyPhaseSpec.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="49" selection-start="411" selection-end="416" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ChapelSpec.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="10" selection-start="312" selection-end="312" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/ActionCards.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="39" selection-start="216" selection-end="216" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1009,16 +955,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/StacksTest.scala">
+    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/CommandLinePlayerTest.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="52" selection-start="2032" selection-end="2032" vertical-scroll-proportion="0.0">
+        <state line="92" column="48" selection-start="3399" selection-end="3399" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/CommandLinePlayerTest.scala">
+    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/ActionPhaseSpec.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="48" selection-start="3399" selection-end="3399" vertical-scroll-proportion="1.329114">
+        <state line="12" column="45" selection-start="341" selection-end="341" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/StacksTest.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="5" selection-start="2046" selection-end="2046" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/scala-2.8.1.final/src/scala-library-src.jar!/scala/package.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="48" selection-start="2235" selection-end="2235" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/scala-2.8.1.final/src/scala-library-src.jar!/scala/collection/immutable/List.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="22" selection-start="1725" selection-end="1725" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="45" selection-start="153" selection-end="153" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Card.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="51" selection-start="169" selection-end="169" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/ActionCards.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="58" selection-start="379" selection-end="379" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ChapelSpec.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="60" selection-start="493" selection-end="493" vertical-scroll-proportion="0.33280507">
           <folding />
         </state>
       </provider>
