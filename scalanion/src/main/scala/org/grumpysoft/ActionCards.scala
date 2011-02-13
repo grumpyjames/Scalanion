@@ -130,10 +130,12 @@ object ActionCards {
 
   class Remodel extends ActionCard(4) {
     def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
-      val toRemodel = player.chooseFrom(stacks.hand, Trash, 1, 1).head
-      val possibleDestinations = supply.availableCards(toRemodel.price + 2)
-      val toRemodelTo = player.chooseFrom(possibleDestinations, Gain, 1, 1).head
-      ActionResult(0, stacks.trashOne(toRemodel)._2.gainOne(toRemodelTo), supply, table)
+      val toRemodel = player.chooseFrom(stacks.hand, Trash, 1, 1)
+      table.map(_._2).foreach(_.playerEvent(player, Trash, toRemodel))
+      val possibleDestinations = supply.availableCards(toRemodel.head.price + 2)
+      val toRemodelTo = player.chooseFrom(possibleDestinations, Gain, 1, 1)
+      table.map(_._2).foreach(_.playerEvent(player, Gain, toRemodelTo))
+      ActionResult(0, stacks.trash(toRemodel)._2.gain(toRemodelTo), supply.buy(toRemodelTo.head), table)
     }
     def describe() : String = { "Remodel" }
   }

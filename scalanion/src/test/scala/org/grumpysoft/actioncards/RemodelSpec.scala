@@ -11,6 +11,7 @@ object RemodelSpec extends ActionCardSpecBase {
     playerOne.chooseFrom(copperAndSilver, Trash, 1, 1) returns copperAndSilver.drop(1)
     supply.availableCards(5) returns witchAndDuchy
     playerOne.chooseFrom(witchAndDuchy, Gain, 1, 1) returns witchAndDuchy.drop(1)
+    supply.buy(witchAndDuchy.last) returns anotherSupply
     val actionResult = Remodel().play(playerStacks, playerOne, supply, eventOnlyTable)
     "ask the player for a card to remodel" in {
       there was one(playerOne).chooseFrom(copperAndSilver, Trash, 1, 1)
@@ -26,6 +27,13 @@ object RemodelSpec extends ActionCardSpecBase {
     }
     "adds the remodelled card to the discard deck of the player" in {
       actionResult.stacks.discard.head mustEq(witchAndDuchy.last)
+    }
+    "return the correct supply" in {
+      actionResult.supply mustEq(anotherSupply)
+    }
+    "fire the correct events" in {
+      there was one(playerTwo).playerEvent(playerOne, Trash, copperAndSilver.drop(1))
+      there was one(playerTwo).playerEvent(playerOne, Gain, witchAndDuchy.drop(1))
     }
   }
 
