@@ -15,6 +15,7 @@ object LibrarySpec extends ActionCardSpecBase {
   "library" should {
     "deal until seven cards are in the hand" in {
       val actionResult = playLibrary(noActionsDeckStacks)
+      actionResult.treasure must_==0
       actionResult.stacks.hand must_==fourCardHand ++ copperEstateAndGold
       actionResult.stacks.deck must_==List()
     }

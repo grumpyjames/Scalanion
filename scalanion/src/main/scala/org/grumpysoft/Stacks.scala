@@ -37,6 +37,11 @@ case class Stacks(deck: List[Card], hand: List[Card], discard: List[Card]) {
     case None => error("argh")
   }
 
+  def discardCards(cards: Seq[Card]) : Stacks = {
+    val (newHand, toDiscard) = hand.partition(card => !cards.exists(_.eq(card)))
+    Stacks(deck, newHand, toDiscard ++ discard)
+  }
+
   override def toString() : String = {
     asString(deck, "deck") + " " + asString(hand, "hand") + " " + asString(discard, "discard")
   }

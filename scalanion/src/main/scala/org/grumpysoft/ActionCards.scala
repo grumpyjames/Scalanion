@@ -147,7 +147,30 @@ object ActionCards {
   }
 
   class Militia extends ActionCard(4) {
-    def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = { ActionResult(0, Stacks.base(), supply, table) }
+
+    type stacksWithPlayer = Tuple2[Stacks, GenericPlayer[Card]]
+
+    def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
+      val newTable = table.map(a => attack(a, player :: allBut(a, table)))
+      ActionResult(2, Stacks.base(), supply, newTable)
+    }
+
+    def attack(underAttack: stacksWithPlayer, others: Seq[GenericPlayer[Card]]) : stacksWithPlayer = {
+      val (stacksUnderAttack, playerUnderAttack) = underAttack
+      val numberToDiscard = stacksUnderAttack.hand.size - 3
+      if (numberToDiscard > 0) {
+        val cardsToDiscard = playerUnderAttack.chooseFrom(stacksUnderAttack.hand, Discard, numberToDiscard, numberToDiscard)
+        others.map(_.playerEvent(playerUnderAttack, Discard, cardsToDiscard))
+        return (stacksUnderAttack.discardCards(cardsToDiscard), playerUnderAttack)
+      } else {
+        return underAttack
+      }
+    }
+
+    def allBut(victim: stacksWithPlayer, table: Table) : List[GenericPlayer[Card]] = {
+      table.filter(_.ne(victim)).map(_._2).toList
+    }
+
     def describe() : String = { "Militia" }
   }
 
