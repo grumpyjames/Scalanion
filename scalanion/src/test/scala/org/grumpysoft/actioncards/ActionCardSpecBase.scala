@@ -21,6 +21,7 @@ abstract class ActionCardSpecBase extends Specification with Mockito {
   protected val twoEstates = List(Estate(), Estate())
   protected val estateAndDuchy = List(Estate(), Duchy())
   protected val estateDuchyAndCopper = Copper() :: estateAndDuchy
+  protected val witchAndDuchy = List(Witch(), Duchy())
   protected val copperEstateAndGold = List(Copper(), Estate(), Gold())
 
   protected val mixOfAllTypes = List(Remodel(), Copper(), Witch(), Gold(), Estate(), Copper(), Copper())

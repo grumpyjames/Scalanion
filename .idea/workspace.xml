@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="335121ac-d150-4852-93e9-f0488d7c3091" name="Default" comment="add Library card (although could do with a quickcheck test)">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/MilitiaSpec.scala" />
+    <list default="true" id="335121ac-d150-4852-93e9-f0488d7c3091" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/RemodelSpec.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/scalanion.iml" afterPath="$PROJECT_DIR$/scalanion/scalanion.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/ActionCards.scala" afterPath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/ActionCards.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala" afterPath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/LibrarySpec.scala" afterPath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/LibrarySpec.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Verbs.scala" afterPath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Verbs.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ActionCardSpecBase.scala" afterPath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ActionCardSpecBase.scala" />
     </list>
     <ignored path="Scalanion.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,21 +26,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/ActionCards.scala" line="160" class="Class at ActionCards.scala:160" package="">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
     <breakpoint_any>
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -93,7 +78,7 @@
       <file leaf-file-name="MilitiaSpec.scala" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/MilitiaSpec.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="24" selection-start="508" selection-end="508" vertical-scroll-proportion="0.0">
+            <state line="29" column="19" selection-start="1289" selection-end="1289" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -102,7 +87,7 @@
       <file leaf-file-name="ActionCardSpecBase.scala" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ActionCardSpecBase.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="34" selection-start="267" selection-end="267" vertical-scroll-proportion="0.0">
+            <state line="23" column="12" selection-start="1040" selection-end="1040" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -111,7 +96,34 @@
       <file leaf-file-name="ActionCards.scala" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/ActionCards.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="170" column="32" selection-start="5843" selection-end="5843" vertical-scroll-proportion="1.2123077">
+            <state line="133" column="75" selection-start="4469" selection-end="4469" vertical-scroll-proportion="0.33280507">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Card.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Card.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="27" selection-start="51" selection-end="51" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RemodelSpec.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/RemodelSpec.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="20" selection-start="247" selection-end="247" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Verbs.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Verbs.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="47" selection-start="340" selection-end="340" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -120,7 +132,7 @@
       <file leaf-file-name="Stacks.scala" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="0" selection-start="1157" selection-end="1157" vertical-scroll-proportion="0.0">
+            <state line="21" column="6" selection-start="529" selection-end="529" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -140,7 +152,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ChapelSpec.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/CommandLinePlayer.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/GenericPlayer.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/RichPlayerTest.scala" />
@@ -148,13 +159,14 @@
         <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/PlayerAdapter.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ChancellorSpec.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/BureaucratSpec.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Verbs.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/StacksTest.scala" />
         <option value="$PROJECT_DIR$/README" />
-        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ActionCardSpecBase.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/LibrarySpec.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/MilitiaSpec.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ActionCardSpecBase.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Verbs.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/RemodelSpec.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/ActionCards.scala" />
       </list>
     </option>
@@ -363,7 +375,67 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Verbs.scala" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Scalanion" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scalanion" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scala" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grumpysoft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Stacks.scala" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Scalanion" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scalanion" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scala" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grumpysoft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Card.scala" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -408,20 +480,7 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
   </component>
-  <component name="RunManager" selected="Application.MilitiaSpec">
-    <configuration default="false" name="ChancellorSpec" type="SpecsRunConfiguration" factoryName="Specs" temporary="true">
-      <module name="scalanion" />
-      <setting name="path" value="org.grumpysoft.actioncards.ChancellorSpec" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="packagepath" value="" />
-      <setting name="workingDirectory" value="$PROJECT_DIR$" />
-      <setting name="sysFilter" value=".*" />
-      <setting name="exampleFilter" value=".*" />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Application.RemodelSpec">
     <configuration default="false" name="ChancellorSpec" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="org.grumpysoft.actioncards.ChancellorSpec" />
       <option name="VM_PARAMETERS" />
@@ -501,6 +560,22 @@
       </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="RemodelSpec" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="org.grumpysoft.actioncards.RemodelSpec" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="scalanion" />
+      <envs />
+      <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -641,13 +716,13 @@
       <method />
     </configuration>
     <list size="7">
-      <item index="0" class="java.lang.String" itemvalue="Specs.ChancellorSpec" />
-      <item index="1" class="java.lang.String" itemvalue="Application.ChancellorSpec" />
-      <item index="2" class="java.lang.String" itemvalue="Application.BureaucratSpec" />
-      <item index="3" class="java.lang.String" itemvalue="Application.LibrarySpec" />
-      <item index="4" class="java.lang.String" itemvalue="Application.MilitiaSpec" />
-      <item index="5" class="java.lang.String" itemvalue="ScalaTest.All ScalaTests in Scalanion" />
-      <item index="6" class="java.lang.String" itemvalue="Specs.All Specs in Scalanion" />
+      <item index="0" class="java.lang.String" itemvalue="ScalaTest.All ScalaTests in Scalanion" />
+      <item index="1" class="java.lang.String" itemvalue="Specs.All Specs in Scalanion" />
+      <item index="2" class="java.lang.String" itemvalue="Application.ChancellorSpec" />
+      <item index="3" class="java.lang.String" itemvalue="Application.BureaucratSpec" />
+      <item index="4" class="java.lang.String" itemvalue="Application.LibrarySpec" />
+      <item index="5" class="java.lang.String" itemvalue="Application.MilitiaSpec" />
+      <item index="6" class="java.lang.String" itemvalue="Application.RemodelSpec" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -719,7 +794,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="add Library card (although could do with a quickcheck test)" />
+    <option name="LAST_COMMIT_MESSAGE" value="don't mangle the player's hand when playing militia" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -742,6 +817,8 @@
     <MESSAGE value="...which causes a test for Stacks to fail. Change the test, in this particular case..." />
     <MESSAGE value="better add a readme, I suppose" />
     <MESSAGE value="add Library card (although could do with a quickcheck test)" />
+    <MESSAGE value="add Militia card" />
+    <MESSAGE value="don't mangle the player's hand when playing militia" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -751,16 +828,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/BureaucratSpec.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="61" selection-start="358" selection-end="358" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/specs_2.8.1-1.6.7.jar!/org/specs/mock/MockitoFunctions.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="6" selection-start="29" selection-end="29" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/specs_2.8.1-1.6.7.jar!/org/specs/mock/MockitoStubs.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="6" selection-start="29" selection-end="29" vertical-scroll-proportion="0.023734177" />
@@ -786,11 +853,6 @@
         <state line="3" column="6" selection-start="190" selection-end="190" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Verbs.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="28" selection-start="377" selection-end="377" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/scala-2.8.1.final/src/scala-library-src.jar!/scala/collection/TraversableLike.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state line="310" column="6" selection-start="13161" selection-end="13161" vertical-scroll-proportion="0.0" />
@@ -811,28 +873,51 @@
         <state line="17" column="36" selection-start="598" selection-end="598" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ActionCardSpecBase.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="34" selection-start="267" selection-end="267" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/MilitiaSpec.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="24" selection-start="508" selection-end="508" vertical-scroll-proportion="0.0">
+        <state line="29" column="19" selection-start="1289" selection-end="1289" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ActionCardSpecBase.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="12" selection-start="1040" selection-end="1040" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/RemodelSpec.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="20" selection-start="247" selection-end="247" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="0" selection-start="1157" selection-end="1157" vertical-scroll-proportion="0.0">
+        <state line="21" column="6" selection-start="529" selection-end="529" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Verbs.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="47" selection-start="340" selection-end="340" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Card.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="27" selection-start="51" selection-end="51" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/ActionCards.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="170" column="32" selection-start="5843" selection-end="5843" vertical-scroll-proportion="1.2123077">
+        <state line="133" column="75" selection-start="4469" selection-end="4469" vertical-scroll-proportion="0.33280507">
           <folding />
         </state>
       </provider>

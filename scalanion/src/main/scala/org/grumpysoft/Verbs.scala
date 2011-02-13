@@ -6,6 +6,7 @@ case object Play extends Verb("play", "played")
 case object Discard extends Verb("discard", "discarded")
 case object Buy extends Verb("buy", "bought")
 case object Trash extends Verb("trash", "trashed")
+case object Gain extends Verb("gain", "gained")
 case object Receive extends Verb("receive", "received")
 // TODO: these two are silly
 case object PlaceOnDeck extends Verb("decktop", "decktopped")

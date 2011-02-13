@@ -19,6 +19,10 @@ case class Stacks(deck: List[Card], hand: List[Card], discard: List[Card]) {
       Stacks(deck.drop(count), newHand, discard)
   }
 
+  def gainOne(card: Card) : Stacks = {
+    gain(List(card))
+  }
+
   def gain(cards: Seq[Card]) : Stacks = {
     Stacks(deck, hand, discard ++ cards)
   }
@@ -26,6 +30,11 @@ case class Stacks(deck: List[Card], hand: List[Card], discard: List[Card]) {
   def replace(cards: Seq[Card]) : Stacks = {
     val (deckAdditions, newHand) = hand.partition(card => cards.exists(_.eq(card)))
     Stacks(deckAdditions ++ deck, newHand, discard)
+  }
+
+  def trashOne(card: Card) : (Card, Stacks) = {
+    val (discarded, newStacks) = trash(List(card))
+    (discarded.head, newStacks)
   }
 
   def trash(cards: Seq[Card]) : (Seq[Card], Stacks) = {
