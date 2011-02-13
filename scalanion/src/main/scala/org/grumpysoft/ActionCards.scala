@@ -151,8 +151,7 @@ object ActionCards {
     type stacksWithPlayer = Tuple2[Stacks, GenericPlayer[Card]]
 
     def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
-      val newTable = table.map(a => attack(a, player :: allBut(a, table)))
-      ActionResult(2, Stacks.base(), supply, newTable)
+      ActionResult(2, stacks, supply, table.map(a => attack(a, player :: allBut(a, table))))
     }
 
     def attack(underAttack: stacksWithPlayer, others: Seq[GenericPlayer[Card]]) : stacksWithPlayer = {

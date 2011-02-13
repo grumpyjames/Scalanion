@@ -26,6 +26,9 @@ object MilitiaSpec extends ActionCardSpecBase {
         there was one(player).playerEvent(playerTwo, Discard, playerTwosDiscardChoices)
       )
     }
+    "leave the player's hand untouched" in {
+      actionResult.stacks mustEq(playerOneStacks)
+    }
   }
 
 }
