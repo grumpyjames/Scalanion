@@ -1,5 +1,6 @@
 package org.grumpysoft
 
+import actioncards.Militia
 import org.scalatest.WordSpec
 import org.scalatest.matchers.ShouldMatchers
 

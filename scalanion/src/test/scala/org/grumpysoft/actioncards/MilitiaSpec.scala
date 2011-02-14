@@ -1,6 +1,5 @@
 package org.grumpysoft.actioncards
 
-import org.grumpysoft.ActionCards.Militia
 import collection.immutable.List
 import org.grumpysoft.{Card, Discard, Stacks}
 
