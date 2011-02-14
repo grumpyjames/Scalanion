@@ -3,61 +3,7 @@ package org.grumpysoft
 import org.grumpysoft.TreasureCards.Silver
 import collection.immutable.List
 
-object ActionCards {
-
-
-  object Bureaucrat {
-    def apply() : Bureaucrat = { new Bureaucrat }
-  }
-
-  class Bureaucrat extends ActionCard(4) {
-    type stacksWithPlayer = Tuple2[Stacks, GenericPlayer[Card]]
-    val oneSilver: List[Silver] = List(Silver())
-
-    // TODO: must this return a Tuple?
-    def addRedTape(stacks: Stacks, player: GenericPlayer[Card], victoryCards: List[Card])
-      : (Stacks, Card) = {
-      val toReplace = player.chooseFrom(victoryCards, PlaceOnDeck, 1, 1)
-      (stacks.replace(toReplace), toReplace.head)
-    }
-
-    def attack(stacksAndPlayer: stacksWithPlayer, otherPlayers: Seq[GenericPlayer[Card]]) : stacksWithPlayer = {
-      val (stacks, player) = stacksAndPlayer
-      val victoryCards = stacks.hand.filter(isVictoryCard(_))
-      if (victoryCards.size > 0) {
-        val (newStacks, replaced) = addRedTape(stacks, player, victoryCards)
-        otherPlayers.map(_.playerEvent(player, PlaceOnDeck, List(replaced)))
-        return (newStacks, player)
-      } else {
-        otherPlayers.map(_.playerEvent(player, RevealHand, stacks.hand))
-        stacksAndPlayer
-      }
-    }
-
-    def performAttack(table: Table, player: GenericPlayer[Card]) : Table = {
-      table.map(a => attack(a, otherPlayers(player, table, a)))
-    }
-
-    def isVictoryCard(card: Card) : Boolean = {
-      card match {
-        case vc: VictoryCard => true
-        case _ => false
-      }
-    }
-
-    def otherPlayers(player: GenericPlayer[Card], table: Table, a: stacksWithPlayer) : List[GenericPlayer[Card]] = {
-      player :: table.filter(_.ne(a)).map(_._2).toList
-    }
-
-    def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
-      table.map(_._2.playerEvent(player, PlaceOnDeck, oneSilver))
-      ActionResult(0, Stacks(oneSilver ++ stacks.deck, stacks.hand, stacks.discard), supply.buy(Silver()), performAttack(table, player))
-    }
-
-    def describe() = { "Bureaucrat" }
-  }
-
-  object Chancellor {
+ object Chancellor {
     def apply() : Chancellor = { new Chancellor }
   }
 
@@ -76,6 +22,13 @@ object ActionCards {
       "Chancellor"
     }
   }
+
+object ActionCards {
+
+
+
+
+
 
   object Chapel {
     def apply() : Chapel = { new Chapel }

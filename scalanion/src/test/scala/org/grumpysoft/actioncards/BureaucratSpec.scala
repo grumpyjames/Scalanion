@@ -1,7 +1,6 @@
 package org.grumpysoft.actioncards
 
 import org.grumpysoft.Stacks._
-import org.grumpysoft.ActionCards.Bureaucrat
 import org.grumpysoft.TreasureCards._
 import org.grumpysoft.VictoryCards._
 import org.grumpysoft.{RevealHand, ActionResult, Stacks, PlaceOnDeck}
