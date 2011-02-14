@@ -1,6 +1,5 @@
 package org.grumpysoft.actioncards
 
-import org.grumpysoft.ActionCards.Remodel
 import org.grumpysoft.{Gain, Stacks, Trash}
 
 object RemodelSpec extends ActionCardSpecBase {

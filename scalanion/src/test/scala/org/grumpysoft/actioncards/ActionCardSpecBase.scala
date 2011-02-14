@@ -2,6 +2,7 @@ package org.grumpysoft.actioncards
 
 import org.specs.mock.Mockito
 import org.specs.Specification
+import org.grumpysoft.actioncards.Remodel
 import org.grumpysoft.ActionCards._
 import org.grumpysoft.TreasureCards._
 import org.grumpysoft.VictoryCards._

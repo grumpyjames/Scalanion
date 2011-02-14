@@ -5,12 +5,6 @@ import collection.immutable.List
 
 object ActionCards {
 
-  def isVictoryCard(card: Card) : Boolean = {
-    card match {
-      case vc: VictoryCard => true
-      case _ => false
-    }
-  }
 
   object Bureaucrat {
     def apply() : Bureaucrat = { new Bureaucrat }
@@ -42,6 +36,13 @@ object ActionCards {
 
     def performAttack(table: Table, player: GenericPlayer[Card]) : Table = {
       table.map(a => attack(a, otherPlayers(player, table, a)))
+    }
+
+    def isVictoryCard(card: Card) : Boolean = {
+      card match {
+        case vc: VictoryCard => true
+        case _ => false
+      }
     }
 
     def otherPlayers(player: GenericPlayer[Card], table: Table, a: stacksWithPlayer) : List[GenericPlayer[Card]] = {
@@ -120,24 +121,6 @@ object ActionCards {
     def describe() = {
       "Library"
     }
-  }
-
-  object Remodel {
-    def apply() : Remodel = {
-      new Remodel
-    }
-  }
-
-  class Remodel extends ActionCard(4) {
-    def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
-      val toRemodel = player.chooseFrom(stacks.hand, Trash, 1, 1)
-      table.map(_._2).foreach(_.playerEvent(player, Trash, toRemodel))
-      val possibleDestinations = supply.availableCards(toRemodel.head.price + 2)
-      val toRemodelTo = player.chooseFrom(possibleDestinations, Gain, 1, 1)
-      table.map(_._2).foreach(_.playerEvent(player, Gain, toRemodelTo))
-      ActionResult(0, stacks.trash(toRemodel)._2.gain(toRemodelTo), supply.buy(toRemodelTo.head), table)
-    }
-    def describe() : String = { "Remodel" }
   }
 
   object Witch {

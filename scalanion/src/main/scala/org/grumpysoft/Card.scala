@@ -9,7 +9,7 @@ case class ActionResult(treasure: Int, stacks: Stacks, supply: Supply, table: Se
 
 
 abstract case class ActionCard(cost: Int) extends Card(cost) {
-  type Table = Sequence[Tuple2[Stacks, GenericPlayer[Card]]]
+  type Table = Seq[Tuple2[Stacks, GenericPlayer[Card]]]
   def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult;
 }
 
