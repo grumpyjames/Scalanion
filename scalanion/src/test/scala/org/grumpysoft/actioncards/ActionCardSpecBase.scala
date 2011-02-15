@@ -26,6 +26,8 @@ abstract class ActionCardSpecBase extends Specification with Mockito {
 
   protected val mixOfAllTypes = List(Remodel(), Copper(), Witch(), Gold(), Estate(), Copper(), Copper())
 
+  protected val slightlyDifferentMix = List(Copper(), Remodel(), Copper(), Gold(), Estate(), Witch(), Copper())
+
   val fourCardHand = List(Copper(), Copper(), Estate(), Copper())
 
   protected val supply = mock[Supply]
