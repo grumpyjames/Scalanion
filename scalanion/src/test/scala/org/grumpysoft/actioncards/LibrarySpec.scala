@@ -1,6 +1,6 @@
 package org.grumpysoft.actioncards
 
-import org.grumpysoft.{ActionResult, Stacks}
+import org.grumpysoft.{Discard, ActionResult, Stacks}
 
 object LibrarySpec extends ActionCardSpecBase {
 
@@ -8,7 +8,7 @@ object LibrarySpec extends ActionCardSpecBase {
   val mixedDeckStacks = Stacks(mixOfAllTypes, twoCoppers, List())
 
   def playLibrary(stacks: Stacks): ActionResult = {
-    Library().play(stacks, playerOne, supply, emptyTable)
+    Library().play(stacks, playerOne, supply, eventOnlyTable)
   }
 
   "library" should {
@@ -19,10 +19,16 @@ object LibrarySpec extends ActionCardSpecBase {
       actionResult.stacks.deck must_==List()
     }
 
+    val actionResult = playLibrary(mixedDeckStacks)
+    val discardedActions = actionsOf(mixOfAllTypes)
     "discard any action cards dealt in the process" in {
-      val actionResult = playLibrary(mixedDeckStacks)
       actionResult.stacks.hand must_==twoCoppers ++ withoutActions(mixOfAllTypes)
-      actionResult.stacks.discard must_==actionsOf(mixOfAllTypes)
+      actionResult.stacks.discard must_==discardedActions
+    }
+    "transmit discard events for those action cards" in {
+      eventOnlyTable.map(_._2).foreach(otherPlayer =>
+        there was one(otherPlayer).playerEvent(playerOne, Discard, discardedActions)
+      )
     }
   }
 

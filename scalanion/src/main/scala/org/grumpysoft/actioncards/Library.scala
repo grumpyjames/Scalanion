@@ -8,20 +8,21 @@ object Library {
 
 class Library extends ActionCard(2) {
   def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
-    ActionResult(0, goUntilSeven(stacks), supply, table)
+    ActionResult(0, goUntilSeven(stacks, player, table.map(_._2)), supply, table)
   }
 
   def describe() = {
     "Library"
   }
 
-  private def goUntilSeven(stacks: Stacks) : Stacks = {
+  private def goUntilSeven(stacks: Stacks, player: GenericPlayer[Card], otherPlayers: Seq[GenericPlayer[Card]]) : Stacks = {
     if (stacks.hand.length == 7) {
       stacks
     } else {
       val numberToTake: Int = 7 - stacks.hand.length
       val (actions, others) = stacks.deck.take(numberToTake).partition(isActionCard(_))
-      goUntilSeven(Stacks(stacks.deck.drop(numberToTake), stacks.hand ++ others, stacks.discard ++ actions))
+      otherPlayers.foreach(_.playerEvent(player, Discard, actions))
+      goUntilSeven(Stacks(stacks.deck.drop(numberToTake), stacks.hand ++ others, stacks.discard ++ actions), player, otherPlayers)
     }
   }
 
