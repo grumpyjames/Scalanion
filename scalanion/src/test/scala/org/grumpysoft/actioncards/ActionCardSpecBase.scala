@@ -31,7 +31,7 @@ abstract class ActionCardSpecBase extends Specification with Mockito {
   protected val supply = mock[Supply]
   protected val anotherSupply = mock[Supply]
 
-  type Table = Seq[Tuple2[Stacks, GenericPlayer[Card]]]
+  type Table = Seq[(Stacks, GenericPlayer[Card])]
 
   protected val emptyTable: Table = List()
 

@@ -1,7 +1,6 @@
 package org.grumpysoft.actioncards
 
 import org.grumpysoft.{ActionResult, Stacks}
-import org.grumpysoft.ActionCards.Library
 
 object LibrarySpec extends ActionCardSpecBase {
 

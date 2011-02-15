@@ -1,8 +1,7 @@
 package org.grumpysoft.actioncards
 
-import org.grumpysoft.ActionCards._
-import org.grumpysoft.TreasureCards._
 import org.grumpysoft.{Trash, Stacks}
+import org.grumpysoft.TreasureCards.Copper
 
 object ChapelSpec extends ActionCardSpecBase {
 
