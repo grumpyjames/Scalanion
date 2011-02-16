@@ -6,7 +6,7 @@ object ActionCards {
   }
 
   class Witch extends ActionCard(5) {
-    def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = { ActionResult(0, Stacks.base(), supply, table) }
+    def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = { ActionResult.noTreasureOrBuys(Stacks.base(), supply, table) }
     def describe() : String = { "Witch" }
   }
 }

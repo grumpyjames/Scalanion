@@ -12,9 +12,9 @@ class Chancellor extends ActionCard(3) {
     player.query(DiscardYourDeck) match {
       case true => {
         table.map(_._2.playerEvent(player, DeckDiscard, stacks.deck))
-        ActionResult(2, Stacks(List(), stacks.hand, stacks.discard ++ stacks.deck), supply, table)
+        ActionResult.noBuys(2, Stacks(List(), stacks.hand, stacks.discard ++ stacks.deck), supply, table)
       }
-      case false => ActionResult(2, stacks, supply, table)
+      case false => ActionResult.noBuys(2, stacks, supply, table)
     }
   }
 

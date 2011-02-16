@@ -41,7 +41,7 @@ class Bureaucrat extends ActionCard(4) with TransmittableChoices {
 
   def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
     table.map(_._2.playerEvent(player, PlaceOnDeck, oneSilver))
-    ActionResult(0, Stacks(oneSilver ++ stacks.deck, stacks.hand, stacks.discard), supply.buy(Silver()), performAttack(table, player))
+    ActionResult.noTreasureOrBuys(Stacks(oneSilver ++ stacks.deck, stacks.hand, stacks.discard), supply.buy(Silver()), performAttack(table, player))
   }
 
   def describe() = { "Bureaucrat" }
