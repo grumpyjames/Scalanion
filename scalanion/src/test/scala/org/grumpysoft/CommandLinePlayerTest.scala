@@ -1,16 +1,12 @@
 package org.grumpysoft
 
 import actioncards.Remodel
-import scala.collection.mutable.LinearSeq
 import scala.collection.mutable.Stack
 
 import org.scalatest.matchers.ShouldMatchers
 import org.scalatest.WordSpec
 
 import TreasureCards._
-import ActionCards._
-import VictoryCards._
-
 class FakePrompter(var responses : Stack[Seq[Int]]) extends Promptable {
   var received : List[(SelfDescribing, Seq[SelfDescribing])] = Nil
   var messages : List[SelfDescribing] = Nil
