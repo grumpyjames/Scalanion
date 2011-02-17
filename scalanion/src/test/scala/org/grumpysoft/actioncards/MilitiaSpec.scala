@@ -7,7 +7,7 @@ object MilitiaSpec extends ActionCardSpecBase {
 
   val playerOneStacks = Stacks.empty()
   val sevenCardHandStacks = Stacks(twoCoppers, mixOfAllTypes, List())
-  val threeCardHandStacks = Stacks(twoCoppers, estateDuchyAndCopper, List())
+  val threeCardHandStacks = Stacks(twoCoppers, copperDuchyAndEstate, List())
 
   "militia" should {
     val playerTwosDiscardChoices: List[Card] = mixOfAllTypes.take(4)

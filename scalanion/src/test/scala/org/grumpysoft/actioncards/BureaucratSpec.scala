@@ -9,7 +9,7 @@ object BureaucratSpec extends ActionCardSpecBase {
 
   val stacks = deckOnly(threeCoppersAndAnEstate)
 
-  val stacksTwo = Stacks(List(Copper()), estateDuchyAndCopper, List())
+  val stacksTwo = Stacks(List(Copper()), copperDuchyAndEstate, List())
   val stacksThree = handOnly(twoCoppers)
 
   val table = makeTable(stacksTwo, stacksThree)

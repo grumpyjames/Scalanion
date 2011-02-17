@@ -12,6 +12,7 @@ abstract class ActionCardSpecBase extends Specification with Mockito {
   protected val playerOne = mockAs[GenericPlayer[Card]]("Player One")
   protected val playerTwo = mockAs[GenericPlayer[Card]]("Player Two")
   protected val playerThree = mockAs[GenericPlayer[Card]]("Player Three")
+  protected val playerFour = mockAs[GenericPlayer[Card]]("Player Four")
 
   protected val threeCoppersAndAnEstate = List(Copper(), Copper(), Copper(), Estate())
   protected val twoCoppers = List(Copper(), Copper())
@@ -20,7 +21,7 @@ abstract class ActionCardSpecBase extends Specification with Mockito {
   protected val silverRemodelAndTwoCoppers = Copper() :: Remodel() :: copperAndSilver
   protected val twoEstates = List(Estate(), Estate())
   protected val estateAndDuchy = List(Estate(), Duchy())
-  protected val estateDuchyAndCopper = Copper() :: estateAndDuchy
+  protected val copperDuchyAndEstate = Copper() :: estateAndDuchy
   protected val witchAndDuchy = List(Witch(), Duchy())
   protected val copperEstateAndGold = List(Copper(), Estate(), Gold())
 
@@ -44,6 +45,10 @@ abstract class ActionCardSpecBase extends Specification with Mockito {
    */
   protected def makeTable(stacksTwo: Stacks, stacksThree: Stacks) : Table = {
     return List(stacksTwo, stacksThree).zip(List(playerTwo, playerThree))
+  }
+
+  protected def makeTable(stacksTwo: Stacks, stacksThree: Stacks, stacksFour: Stacks) : Table = {
+    return List(stacksTwo, stacksThree, stacksFour).zip(List(playerTwo, playerThree, playerFour))
   }
 
   def checkEventReceived(player: GenericPlayer[Card], verb: Verb, cards: Seq[Card], players: Seq[GenericPlayer[Card]]) : Unit = {
