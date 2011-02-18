@@ -45,54 +45,57 @@ object ThiefSpec extends ActionCardSpecBase {
 case class ThiefResult(stacks: Stacks, card: Option[Card]) {}
 
 object Thieve {
+  case class ThiefImpl(thief: GenericPlayer[Card], victim: GenericPlayer[Card], table: Seq[GenericPlayer[Card]]) {
+    lazy val nonVictims = thief :: allBut(victim, table)
 
-  private def isTreasureCard(card: Card) : Boolean = card match {
-    case tc: TreasureCard => true
-    case _ => false
-  }
+    private def allBut(player: GenericPlayer[Card], table: Seq[GenericPlayer[Card]]) : List[GenericPlayer[Card]] = {
+      table.filter(_.ne(player)).toList
+    }
 
-  private def steal(stacks: Stacks) : (List[Card], List[Card]) = {
-    stacks.deck.take(2).partition(isTreasureCard(_))
-  }
+    private def isTreasureCard(card: Card) : Boolean = card match {
+      case tc: TreasureCard => true
+      case _ => false
+    }
 
-  private def doDiscard(player: GenericPlayer[Card], stacks: Stacks, toDiscard: List[Card], others: Seq[GenericPlayer[Card]])
-  : Stacks = {
-    if (toDiscard.size > 0) others.foreach(other => other.playerEvent(player, Discard, toDiscard))
-    Stacks(stacks.deck.drop(2), stacks.hand, toDiscard ++ stacks.discard)
-  }
+    private def steal(stacks: Stacks) : (List[Card], List[Card]) = {
+      stacks.deck.take(2).partition(isTreasureCard(_))
+    }
 
-  private def allBut(player: GenericPlayer[Card], table: Seq[GenericPlayer[Card]]) : List[GenericPlayer[Card]] = {
-    table.filter(_.ne(player)).toList
-  }
+    private def doDiscard(stacks: Stacks, toDiscard: List[Card]): Stacks = {
+      if (toDiscard.size > 0) nonVictims.foreach(other => other.playerEvent(victim, Discard, toDiscard))
+      Stacks(stacks.deck.drop(2), stacks.hand, toDiscard ++ stacks.discard)
+    }
 
-  private def doThieving(thief: GenericPlayer[Card], victim: GenericPlayer[Card], targetStacks: Stacks, treasure: Seq[Card], table: Seq[GenericPlayer[Card]])
-  : ThiefResult = treasure.size match {
-    case 0 => ThiefResult(targetStacks, None)
-    case 1 => trashAndQuery(treasure, thief, victim, targetStacks, table)
-    case 2 => pickTrashThenQuery(treasure, thief, victim, targetStacks, table)
-  }
+    private def trashAndQuery(card: Seq[Card], targetStacks: Stacks) : ThiefResult = {
+      nonVictims.foreach(_.playerEvent(victim, Trash, card))
+      val gain = thief.chooseFrom(card, Gain, 0, 1)
+      if (gain.size > 0) table.foreach(_.playerEvent(thief, Gain, gain))
+      ThiefResult(targetStacks, gain.headOption)
+    }
 
-  private def trashAndQuery(card: Seq[Card], thief: GenericPlayer[Card], victim: GenericPlayer[Card], targetStacks: Stacks, table: Seq[GenericPlayer[Card]]) : ThiefResult = {
-    val nonVictims = thief :: allBut(victim, table)
-    nonVictims.foreach(_.playerEvent(victim, Trash, card))
-    val gain = thief.chooseFrom(card, Gain, 0, 1)
-    if (gain.size > 0) table.foreach(_.playerEvent(thief, Gain, gain))
-    ThiefResult(targetStacks, gain.headOption)
-  }
+    private def pickTrashThenQuery(cards: Seq[Card], targetStacks: Stacks) : ThiefResult = {
+      val toTrash = thief.chooseFrom(cards, ThiefTrash, 1, 1)
+      val toDiscard = cards.filter(_.ne(toTrash.head))
+      nonVictims.foreach(_.playerEvent(victim, Discard, toDiscard))
+      trashAndQuery(toTrash, targetStacks.gain(toDiscard))
+    }
 
-  private def pickTrashThenQuery(cards: Seq[Card], thief: GenericPlayer[Card], victim: GenericPlayer[Card], targetStacks: Stacks, table: Seq[GenericPlayer[Card]]) : ThiefResult = {
-    val toTrash = thief.chooseFrom(cards, ThiefTrash, 1, 1)
-    val nonVictims = thief :: allBut(victim, table)
-    val toDiscard = cards.filter(_.ne(toTrash.head))
-    nonVictims.foreach(_.playerEvent(victim, Discard, toDiscard))
-    trashAndQuery(toTrash, thief, victim, targetStacks.gain(toDiscard), table)
+    private def doThieving(stacks: Stacks, treasure: Seq[Card]) : ThiefResult = treasure.size match {
+      case 0 => ThiefResult(stacks, None)
+      case 1 => trashAndQuery(treasure, stacks)
+      case 2 => pickTrashThenQuery(treasure, stacks)
+    }
+
+    def thieveFrom(stacks: Stacks) : ThiefResult = {
+      val (treasure, discard) = steal(stacks)
+      val afterDiscard = doDiscard(stacks, discard)
+      doThieving(afterDiscard, treasure)
+    }
+
   }
 
   def apply(thief: GenericPlayer[Card], victim: GenericPlayer[Card], targetStacks: Stacks, table: Seq[GenericPlayer[Card]]) : ThiefResult = {
-    val (treasure, discard) = steal(targetStacks)
-    val nonVictims = thief :: allBut(victim, table)
-    val discardDone = doDiscard(victim, targetStacks, discard, nonVictims)
-    doThieving(thief, victim, discardDone, treasure, table)
+    new ThiefImpl(thief, victim, table).thieveFrom(targetStacks)
   }
 }
 
