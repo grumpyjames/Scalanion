@@ -2,8 +2,6 @@ package org.grumpysoft
 
 import scala.collection.mutable.Stack
 
-import org.scalatest.WordSpec
-import org.scalatest.matchers.ShouldMatchers
 import org.specs.Specification
 
 class FakePrinter extends Printer {
@@ -22,39 +20,41 @@ object Magic {
 }
 
 trait DevNullPrompter extends Promptable {
-  def prompt(message: SelfDescribing) : Unit = {
-
-  }
+  def prompt(message: SelfDescribing) : Unit = {}
 }
 
-class TestPrompterWithFormatter(expectedGreeting: String, formatted: List[String], cannedFormatter: Formatter) extends DevNullPrompter with ShouldMatchers{
-  def prompt(greeting: SelfDescribing, options: Seq[SelfDescribing]) : Seq[Int] = {
-    val stringOptions = options.map(_.describe)
-    greeting.describe should equal (expectedGreeting)
-    stringOptions should equal (formatted)
-    List(Magic.returnValue);
+object FormattedPromptableSpec extends Specification {
+  class TestPrompterWithFormatter(expectedGreeting: String, formatted: List[String], cannedFormatter: Formatter) extends DevNullPrompter {
+    def prompt(greeting: SelfDescribing, options: Seq[SelfDescribing]) : Seq[Int] = {
+      val stringOptions = options.map(_.describe)
+      greeting.describe must_==expectedGreeting
+      stringOptions must_==formatted
+      List(Magic.returnValue);
+    }
+
+    protected def formatter() : Formatter = { cannedFormatter }
   }
 
-  protected def formatter() : Formatter = { cannedFormatter }
-}
-
-class FormattedPromptableTest extends WordSpec with ShouldMatchers {
   val unformatted = List(StringDescription("some"), StringDescription("bloody"), StringDescription("strings"))
   val formatted = List("formatted", "strings")
   val greeting = "Hello"
 
   val cannedFormatter = new Formatter() {
     def format(options: Seq[SelfDescribing]) = {
-      options should equal (unformatted)
+      options must_==unformatted
       formatted.map(StringDescription(_))
     }
   }
   val prompter = new TestPrompterWithFormatter(greeting, formatted, cannedFormatter) with FormattedPrompts
-  prompter.prompt(StringDescription(greeting), unformatted).head should equal (Magic.returnValue)
+  prompter.prompt(StringDescription(greeting), unformatted).head must_== Magic.returnValue
 }
 
 class UniquererSpec extends Specification {
-  uniquery.toSet(List(1,1,1,3,4,5,4,6)) must_==List(1,3,4,5,6)
+  "uniquerer" should {
+    "settify a sequence" in {
+      uniquery.toSet(List(1,1,1,3,4,5,4,6)) must_==List(1,3,4,5,6)
+    }
+  }
 }
 
 class PrompterSpec extends Specification {
