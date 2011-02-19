@@ -1,10 +1,10 @@
+package org.grumpysoft
+
 import scala.collection.mutable.Stack
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.ShouldMatchers
-
-package org {
-package grumpysoft {
+import org.specs.Specification
 
 class FakePrinter extends Printer {
   var printedLines : List[String] = List()
@@ -53,85 +53,65 @@ class FormattedPromptableTest extends WordSpec with ShouldMatchers {
   prompter.prompt(StringDescription(greeting), unformatted).head should equal (Magic.returnValue)
 }
 
-class UniquererTest extends WordSpec with ShouldMatchers {
-  uniquery.toSet(List(1,1,1,3,4,5,4,6)) should equal (List(1,3,4,5,6))
+class UniquererSpec extends Specification {
+  uniquery.toSet(List(1,1,1,3,4,5,4,6)) must_==List(1,3,4,5,6)
 }
 
-class PrompterTest extends WordSpec with ShouldMatchers {
+class PrompterSpec extends Specification {
 
   val options = List(StringDescription("one"),StringDescription("two"),StringDescription("three"))
   val greeting = "Good day to you, sir!"
   val expectedOutput = List(greeting, "1. one","2. two","3. three")
 
-  def createFixture(inputs: Stack[Seq[Int]]) : (FakeUserInput, FakePrinter, Prompter) = {
-    val printer = new FakePrinter()
-    val user = new FakeUserInput(inputs)
-    (user, printer, new FormattedPrompter(user, printer, new OptionFormatter))
-  }
 
-  "a prompter" when {
-    "prompted to choose from some options" should {
+  "a prompter" should {
+    "print the provided string, then those options to the supplied printstream, when prompted to choose from some options" in {
       val (user, printer, player) = createFixture(Stack(List(1)))
-      "greet the provided string, then print those options to the supplied printstream" in {
-        val index = player.prompt(StringDescription(greeting), options)
-        assert(printer.printedLines.reverse === expectedOutput)
-        assert(index.head === 1)
-        assert(user.cannedInputs.isEmpty)
-      }
+      val index = player.prompt(StringDescription(greeting), options)
+      printer.printedLines.reverse must_==expectedOutput
+      index.head must_==1
+      user.cannedInputs.size must_==0
     }
-  }
 
-  "a prompter" when {
-    "prompted to choose from some options" should {
+    "reject reads that don't match an option, and retry until a valid option is given" in {
       val (user, printer, player) = createFixture(Stack(List(2),List(5),List(4)))
-      "reject reads that don't match an option, and retry until a valid option is given" in {
-        val index = player.prompt(StringDescription(greeting), options)
-        assert(index.head === 2)
-        assert(printer.printedLines.reverse === (expectedOutput ++ expectedOutput ++ expectedOutput))
-        assert(user.cannedInputs.isEmpty)
-      }
+      val index = player.prompt(StringDescription(greeting), options)
+      index.head must_== 2
+      printer.printedLines.reverse must_== expectedOutput ++ expectedOutput ++ expectedOutput
+      user.cannedInputs.isEmpty must_== true
+    }
+
+    "reject reads returning multiple choices if one or more of them is invalid" in {
+      val expectedReturn = List(2,3)
+      promptExpectingReturn(greeting, options, expectedReturn, Stack(List(2,3), List(2,55), List(0,2), List(5)))
+    }
+
+    "merge identical results" in {
+      val expectedReturn = List(2,1)
+      promptExpectingReturn(greeting, options, expectedReturn, Stack(List(2,2,1,1), List(4,5,1), List(2,9)))
+    }
+
+    "just print update messages verbatim" in {
+      expectPromptOf("hello\nworld")
     }
   }
 
   def promptExpectingReturn(greeting: String, options: Seq[SelfDescribing], expectedResult: Seq[Int], inputs: Stack[Seq[Int]]) : Unit = {
     val (user, printer, player) = createFixture(inputs)
     val result = player.prompt(StringDescription(greeting), options)
-    result should equal (expectedResult)
-    user.cannedInputs should be ('empty)
+    result must_==expectedResult
+    user.cannedInputs.isEmpty must_==true
   }
 
   def expectPromptOf(message: String) : Unit = {
     val (user, printer, player) = createFixture(Stack(Nil))
     player.prompt(StringDescription(message))
-    printer.printedLines should equal (List(message))
+    printer.printedLines must_==List(message)
   }
 
-  "a prompter" when {
-    "prompted to choose from some options" should {
-      val expectedReturn = List(2,3)
-
-      "reject reads returning multiple choices if one or more of them is invalid" in {
-        promptExpectingReturn(greeting, options, expectedReturn, Stack(List(2,3), List(2,55), List(0,2), List(5)))
-      }
-    }
+  def createFixture(inputs: Stack[Seq[Int]]) : (FakeUserInput, FakePrinter, Prompter) = {
+    val printer = new FakePrinter()
+    val user = new FakeUserInput(inputs)
+    (user, printer, new FormattedPrompter(user, printer, new OptionFormatter))
   }
-
-  "a prompter" when {
-    "prompted to choose from some options" should {
-      val expectedReturn = List(2,1)
-      "merge identical results" in {
-        promptExpectingReturn(greeting, options, expectedReturn, Stack(List(2,2,1,1), List(4,5,1), List(2,9)))
-      }
-    }
-  }
-
-  "a prompter" when {
-    "given an update message" should {
-      "just print it verbatim" in {
-        expectPromptOf("hello\nworld")
-      }
-    }
-  }
-}
-}
 }

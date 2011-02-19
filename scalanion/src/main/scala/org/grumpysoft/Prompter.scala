@@ -24,15 +24,15 @@ package org {
       }
     }
 
-    // TODO: this must be useful elsewhere!
-    object uniquery {
-      def toSet[A](stream : Seq[A]) : Seq[A] = {
-	val aList : List[A] = List()
-	stream.foldLeft(aList) ( (acc,el) =>
-	  if (acc.contains(el)) acc else el :: acc
-			       ).reverse
-      }
+    // TODO: this must be useful elsewhere! (and get rid of the reverse?)
+  object uniquery {
+    def toSet[A](stream : Seq[A]) : Seq[A] = {
+      val aList : List[A] = List()
+      stream.foldLeft(aList) ( (acc,el) =>
+        if (acc.contains(el)) acc else el :: acc
+      ).reverse
     }
+  }
 
     class FormattedPrompter(input: UserInput, output: Printer, optionFormatter: Formatter) extends Prompter(input, output) with FormattedPrompts {
       protected def formatter() : Formatter = {
