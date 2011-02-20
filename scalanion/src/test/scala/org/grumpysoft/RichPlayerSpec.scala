@@ -1,8 +1,7 @@
 package org.grumpysoft
 
-import actioncards.Militia
+import actioncards.{Witch, Militia}
 import org.specs.Specification
-import ActionCards._
 import VictoryCards._
 
 

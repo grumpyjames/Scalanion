@@ -1,8 +1,6 @@
 package org.grumpysoft.actioncards
 
-import org.grumpysoft.ActionCards.Witch
 import org.grumpysoft._
-;
 
 object WitchSpec extends ActionCardSpecBase {
 
