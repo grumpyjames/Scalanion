@@ -10,7 +10,7 @@ object ActionPhaseSpec extends Specification with Mockito {
   val player = mock[GenericPlayer[Card]]
   val supply = mock[Supply]
 
-  type Table = Sequence[Tuple2[Stacks, GenericPlayer[Card]]]
+  type Table = Seq[(Stacks, GenericPlayer[Card])]
 
   val table : Table = List()
   val stacks = Stacks(List(), List(), List())

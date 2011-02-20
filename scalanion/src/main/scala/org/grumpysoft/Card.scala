@@ -28,3 +28,7 @@ abstract case class ActionCard(cost: Int) extends Card(cost) {
 abstract case class TreasureCard(cost: Int, value: Int) extends Card(cost) {}
 
 abstract case class VictoryCard(cost: Int, victoryPoints: Int) extends Card(cost) {}
+
+case class Curse() extends Card(0) {
+  def describe() = "Curse"
+}

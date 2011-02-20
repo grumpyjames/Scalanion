@@ -49,7 +49,7 @@ object FormattedPromptableSpec extends Specification {
   prompter.prompt(StringDescription(greeting), unformatted).head must_== Magic.returnValue
 }
 
-class UniquererSpec extends Specification {
+object UniquererSpec extends Specification {
   "uniquerer" should {
     "settify a sequence" in {
       uniquery.toSet(List(1,1,1,3,4,5,4,6)) must_==List(1,3,4,5,6)
@@ -57,7 +57,7 @@ class UniquererSpec extends Specification {
   }
 }
 
-class PrompterSpec extends Specification {
+object PrompterSpec extends Specification {
 
   val options = List(StringDescription("one"),StringDescription("two"),StringDescription("three"))
   val greeting = "Good day to you, sir!"
