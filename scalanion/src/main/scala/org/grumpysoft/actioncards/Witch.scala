@@ -29,7 +29,7 @@ class Witch extends ActionCard(5) {
 
   def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
     val cursedStacksWithSupplies = curseAll(supply, player, table.toList, table.toList)
-    ActionResult.noTreasureOrBuys(stacks.addCards(2), cursedStacksWithSupplies.map(_._2).lastOption.getOrElse(supply), cursedStacksWithSupplies.map(_._1).zip(table.map(_._2)))
+    ActionResult.noTreasureOrBuysOrActions(stacks.addCards(2), cursedStacksWithSupplies.map(_._2).lastOption.getOrElse(supply), cursedStacksWithSupplies.map(_._1).zip(table.map(_._2)))
   }
 
   def describe() : String = { "Witch" }

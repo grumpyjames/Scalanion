@@ -12,7 +12,7 @@ class Militia extends ActionCard(4) with TransmittableChoices {
   type stacksWithPlayer = (Stacks, GenericPlayer[Card])
 
   def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
-    ActionResult.noBuys(2, stacks, supply, table.map(a => attack(a, player :: allBut(a, table))))
+    ActionResult.noBuysOrActions(2, stacks, supply, table.map(a => attack(a, player :: allBut(a, table))))
   }
 
   def attack(underAttack: stacksWithPlayer, others: Seq[GenericPlayer[Card]]) : stacksWithPlayer = {

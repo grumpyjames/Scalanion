@@ -11,7 +11,7 @@ class Thief extends ActionCard(4) {
   def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
     val thiefResults = table.map(a => Thieve(player, a._2, a._1, table.map(_._2)))
     val gainedCards = thiefResults.map(_.card).filter(_.isDefined).map(_.get)
-    ActionResult.noTreasureOrBuys(stacks.gain(gainedCards), supply, thiefResults.map(_.stacks).zip(table.map(_._2)))
+    ActionResult.noTreasureOrBuysOrActions(stacks.gain(gainedCards), supply, thiefResults.map(_.stacks).zip(table.map(_._2)))
   }
 
   def describe() = "Thief"

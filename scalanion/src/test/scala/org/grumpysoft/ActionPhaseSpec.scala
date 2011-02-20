@@ -36,7 +36,7 @@ object ActionPhaseSpec extends Specification with Mockito {
 
 object ActionPhase {
 
-  type Table = Sequence[Tuple2[Stacks, GenericPlayer[Card]]]
+  type Table = Seq[(Stacks, GenericPlayer[Card])]
 
   def apply(actionCount: Int, stacks: Stacks, player: GenericPlayer[Card], actionCards: Seq[ActionCard], supply: Supply, table: Table) : Unit = {
     val chosen = player.chooseFrom(actionCards, Play, 0, 1)

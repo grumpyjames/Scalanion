@@ -8,7 +8,7 @@ object Library {
 
 class Library extends ActionCard(2) {
   def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
-    ActionResult.noTreasureOrBuys(goUntilSeven(stacks, player, table.map(_._2)), supply, table)
+    ActionResult.noTreasureOrBuysOrActions(goUntilSeven(stacks, player, table.map(_._2)), supply, table)
   }
 
   def describe() = {
