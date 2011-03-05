@@ -9,7 +9,7 @@ object Chancellor {
 
 class Chancellor extends ActionCard(3) {
   def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
-    player.query(DiscardYourDeck) match {
+    player.query(BasicQuestion("do you want to discard your deck?")) match {
       case true => {
         table.map(_._2.playerEvent(player, DeckDiscard, stacks.deck))
         ActionResult.noBuysOrActions(2, Stacks(List(), stacks.hand, stacks.discard ++ stacks.deck), supply, table)

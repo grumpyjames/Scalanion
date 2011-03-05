@@ -6,6 +6,10 @@ sealed abstract class Card(cost: Int) extends SelfDescribing {
 }
 
 object ActionResult {
+  def noTreasureOrBuys(actions: Int, stacks: Stacks, supply: Supply, table: Seq[(Stacks, GenericPlayer[Card])]) : ActionResult = {
+    ActionResult(0, 0, actions, stacks, supply, table)
+  }
+
   def noTreasureOrActions(buys: Int, stacks: Stacks, supply: Supply, table: Seq[(Stacks, GenericPlayer[Card])]) : ActionResult = {
     ActionResult(0, buys, 0, stacks, supply, table)
   }
@@ -21,7 +25,8 @@ case class ActionResult(treasure: Int, buys: Int, actions: Int, stacks: Stacks, 
 
 
 abstract case class ActionCard(cost: Int) extends Card(cost) {
-  type Table = Seq[Tuple2[Stacks, GenericPlayer[Card]]]
+  type StacksWithPlayer = (Stacks, GenericPlayer[Card])
+  type Table = Seq[StacksWithPlayer]
   def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult;
 }
 

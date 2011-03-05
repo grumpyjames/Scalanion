@@ -1,5 +1,6 @@
 package org.grumpysoft
 
-sealed abstract class Query(val query: String)
+sealed abstract class Query {}
 
-case object DiscardYourDeck extends Query("Do you want to discard your deck?")
+case class BasicQuestion(query: String) extends Query
+case class ChooseForOtherPlayer(cards: Seq[Card], otherPlayer: GenericPlayer[Any], verb: Verb) extends Query
