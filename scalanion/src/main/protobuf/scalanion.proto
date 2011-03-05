@@ -1,0 +1,32 @@
+package scalanion;
+
+option java_package = "org.grumpysoft";
+
+message ChooseFrom {
+  required string verb = 1;
+  required int32 minimumChoices = 2;
+  required int32 maximumChoices = 3;
+  repeated string card = 4;
+}
+
+message Choices {
+  repeated int32 index;
+}
+
+message Query {
+  required string question = 1;
+}
+
+message Answer {
+  required boolean answer;
+}
+
+message Hand {
+  repeated string card = 1;
+}
+
+message Event {
+  required string player = 1;
+  required string verb = 2;
+  repeated string card = 3;
+}

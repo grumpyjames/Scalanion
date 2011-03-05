@@ -20,8 +20,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="scala-library-2.8.1" level="application" />
-    <orderEntry type="library" name="scalatest-1.2" level="project" />
-    <orderEntry type="library" name="specs" level="project" />
+    <orderEntry type="library" name="sbt resolved" level="project" />
   </component>
 </module>
 

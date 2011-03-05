@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="335121ac-d150-4852-93e9-f0488d7c3091" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/sbt_resolved.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/NetworkedPlayerSpec.scala" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/scalatest_1_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/specs.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/CommandLinePlayerTest.scala" afterPath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/CommandLinePlayerTest.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/scalanion.iml" afterPath="$PROJECT_DIR$/scalanion/scalanion.iml" />
     </list>
     <ignored path="Scalanion.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -22,6 +26,34 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <line_breakpoints>
+      <breakpoint url="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/SpySpec.scala" line="19" class="Class at SpySpec.scala:53" package="">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/actioncards/TransmittableChoices.scala" line="7" class="Class at TransmittableChoices.scala:7" package="">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <breakpoint_any>
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -62,8 +94,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ActionCards.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/ActionCards.scala">
+      <file leaf-file-name="SpySpec.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/SpySpec.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="47" column="0" selection-start="1578" selection-end="1578" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Spy.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/actioncards/Spy.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="7" selection-start="43" selection-end="43" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ChancellorSpec.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ChancellorSpec.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="0" selection-start="295" selection-end="295" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scalanion.proto" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/main/protobuf/scalanion.proto">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
@@ -71,82 +130,55 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PrompterTest.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/PrompterTest.scala">
+      <file leaf-file-name="Scalanion.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/main/java/org/grumpysoft/Scalanion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="22" selection-start="1705" selection-end="1705" vertical-scroll-proportion="0.0">
+            <state line="21" column="10" selection-start="572" selection-end="572" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommandLinePlayerTest.scala" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/CommandLinePlayerTest.scala">
+      <file leaf-file-name="NetworkedPlayerSpec.scala" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/NetworkedPlayerSpec.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="3" selection-start="628" selection-end="628" vertical-scroll-proportion="0.477707">
+            <state line="11" column="0" selection-start="343" selection-end="343" vertical-scroll-proportion="0.38283062">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LibrarySpec.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/LibrarySpec.scala">
+      <file leaf-file-name="Stacks.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="34" selection-start="125" selection-end="125" vertical-scroll-proportion="0.0">
+            <state line="7" column="0" selection-start="108" selection-end="108" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChapelSpec.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ChapelSpec.scala">
+      <file leaf-file-name="TransmittableChoices.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/actioncards/TransmittableChoices.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="43" selection-start="900" selection-end="900" vertical-scroll-proportion="0.0">
+            <state line="8" column="0" selection-start="335" selection-end="335" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Chapel.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/actioncards/Chapel.scala">
+      <file leaf-file-name="ActionCardSpecBase.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ActionCardSpecBase.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="4" selection-start="380" selection-end="380" vertical-scroll-proportion="0.0">
+            <state line="52" column="6" selection-start="2193" selection-end="2193" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RichPlayerSpec.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/RichPlayerSpec.scala">
+      <file leaf-file-name="Queries.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Queries.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="10" selection-start="738" selection-end="738" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OptionFormatterSpec.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/OptionFormatterSpec.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="3" selection-start="215" selection-end="215" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameSpec.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/GameSpec.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="0" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RemodelSpec.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/RemodelSpec.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="23" selection-start="506" selection-end="506" vertical-scroll-proportion="0.0">
+            <state line="5" column="11" selection-start="121" selection-end="121" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -166,22 +198,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/actioncards/Chancellor.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/actioncards/Militia.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/MilitiaSpec.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ChancellorSpec.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/actioncards/Chapel.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ChapelSpec.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/actioncards/Library.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/actioncards/Witch.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/RichPlayerSpec.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ActionCardSpecBase.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/LibrarySpec.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/RichPlayerTest.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/OptionFormatterTest.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/OptionFormatterSpec.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/GameSpec.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/ActionCards.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/PrompterTest.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/CommandLinePlayerTest.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/WitchSpec.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/ActionPhaseSpec.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/MarketSpec.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/actioncards/Market.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/actioncards/Chancellor.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ChancellorSpec.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Queries.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Card.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Verbs.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/SpySpec.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/actioncards/Spy.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/main/protobuf/scalanion.proto" />
+        <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/NetworkedPlayerSpec.scala" />
       </list>
     </option>
   </component>
@@ -235,7 +267,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Favorites" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -253,6 +285,20 @@
               <option name="myItemId" value="Scalanion" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sbt resolved" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Scalanion" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -316,7 +362,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="CommandLinePlayerTest.scala" />
+              <option name="myItemId" value="NetworkedPlayerSpec.scala" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -337,36 +383,6 @@
               <option name="myItemId" value="test" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="grumpysoft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="actioncards" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -411,18 +427,6 @@
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="grumpysoft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Stacks.scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -442,283 +446,31 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="scala" />
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="org" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="grumpysoft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CommandLinePlayer.scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="grumpysoft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="actioncards" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="grumpysoft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="actioncards" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Remodel.scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="grumpysoft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="actioncards" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Militia.scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="grumpysoft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="actioncards" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Library.scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="grumpysoft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="actioncards" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chapel.scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="grumpysoft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="actioncards" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chancellor.scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="grumpysoft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="actioncards" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Bureaucrat.scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Favorites" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="project.propCompiler" />
+    <property name="options.lastSelected" value="preferences.pluginManager" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -733,68 +485,7 @@
       <recent name="org.grumpysoft.actioncards" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.GameSpec">
-    <configuration default="false" name="RemodelSpec" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="org.grumpysoft.actioncards.RemodelSpec" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="scalanion" />
-      <envs />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="ChapelSpec" type="SpecsRunConfiguration" factoryName="Specs" temporary="true">
-      <module name="scalanion" />
-      <setting name="path" value="org.grumpysoft.actioncards.ChapelSpec" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="packagepath" value="" />
-      <setting name="workingDirectory" value="$PROJECT_DIR$" />
-      <setting name="sysFilter" value=".*" />
-      <setting name="exampleFilter" value=".*" />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="RichPlayerSpec" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="org.grumpysoft.RichPlayerSpec" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="scalanion" />
-      <envs />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="OptionFormatterSpec" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="org.grumpysoft.OptionFormatterSpec" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="scalanion" />
-      <envs />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Specs.SpySpec">
     <configuration default="false" name="GameSpec" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="org.grumpysoft.GameSpec" />
       <option name="VM_PARAMETERS" />
@@ -809,6 +500,71 @@
       <envs />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="CouncilRoomSpec" type="SpecsRunConfiguration" factoryName="Specs" temporary="true">
+      <module name="scalanion" />
+      <setting name="path" value="org.grumpysoft.actioncards.CouncilRoomSpec" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="packagepath" value="" />
+      <setting name="workingDirectory" value="$PROJECT_DIR$" />
+      <setting name="sysFilter" value=".*" />
+      <setting name="exampleFilter" value=".*" />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="ThiefSpec" type="SpecsRunConfiguration" factoryName="Specs" temporary="true">
+      <module name="scalanion" />
+      <setting name="path" value="org.grumpysoft.actioncards.ThiefSpec" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="packagepath" value="" />
+      <setting name="workingDirectory" value="$PROJECT_DIR$" />
+      <setting name="sysFilter" value=".*" />
+      <setting name="exampleFilter" value=".*" />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="WitchSpec" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="org.grumpysoft.actioncards.WitchSpec" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="scalanion" />
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="56592" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="SpySpec" type="SpecsRunConfiguration" factoryName="Specs" temporary="true">
+      <module name="scalanion" />
+      <setting name="path" value="org.grumpysoft.actioncards.SpySpec" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="packagepath" value="" />
+      <setting name="workingDirectory" value="$PROJECT_DIR$" />
+      <setting name="sysFilter" value=".*" />
+      <setting name="exampleFilter" value=".*" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="38133" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <ConfigurationWrapper RunnerId="Debug" />
       <method />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
@@ -948,13 +704,13 @@
       <method />
     </configuration>
     <list size="7">
-      <item index="0" class="java.lang.String" itemvalue="Application.RemodelSpec" />
-      <item index="1" class="java.lang.String" itemvalue="Specs.ChapelSpec" />
-      <item index="2" class="java.lang.String" itemvalue="Application.RichPlayerSpec" />
-      <item index="3" class="java.lang.String" itemvalue="Application.OptionFormatterSpec" />
-      <item index="4" class="java.lang.String" itemvalue="Application.GameSpec" />
-      <item index="5" class="java.lang.String" itemvalue="ScalaTest.All ScalaTests in Scalanion" />
-      <item index="6" class="java.lang.String" itemvalue="Specs.All Specs in Scalanion" />
+      <item index="0" class="java.lang.String" itemvalue="Application.GameSpec" />
+      <item index="1" class="java.lang.String" itemvalue="Specs.CouncilRoomSpec" />
+      <item index="2" class="java.lang.String" itemvalue="Specs.ThiefSpec" />
+      <item index="3" class="java.lang.String" itemvalue="Application.WitchSpec" />
+      <item index="4" class="java.lang.String" itemvalue="ScalaTest.All ScalaTests in Scalanion" />
+      <item index="5" class="java.lang.String" itemvalue="Specs.All Specs in Scalanion" />
+      <item index="6" class="java.lang.String" itemvalue="Specs.SpySpec" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -986,26 +742,46 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="24" width="1920" height="1152" extended-state="0" />
+    <frame x="0" y="24" width="1920" height="1151" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937685" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32902583" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32902583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3124378" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32902583" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="SBT Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937685" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18983957" sideWeight="0.67097414" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39960435" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32739863" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937685" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="SBT Console" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5243781" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2395722" sideWeight="0.47562188" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39900497" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32703778" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32902583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937685" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32902583" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1026,7 +802,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="whitespace" />
+    <option name="LAST_COMMIT_MESSAGE" value="complete and promote spy" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1039,17 +815,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="start fleshing out action cards to see what interface we need." />
-    <MESSAGE value="create specification for chancellor" />
-    <MESSAGE value="start building out bureaucrat specification" />
-    <MESSAGE value="modify interface of actioncard once more, to provide access to the supply" />
-    <MESSAGE value="give actions access to the other players. add more specifications for bureaucrat" />
-    <MESSAGE value="start checking that events are received from actions, given they can now see other players." />
-    <MESSAGE value="check correct events are seen from actions. delegate to stacks where necessary, fix a resulting bug in stacks." />
-    <MESSAGE value="...which causes a test for Stacks to fail. Change the test, in this particular case..." />
-    <MESSAGE value="better add a readme, I suppose" />
-    <MESSAGE value="add Library card (although could do with a quickcheck test)" />
-    <MESSAGE value="add Militia card" />
     <MESSAGE value="don't mangle the player's hand when playing militia" />
     <MESSAGE value="first crack at remodel" />
     <MESSAGE value="get remodel to fire events, and to return a better supply" />
@@ -1063,6 +828,18 @@
     <MESSAGE value="move another test over to specs" />
     <MESSAGE value="migrate game tests to use specs" />
     <MESSAGE value="whitespace" />
+    <MESSAGE value="remove some unused imports" />
+    <MESSAGE value="add a buy field to ActionResult, add Council Room card." />
+    <MESSAGE value="add the monstrously complicated thief card. Refactor to come!" />
+    <MESSAGE value="simplify implementation by pulling out an inner class" />
+    <MESSAGE value="move implementation to main" />
+    <MESSAGE value="move another class from scalatest to specs" />
+    <MESSAGE value="remove auxiliary test objects dependency on shouldmatchers and scalatest" />
+    <MESSAGE value="make witch behave correctly even if supply runs out of curses" />
+    <MESSAGE value="move witch into her own file" />
+    <MESSAGE value="add another facet to ActionResult to aid implementation of Market" />
+    <MESSAGE value="move market out into real source area" />
+    <MESSAGE value="complete and promote spy" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1072,90 +849,102 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/MilitiaSpec.scala">
+    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Verbs.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="36" selection-end="36" vertical-scroll-proportion="0.0" />
+        <state line="14" column="53" selection-start="596" selection-end="596" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ChancellorSpec.scala">
+    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/actioncards/Chancellor.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="99" selection-end="99" vertical-scroll-proportion="0.0" />
+        <state line="27" column="16" selection-start="743" selection-end="743" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/actioncards/Remodel.scala">
+    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/actioncards/Witch.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="97" selection-start="599" selection-end="599" vertical-scroll-proportion="0.0" />
+        <state line="7" column="0" selection-start="108" selection-end="108" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/actioncards/TransmittableChoices.scala">
+    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/GenericPlayer.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="1" selection-start="416" selection-end="416" vertical-scroll-proportion="0.0" />
+        <state line="2" column="6" selection-start="30" selection-end="30" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/actioncards/Library.scala">
+    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Card.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="130" selection-start="918" selection-end="918" vertical-scroll-proportion="0.0" />
+        <state line="28" column="36" selection-start="1245" selection-end="1245" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ActionCardSpecBase.scala">
+    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/ActionPhaseSpec.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="66" selection-end="96" vertical-scroll-proportion="0.0" />
+        <state line="38" column="23" selection-start="1128" selection-end="1128" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/LibrarySpec.scala">
+    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Queries.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="34" selection-start="125" selection-end="125" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ChapelSpec.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="43" selection-start="900" selection-end="900" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/actioncards/Chapel.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="4" selection-start="380" selection-end="380" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/RichPlayerSpec.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="10" selection-start="738" selection-end="738" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/OptionFormatterSpec.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="3" selection-start="215" selection-end="215" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/GameSpec.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0">
+        <state line="5" column="11" selection-start="121" selection-end="121" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/RemodelSpec.scala">
+    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ActionCardSpecBase.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="23" selection-start="506" selection-end="506" vertical-scroll-proportion="0.0" />
+        <state line="52" column="6" selection-start="2193" selection-end="2193" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/ActionCards.scala">
+    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Stacks.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="0" selection-start="108" selection-end="108" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/actioncards/TransmittableChoices.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="0" selection-start="335" selection-end="335" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/SpySpec.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="0" selection-start="1578" selection-end="1578" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/actioncards/Spy.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="7" selection-start="43" selection-end="43" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/actioncards/ChancellorSpec.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="0" selection-start="295" selection-end="295" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/main/protobuf/scalanion.proto">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/PrompterTest.scala">
+    <entry file="file://$PROJECT_DIR$/scalanion/src/main/java/org/grumpysoft/Scalanion.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="22" selection-start="1705" selection-end="1705" vertical-scroll-proportion="0.0">
+        <state line="21" column="10" selection-start="572" selection-end="572" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/CommandLinePlayerTest.scala">
+    <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/NetworkedPlayerSpec.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="3" selection-start="628" selection-end="628" vertical-scroll-proportion="0.477707">
+        <state line="11" column="0" selection-start="343" selection-end="343" vertical-scroll-proportion="0.38283062">
           <folding />
         </state>
       </provider>
@@ -1175,11 +964,6 @@
           </splitter-proportions>
         </settings>
       </state>
-      <state key="Copyright.UI">
-        <settings>
-          <splitter-proportions />
-        </settings>
-      </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
           <last-edited>Scala</last-edited>
@@ -1194,7 +978,7 @@
       </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
-          <last-edited>scala-library-2.8.1</last-edited>
+          <last-edited>scala-compiler-2.8.1</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1231,7 +1015,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>specs</last-edited>
+          <last-edited>sbt resolved</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1239,11 +1023,6 @@
               </list>
             </option>
           </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ScopeChooserConfigurable.UI">
-        <settings>
-          <splitter-proportions />
         </settings>
       </state>
     </states>
