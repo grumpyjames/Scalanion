@@ -1,1 +1,3 @@
 Aim: To provide a pluggable Dominion engine and portable API to allow others to create AI players.
+
+Dependencies: You will need protoc (2.4.0) on the path, and the 2.4.0a version of protobuf in your local mvn repo. Otherwise, SBT will fetch them from teh interwebs.
