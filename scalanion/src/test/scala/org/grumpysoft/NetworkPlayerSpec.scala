@@ -35,7 +35,7 @@ object NetworkPlayerSpec extends Specification with Mockito {
   "network player" should {
     val output = new ByteArrayOutputStream(2048)
 
-    "transmit choices and retrieve responses" in {
+    "transmit two choices and retrieve two responses" in {
       val networkPlayer = NetworkPlayer(buildResponsesInput, output)
 
       networkPlayer.chooseFrom(List(Copper(), Silver(), Silver(), Copper()), Discard, 0, 2) must_==List(0, 3)
