@@ -5,7 +5,7 @@ import scalaj.collection.Imports._
 import java.io.{OutputStream, ByteArrayInputStream, InputStream, ByteArrayOutputStream}
 import org.grumpysoft.TreasureCards.{Copper, Silver}
 import org.specs.mock.Mockito
-import org.grumpysoft.Scalanion.{Hand, Query => ProtobufQuery, ChooseFrom, ChooseForOtherPlayer => ProtobufChooseForOtherPlayer, Answer, Choices, Event}
+import org.grumpysoft.Scalanion.{Hand, Query => ProtobufQuery, ServerToClient, ChooseForOtherPlayer => ProtobufChooseForOtherPlayer, Answer, Choices, Event}
 
 object NetworkPlayerSpec extends Specification with Mockito {
 
@@ -47,12 +47,12 @@ object NetworkPlayerSpec extends Specification with Mockito {
 
       val networkPlayerOutput = toInput(output)
 
-      val transmitted = ChooseFrom.parseDelimitedFrom(networkPlayerOutput)
+      val transmitted = ServerToClient.parseDelimitedFrom(networkPlayerOutput).getChooseFrom
       transmitted.getCardList.asScala must_==List("Copper", "Silver", "Silver", "Copper")
       transmitted.getMinimumChoices must_==0
       transmitted.getMaximumChoices must_==2
       transmitted.getVerb must_=="discard"
-      val transmittedQuery = ProtobufQuery.parseDelimitedFrom(networkPlayerOutput)
+      val transmittedQuery = ServerToClient.parseDelimitedFrom(networkPlayerOutput).getQuery
       transmittedQuery.getQuestion must_=="are you geoff?"
     }
 
@@ -60,7 +60,7 @@ object NetworkPlayerSpec extends Specification with Mockito {
       val networkPlayer = NetworkPlayer(falseResponseInput, output)
       mockOtherPlayer.describe returns "another player"
       networkPlayer.query(ChooseForOtherPlayer(List(Copper(), Silver()), mockOtherPlayer, Gain)) must_==false
-      val transmitted = ProtobufChooseForOtherPlayer.parseDelimitedFrom(toInput(output))
+      val transmitted = ServerToClient.parseDelimitedFrom(toInput(output)).getQuery.getChooseForOtherPlayer
       transmitted.getPlayer must_=="another player"
       transmitted.getVerb must_=="gain"
       transmitted.getCardList.asScala must_==List("Copper", "Silver")
@@ -69,7 +69,7 @@ object NetworkPlayerSpec extends Specification with Mockito {
     "transmit hand contents" in {
       val networkPlayer = NetworkPlayer(noInput, output)
       networkPlayer.newHand(List(Copper(), Silver(), Copper()))
-      val transmitted = Hand.parseDelimitedFrom(toInput(output))
+      val transmitted = ServerToClient.parseDelimitedFrom(toInput(output)).getHand
       transmitted.getCardList.asScala must_==List("Copper", "Silver", "Copper")
     }
 
@@ -77,7 +77,7 @@ object NetworkPlayerSpec extends Specification with Mockito {
       val networkPlayer = NetworkPlayer(noInput, output)
       mockOtherPlayer.describe returns "another player"
       networkPlayer.playerEvent(mockOtherPlayer, Discard, List(Copper(), Silver()))
-      val transmitted = Event.parseDelimitedFrom(toInput(output))
+      val transmitted = ServerToClient.parseDelimitedFrom(toInput(output)).getEvent
       transmitted.getVerb() must_==Discard.present
       transmitted.getPlayer() must_=="another player"
       transmitted.getCardList.asScala must_==List("Copper", "Silver")

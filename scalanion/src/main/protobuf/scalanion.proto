@@ -14,7 +14,8 @@ message Choices {
 }
 
 message Query {
-  required string question = 1;
+  optional string question = 1;
+  optional ChooseForOtherPlayer chooseForOtherPlayer = 2;
 }
 
 message ChooseForOtherPlayer {
@@ -35,4 +36,11 @@ message Event {
   required string player = 1;
   required string verb = 2;
   repeated string card = 3;
+}
+
+message ServerToClient {
+  optional ChooseFrom chooseFrom = 1;
+  optional Query query = 2;
+  optional Hand hand = 3;
+  optional Event event = 4;
 }
