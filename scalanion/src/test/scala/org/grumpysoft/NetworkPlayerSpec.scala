@@ -14,7 +14,7 @@ object NetworkPlayerSpec extends Specification with Mockito {
   def buildInput(mutator: (OutputStream => Unit)) : InputStream = {
     val scratchSpace = new ByteArrayOutputStream(128)
     mutator(scratchSpace)
-    toInput(scratchSpace)
+    new ByteArrayInputStream(scratchSpace)
   }
 
   def buildResponsesInput() : InputStream = {
@@ -26,10 +26,6 @@ object NetworkPlayerSpec extends Specification with Mockito {
 
   def falseResponseInput() : InputStream = {
     buildInput(scratchSpace => Answer.newBuilder.setAnswer(false).build.writeDelimitedTo(scratchSpace))
-  }
-
-  def toInput(baos: ByteArrayOutputStream) : InputStream = {
-    new ByteArrayInputStream(baos.toByteArray)
   }
 
   def noInput() : InputStream = {
