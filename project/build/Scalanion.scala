@@ -9,6 +9,7 @@ class ScalanionProject(info: ProjectInfo) extends DefaultProject(info) with prot
   val mockito = "org.mockito" % "mockito-all" % "1.8.5" from "http://mockito.googlecode.com/files/mockito-all-1.8.5.jar"
   val hamcrest = "org.hamcrest" % "hamcrest-all" % "1.3.0RC2" from "http://hamcrest.googlecode.com/files/hamcrest-all-1.3.0RC2.jar"
   val protobuf = "com.google.protobuf" % "protobuf-java" % "2.4.0a"
+  val scalaj_collection = "org.scalaj" %% "scalaj-collection" % "1.0" from "http://www.scala-tools.org/repo-releases/org/scalaj/scalaj-collection_2.8.0/1.0/scalaj-collection_2.8.0-1.0.jar"
 
   def srcPath = "scalanion" / "src"
 

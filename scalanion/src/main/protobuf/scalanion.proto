@@ -10,7 +10,7 @@ message ChooseFrom {
 }
 
 message Choices {
-  repeated int32 index;
+  repeated int32 choice = 1;
 }
 
 message Query {
@@ -18,7 +18,7 @@ message Query {
 }
 
 message Answer {
-  required boolean answer;
+  required bool answer = 1;
 }
 
 message Hand {
