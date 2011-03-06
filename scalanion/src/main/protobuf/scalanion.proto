@@ -17,6 +17,12 @@ message Query {
   required string question = 1;
 }
 
+message ChooseForOtherPlayer {
+  required string player = 1;
+  required string verb = 2;
+  repeated string card = 3;
+}
+
 message Answer {
   required bool answer = 1;
 }
