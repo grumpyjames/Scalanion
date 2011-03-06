@@ -14,7 +14,7 @@ class CommandLinePlayer(private val name: String, private val userInterface: Pro
     userInterface.prompt(QuickDescription("Your hand now contains: " + hand.map(_.describe).reduceLeft(_ + ", " + _)))
   }
   
-  def playerEvent(player: GenericPlayer[Any], action: Verb, cards: Seq[Card]) : Unit = {
+  def playerEvent(player: SelfDescribing, action: Verb, cards: Seq[Card]) : Unit = {
     if (!(player eq this)) 
       userInterface.prompt(QuickDescription(player.describe() + " " + action.past + ": " + cards.map(_.describe).reduceLeft(_ + ", " + _)))
   }

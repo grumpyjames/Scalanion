@@ -22,6 +22,6 @@ trait GenericPlayer[+T] extends SelfDescribing {
   /**
    * Notify player of a game event caused by someone (possibly themselves)
    */
-  def playerEvent(player: GenericPlayer[Any], action: Verb, cards: Seq[Card]) : Unit;
+  def playerEvent(player: SelfDescribing, action: Verb, cards: Seq[Card]) : Unit;
   
 }

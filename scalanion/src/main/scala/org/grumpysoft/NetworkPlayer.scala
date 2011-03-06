@@ -7,7 +7,7 @@ import org.grumpysoft.Scalanion.{ServerToClient, Hand, Query => ProtobufQuery, C
 case class NetworkPlayer(private val input: InputStream, private val output: OutputStream) extends GenericPlayer[Int] {
   def describe() = "Network Player"
 
-  def playerEvent(player: GenericPlayer[Any], action: Verb, cards: Seq[Card]) = {
+  def playerEvent(player: SelfDescribing, action: Verb, cards: Seq[Card]) = {
     send(Event.newBuilder.setPlayer(player.describe).setVerb(action.present).addAllCard(cards.map(_.describe).asJava).build)
   }
 

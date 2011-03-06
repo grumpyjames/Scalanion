@@ -14,7 +14,7 @@ object GameSpec extends Specification {
       hands = hand :: hands
     }
 
-    def playerEvent(player: GenericPlayer[Any], action: Verb, cards: Seq[Card]) : Unit = {}
+    def playerEvent(player: SelfDescribing, action: Verb, cards: Seq[Card]) : Unit = {}
     def describe() : String = { "test player" }
     def query(question: Query) = true
   }
