@@ -9,13 +9,17 @@ import collection.Seq
 import java.lang.String
 import org.grumpysoft.TreasureCards._
 import collection.immutable.List
-import org.grumpysoft.Scalanion._
+import org.grumpysoft.Scalanion.{ChooseForOtherPlayer => ProtoCfop, _}
 
 object RemotePlayerSpec extends Specification with Mockito {
 
   private val noOutput = new ByteArrayOutputStream(0)
   private val realPlayer = mock[GenericPlayer[Int]]
   private val choiceCards: List[ActionCard] = List(Witch(), Remodel(), Remodel())
+
+  private val simpleQuery: String = "are you dave?"
+  private val justGold: List[Gold] = List(Gold())
+  private val playerDave: StringDescription = StringDescription("dave")
 
   def makeInput(streamWriter : (OutputStream => Unit)) = {
     val byteArrayOutput = new ByteArrayOutputStream(128)
@@ -39,9 +43,15 @@ object RemotePlayerSpec extends Specification with Mockito {
     makeInput(ServerToClient.newBuilder.setChooseFrom(ChooseFrom.newBuilder.setVerb(Play.present).setMinimumChoices(2).setMaximumChoices(2).addAllCard(choiceCards.map(_.describe).asJava).build).build.writeDelimitedTo(_))
   }
 
-  val outputBuffer = new ByteArrayOutputStream(128)
+  def queryInput = {
+    makeInput({baos =>
+      ServerToClient.newBuilder.setQuery(Query.newBuilder.setQuestion(simpleQuery)).build.writeDelimitedTo(baos)
+      ServerToClient.newBuilder.setQuery(Query.newBuilder.setChooseForOtherPlayer(ProtoCfop.newBuilder.setPlayer(playerDave.describe).setVerb(Trash.present).addAllCard(justGold.map(_.describe).asJava))).build.writeDelimitedTo(baos)
+    })
+  }
 
   "remote player" should {
+     val outputBuffer = new ByteArrayOutputStream(128)
     "dispatch the received hand to the wrapped player" in {
       val remotePlayer = RemotePlayer(realPlayer, eventInput, noOutput)
       remotePlayer.readAndForward
@@ -61,44 +71,18 @@ object RemotePlayerSpec extends Specification with Mockito {
       there was one(realPlayer).chooseFrom(choiceCards, Play, 2, 2)
       Choices.parseDelimitedFrom(inputFrom(outputBuffer)).getChoiceList.asScala must_==(List(0,2))
     }
+
+    "retrieve answers to queries" in {
+      realPlayer.query(BasicQuestion(simpleQuery)) returns false
+      realPlayer.query(ChooseForOtherPlayer(justGold, playerDave, Trash)) returns true
+      val remotePlayer = RemotePlayer(realPlayer, queryInput, outputBuffer)
+      remotePlayer.readAndForward
+      remotePlayer.readAndForward
+      val responses = inputFrom(outputBuffer)
+      Answer.parseDelimitedFrom(responses).getAnswer must_==false
+      Answer.parseDelimitedFrom(responses).getAnswer must_==true
+    }
   }
 
 }
 
-case class RemotePlayer(private val player: GenericPlayer[Int], private val input: InputStream, private val output: OutputStream) {
-  def passEvent(message: Scalanion.ServerToClient): Unit = {
-    val event = message.getEvent
-    val seq: Seq[String] = event.getCardList.asScala
-    player.playerEvent(liftPlayer(event.getPlayer), liftVerb(event.getVerb), liftCards(seq))
-  }
-
-  def passHand(message: Scalanion.ServerToClient) : Unit = {
-    val hand = message.getHand
-    player.newHand(liftCards(hand.getCardList.asScala))
-  }
-
-  def passChooseFrom(message: Scalanion.ServerToClient) : Unit = {
-    val chooseFrom = message.getChooseFrom
-    val responses: scala.Seq[Int] = player.chooseFrom(liftCards(chooseFrom.getCardList.asScala), liftVerb(chooseFrom.getVerb), chooseFrom.getMinimumChoices, chooseFrom.getMaximumChoices)
-    Choices.newBuilder.addAllChoice(responses.asJava).build.writeDelimitedTo(output)
-  }
-
-  def readAndForward : Unit = {
-    val message = ServerToClient.parseDelimitedFrom(input)
-    if (message.hasEvent) return passEvent(message)
-    if (message.hasHand) return passHand(message)
-    if (message.hasChooseFrom) return passChooseFrom(message)
-  }
-
-  private def liftPlayer(playerName: String) : SelfDescribing = {
-    return StringDescription(playerName)
-  }
-
-  private def liftVerb(presentTense: String) : Verb = {
-    Verbs.fromWire(presentTense)
-  }
-
-  private def liftCards(cards: Seq[String]) : List[Card] = {
-    cards.map(Cards.fromWire(_)).toList
-  }
-}

@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="335121ac-d150-4852-93e9-f0488d7c3091" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/RemotePlayer.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Verbs.scala" afterPath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Verbs.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/NetworkPlayer.scala" afterPath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/NetworkPlayer.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Queries.scala" afterPath="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Queries.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/RemotePlayerSpec.scala" afterPath="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/RemotePlayerSpec.scala" />
     </list>
     <ignored path="Scalanion.iws" />
@@ -89,19 +91,6 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/scalanion/src/main/java/org/grumpysoft/Scalanion.java" line="993" class="org.grumpysoft.Scalanion.Choices.Builder" package="org.grumpysoft">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
     </line_breakpoints>
     <breakpoint_any>
       <breakpoint>
@@ -143,33 +132,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Card.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Card.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="20" selection-start="1490" selection-end="1490" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TreasureCards.scala" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/TreasureCards.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="7" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Object.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/jdk1.6.0_23/src.zip!/java/lang/Object.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="194" column="28" selection-start="9314" selection-end="9314" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CardDeserializationSpec.scala" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/CardDeserializationSpec.scala">
           <provider selected="true" editor-type-id="text-editor">
@@ -182,7 +144,25 @@
       <file leaf-file-name="RemotePlayerSpec.scala" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/RemotePlayerSpec.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="17" selection-start="1622" selection-end="1622" vertical-scroll-proportion="0.38022813">
+            <state line="79" column="22" selection-start="3580" selection-end="3580" vertical-scroll-proportion="1.378327">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NetworkPlayer.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/NetworkPlayer.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="36" column="71" selection-start="1612" selection-end="1612" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Queries.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Queries.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="104" selection-start="211" selection-end="211" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -209,7 +189,16 @@
       <file leaf-file-name="Scalanion.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scalanion/src/main/java/org/grumpysoft/Scalanion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="996" column="0" selection-start="33364" selection-end="33364" vertical-scroll-proportion="0.0">
+            <state line="992" column="0" selection-start="33203" selection-end="33203" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scalanion.proto" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scalanion/src/main/protobuf/scalanion.proto">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="22" selection-start="485" selection-end="485" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -247,14 +236,12 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Queries.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/NetworkedPlayerSpec.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/main/protobuf/scalanion.proto" />
         <option value="$PROJECT_DIR$/scalanion/src/main/java/org/grumpysoft/Scalanion.java" />
         <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/NetworkPlayerSpec.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/GenericPlayer.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/CommandLinePlayer.scala" />
-        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/NetworkPlayer.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/PlayerAdapter.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/GameSpec.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/RichPlayerSpec.scala" />
@@ -262,6 +249,8 @@
         <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Cards.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/CardDeserializationSpec.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Verbs.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Queries.scala" />
+        <option value="$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/NetworkPlayer.scala" />
         <option value="$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/RemotePlayerSpec.scala" />
       </list>
     </option>
@@ -654,36 +643,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="RemotePlayerSpec.scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scalanion" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="grumpysoft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="actioncards" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -759,6 +718,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Verbs.scala" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Scalanion" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scalanion" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scala" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grumpysoft" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Queries.scala" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1179,7 +1168,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="deserialize cards from string" />
+    <option name="LAST_COMMIT_MESSAGE" value="prod remote player a touch closer to" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1192,7 +1181,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="start migrating some old tests to use specs rather than scala test" />
     <MESSAGE value="move another test over to specs" />
     <MESSAGE value="migrate game tests to use specs" />
     <MESSAGE value="whitespace" />
@@ -1217,6 +1205,7 @@
     <MESSAGE value="allow client to have some chance of parsing the correct types (semi oops)" />
     <MESSAGE value="change to SelfDescribing for playerEvent on GenericPlayer interface. Start working on client end." />
     <MESSAGE value="deserialize cards from string" />
+    <MESSAGE value="prod remote player a touch closer to" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1226,21 +1215,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/NetworkPlayer.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="41" selection-start="470" selection-end="470" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/PlayerAdapter.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="40" selection-start="498" selection-end="498" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/RichPlayer.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="227" selection-end="227" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/GameSpec.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="42" selection-start="440" selection-end="440" vertical-scroll-proportion="0.0" />
@@ -1312,16 +1286,37 @@
         <state line="3" column="0" selection-start="55" selection-end="89" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/Queries.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="104" selection-start="211" selection-end="211" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/main/scala/org/grumpysoft/NetworkPlayer.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="71" selection-start="1612" selection-end="1612" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalanion/src/main/protobuf/scalanion.proto">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="22" selection-start="485" selection-end="485" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scalanion/src/main/java/org/grumpysoft/Scalanion.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="996" column="0" selection-start="33364" selection-end="33364" vertical-scroll-proportion="0.0">
+        <state line="992" column="0" selection-start="33203" selection-end="33203" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scalanion/src/test/scala/org/grumpysoft/RemotePlayerSpec.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="17" selection-start="1622" selection-end="1622" vertical-scroll-proportion="0.38022813">
+        <state line="79" column="22" selection-start="3580" selection-end="3580" vertical-scroll-proportion="1.378327">
           <folding />
         </state>
       </provider>

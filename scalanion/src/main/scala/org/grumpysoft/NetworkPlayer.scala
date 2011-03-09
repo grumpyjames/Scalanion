@@ -34,7 +34,7 @@ case class NetworkPlayer(private val input: InputStream, private val output: Out
     send(ProtobufQuery.newBuilder.setQuestion(rawQuery).build)
   }
 
-  private def sendWrappedQuery(cards: Seq[Card], player: GenericPlayer[Any], verb: Verb) : Unit = {
+  private def sendWrappedQuery(cards: Seq[Card], player: SelfDescribing, verb: Verb) : Unit = {
     send(ProtobufQuery.newBuilder
       .setChooseForOtherPlayer(ProtobufChooseForOtherPlayer.newBuilder.addAllCard(cards.map(_.describe).asJava).setVerb(verb.present).setPlayer(player.describe).build)
       .build)
