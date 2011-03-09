@@ -3,6 +3,10 @@ package org.grumpysoft
 sealed abstract class Card(cost: Int) extends SelfDescribing {
   def price() : Int = { cost }
   override def toString() : String = { describe() }
+  def unapply(wireFormat: String) : Option[Card] = {
+    if (this.describe == wireFormat) Some(this)
+    else None
+  }
 }
 
 object ActionResult {
