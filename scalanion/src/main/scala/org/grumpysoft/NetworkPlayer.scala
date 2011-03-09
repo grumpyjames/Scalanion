@@ -34,9 +34,13 @@ case class NetworkPlayer(private val input: InputStream, private val output: Out
     send(ProtobufQuery.newBuilder.setQuestion(rawQuery).build)
   }
 
+  private def makeCfop(cards: scala.Seq[Card], verb: Verb, player: SelfDescribing): Scalanion.ChooseForOtherPlayer = {
+    ProtobufChooseForOtherPlayer.newBuilder.addAllCard(cards.map(_.describe).asJava).setVerb(verb.present).setPlayer(player.describe).build
+  }
+
   private def sendWrappedQuery(cards: Seq[Card], player: SelfDescribing, verb: Verb) : Unit = {
     send(ProtobufQuery.newBuilder
-      .setChooseForOtherPlayer(ProtobufChooseForOtherPlayer.newBuilder.addAllCard(cards.map(_.describe).asJava).setVerb(verb.present).setPlayer(player.describe).build)
+      .setChooseForOtherPlayer(makeCfop(cards, verb, player))
       .build)
   }
 
