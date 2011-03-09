@@ -1,6 +1,11 @@
 package org.grumpysoft
 
-sealed abstract class Verb(val present: String, val past: String)
+sealed abstract class Verb(val present: String, val past: String) {
+  def unapply(wireFormat: String) : Option[Verb] = {
+    if (this.present == wireFormat) Some(this)
+    else None
+  }
+}
 
 // TODO: players need a context in which to place these verbs
 
@@ -16,4 +21,12 @@ case object PlaceOnDeck extends Verb("decktop", "decktopped")
 case object DeckDiscard extends Verb("discard deck", "discarded deck")
 case object RevealHand extends Verb("reveal", "revealed")
 case object ThiefTrash extends Verb("trash (due to thief)", "trashed (due to thieving)")
+
+object Verbs {
+  val allVerbs = List(Play, Discard, Buy, Trash, Gain, Receive, Reveal, PlaceOnDeck, DeckDiscard, RevealHand, ThiefTrash)
+
+  def fromWire(wireFormat: String) : Verb = {
+    allVerbs.map(_.unapply(wireFormat)).find(_.isDefined).get.get
+  }
+}
 
