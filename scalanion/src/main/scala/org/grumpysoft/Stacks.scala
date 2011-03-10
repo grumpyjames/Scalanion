@@ -41,8 +41,8 @@ case class Stacks(deck: List[Card], hand: List[Card], discard: List[Card]) {
     (hand.intersect(cards), Stacks(deck, hand.diff(cards), discard))
   }
 
-  def discardCard(card: Card) : Stacks = hand.find(_ == card) match {
-    case Some(a) => Stacks(deck, hand.filter(_ != a), discard ++ List(a))
+  def discardCard(card: Card) : Stacks = hand.find(_.eq(card)) match {
+    case Some(a) => Stacks(deck, hand.filter(_.ne(a)), a :: discard)
     case None => error("argh")
   }
 
