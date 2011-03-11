@@ -18,7 +18,7 @@ object ActionPhaseSpec extends Specification with Mockito {
   type Table = Seq[(Stacks, GenericPlayer[Card])]
 
   val table : Table = List()
-  val eventOnlyTable  = List((Stacks.empty, anotherPlayer)) 
+  val eventOnlyTable  = List((Stacks.empty, anotherPlayer))
 
   val actionCards = List(actionCard, anotherActionCard)
   val allCards = actionCards ++ List(Copper(), Silver(), Estate())
@@ -70,6 +70,19 @@ object ActionPhaseSpec extends Specification with Mockito {
 
   val verifySecondChoiceThenPlayAction: () => Unit = () => {
     verifyChoiceAndPlay(anotherTwoActionHandStack, secondActionCard, table, threeBuysResult, runAction)
+  }
+
+  val twoTreasureTwoActionResult = ActionResult.noBuys(2, 2, anotherTwoActionHandStack, supply, table)
+  val twoTreasureTwoActionResultWithOneActionStacks = ActionResult.noBuys(2, 2, oneActionHandStacks, supply, table)
+
+  val verifyThirdChoiceThenPlay: () => Unit = () => {
+    player.chooseFrom(oneActionHandStacks.hand.filter(isActionCard(_)), Play, 0, 1) returns List()
+    val actionResult = runAction(twoActionHandStack, table)
+    actionResult.treasure must_==4
+  }
+
+  val verifySecondAndThirdChoicesThenPlay: () => Unit = () => {
+    verifyChoiceAndPlay(anotherTwoActionHandStack, secondActionCard, table, twoTreasureTwoActionResultWithOneActionStacks, verifyThirdChoiceThenPlay)
   }
 
   def runAction(stacks: Stacks, table: Table) : ActionResult = {
@@ -125,21 +138,6 @@ object ActionPhaseSpec extends Specification with Mockito {
       verifyChoiceAndPlay(twoActionHandStack, actionCard, table, oneBuyResult, verifySecondChoiceThenPlayAction)
     }
 
-    val twoTreasureTwoActionResult = ActionResult.noBuys(2, 2, anotherTwoActionHandStack, supply, table)
-    val twoTreasureTwoActionResultWithOneActionStacks = ActionResult.noBuys(2, 2, oneActionHandStacks, supply, table)
-
-    val verifyThirdChoiceThenPlay: () => Unit = () => {
-      player.chooseFrom(oneActionHandStacks.hand.filter(isActionCard(_)), Play, 0, 1) returns List()
-      val actionResult = runAction(twoActionHandStack, table)
-      actionResult.treasure must_==4
-    }
-
-    val verifySecondAndThirdChoicesThenPlay: () => Unit = () => {
-      verifyChoiceAndPlay(anotherTwoActionHandStack, secondActionCard, table, twoTreasureTwoActionResultWithOneActionStacks, verifyThirdChoiceThenPlay)
-    }
-
-
-
     "aggregates treasure across multiple action results" in {
       verifyChoiceAndPlay(twoActionHandStack, actionCard, table, twoTreasureTwoActionResult, verifySecondAndThirdChoicesThenPlay)
     }
@@ -169,7 +167,7 @@ object ActionPhase {
     }
 
     private def done : ActionResult = {
-       ActionResult(counts, stacks, supply, table)
+      ActionResult(counts, stacks, supply, table)
     }
 
     private def playAction() : ActionResult = {
