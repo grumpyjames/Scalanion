@@ -9,12 +9,16 @@ object ActionPhaseSpec extends Specification with Mockito {
 
   val actionCard = mock[ActionCard]
   val anotherActionCard = mock[ActionCard]
+  val secondActionCard = mock[ActionCard]
+  val thirdActionCard = mock[ActionCard]
   val player = mock[GenericPlayer[Card]]
+  val anotherPlayer = mock[GenericPlayer[Card]]
   val supply = mock[Supply]
 
   type Table = Seq[(Stacks, GenericPlayer[Card])]
 
   val table : Table = List()
+  val eventOnlyTable  = List((Stacks.empty, anotherPlayer)) 
 
   val actionCards = List(actionCard, anotherActionCard)
   val allCards = actionCards ++ List(Copper(), Silver(), Estate())
@@ -23,10 +27,17 @@ object ActionPhaseSpec extends Specification with Mockito {
   val stacks = Stacks(List(), allCards, List())
   val stacksPostAction = stacks.discardCard(actionCard)
 
+  val boringResult = ActionResult.noTreasureOrBuysOrActions(stacksPostAction, supply, table)
+
+  def expectChoiceAndPlay(actionCards: Seq[Card], actionCard: ActionCard, table: Table, result: ActionResult) : Unit = {
+    player.chooseFrom(actionCards, Play, 0, 1) returns List(actionCard)
+    actionCard.play(stacksPostAction, player, supply, table) returns result
+  }
+
   "the action phase" should {
 
     "offer the player all their remaining actions and then play the selected one" in {
-      player.chooseFrom(actionCards, Play, 0, 1) returns List(actionCard)
+      expectChoiceAndPlay(actionCards, actionCard, table, boringResult)
       val actionResult = ActionPhase(1, stacks, player, supply, table)
       there was one(actionCard).play(stacksPostAction, player, supply, table)
     }
@@ -39,10 +50,34 @@ object ActionPhaseSpec extends Specification with Mockito {
     }
 
     "discard the played action card" in {
-      player.chooseFrom(actionCards, Play, 0, 1) returns List(actionCard)
-      actionCard.play(stacksPostAction, player, supply, table) returns ActionResult.noTreasureOrBuysOrActions(stacksPostAction, supply, table)
+      expectChoiceAndPlay(actionCards, actionCard, table, boringResult)
       val result = ActionPhase(1, stacks, player, supply, table)
       result.stacks.discard.head must_==actionCard
+    }
+
+    "transmit the played card to the table" in {
+      expectChoiceAndPlay(actionCards, actionCard, eventOnlyTable, boringResult)
+      val result = ActionPhase(1, stacks, player, supply, eventOnlyTable)
+      there was one(anotherPlayer).playerEvent(player, Play, List(actionCard))
+    }
+
+    "gracefully deals with opportunities to play more than one action" in {
+      expectChoiceAndPlay(actionCards, actionCard, table, ActionResult.noTreasureOrBuys(2, stacksPostAction, supply, eventOnlyTable))
+      player.chooseFrom(actionCards.filter(_.ne(actionCard)), Play, 0, 1) returns List()
+      val result = ActionPhase(1, stacks, player, supply, table)
+      there was one(player).chooseFrom(actionCards.filter(_.ne(actionCard)), Play, 0, 1)
+    }
+
+    "can play three actions consecutively" in {
+
+    }
+
+    "aggregates buys across multiple action results" in {
+
+    }
+
+    "aggregates treasure across multiple action results" in {
+
     }
 
   }
@@ -59,6 +94,7 @@ object ActionPhase {
 
   private case class OneAction(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) {
     def play(actionCard: ActionCard) : ActionResult = {
+      table.map(_._2.playerEvent(player, Play, List(actionCard)))
       actionCard.play(stacks.discardCard(actionCard), player, supply, table)
     }
   }
@@ -68,7 +104,11 @@ object ActionPhase {
     val chosen = player.chooseFrom(actionCards, Play, 0, 1)
     chosen.headOption match {
       case Some(a) => a match {
-        case b : ActionCard => OneAction(stacks, player, supply, table).play(b)
+        case b : ActionCard => {
+          val actionResult = OneAction(stacks, player, supply, table).play(b)
+          if (actionResult.actions > 0) ActionPhase(actionResult.actions, actionResult.stacks, player, actionResult.supply, actionResult.table)
+          else actionResult
+        }
         case _ => throw new IllegalStateException("Something that wasn't an action card was chosen from a set of action cards.")
       }
       case None => ActionResult.noTreasureOrBuysOrActions(stacks, supply, table)
