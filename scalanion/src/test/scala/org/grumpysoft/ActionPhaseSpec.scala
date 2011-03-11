@@ -150,17 +150,24 @@ object ActionPhase {
     }
   }
 
+  private def performAction(counts: CountVonCount, stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table, actionCard: ActionCard) = {
+     val actionResult = OneAction(stacks, player, supply, table).play(actionCard)
+     ActionPhase(counts + actionResult.count.lessOneAction, actionResult.stacks, player, actionResult.supply, actionResult.table)
+  }
+
+
+  private def chooseActionCard(stacks: Stacks, player: GenericPlayer[Card]): Option[Card] = {
+    val actionCards = stacks.hand.filter(isActionCard(_))
+    player.chooseFrom(actionCards, Play, 0, 1).headOption
+  }
+
   def apply(counts: CountVonCount, stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = counts.actions match {
     case 0 => ActionResult(counts, stacks, supply, table)
     case _ => {
-      val actionCards = stacks.hand.filter(isActionCard(_))
-      val chosen = player.chooseFrom(actionCards, Play, 0, 1)
-      chosen.headOption match {
+      val chosen = chooseActionCard(stacks, player)
+      chosen match {
         case Some(a) => a match {
-          case b : ActionCard => {
-            val actionResult = OneAction(stacks, player, supply, table).play(b)
-            ActionPhase(counts + actionResult.count.lessOneAction, actionResult.stacks, player, actionResult.supply, actionResult.table)
-          }
+          case b : ActionCard => performAction(counts, stacks, player, supply, table, b)
           case _ => throw new IllegalStateException("Something that wasn't an action card was chosen from a set of action cards.")
         }
         case None => ActionResult.noTreasureOrBuysOrActions(stacks, supply, table)
