@@ -8,6 +8,7 @@ import collection.immutable.List
 import org.grumpysoft.Scalanion._
 
 case class RemotePlayer(private val player: GenericPlayer[Int], private val input: InputStream, private val output: OutputStream) {
+
   private def passEvent(message: Scalanion.ServerToClient): Unit = {
     val event = message.getEvent
     val seq: Seq[String] = event.getCardList.asScala
@@ -35,7 +36,7 @@ case class RemotePlayer(private val player: GenericPlayer[Int], private val inpu
       sendResponse(player.query(BasicQuestion(query.getQuestion)))
     } else {
       val cfop = query.getChooseForOtherPlayer
-      sendResponse(player.query(ChooseForOtherPlayer(liftCards(cfop.getCardList.asScala), StringDescription(cfop.getPlayer), liftVerb(cfop.getVerb))))
+      sendResponse(player.query(ChooseForOtherPlayer(liftCards(cfop.getCardList.asScala), liftPlayer(cfop.getPlayer), liftVerb(cfop.getVerb))))
     }
   }
 

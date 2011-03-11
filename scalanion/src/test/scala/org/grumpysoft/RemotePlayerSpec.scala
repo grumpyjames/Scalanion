@@ -31,8 +31,10 @@ object RemotePlayerSpec extends Specification with Mockito {
     new ByteArrayInputStream(baos.toByteArray)
   }
 
+  val thePlayer = "thePlayer"
+
   def eventInput = {
-    makeInput(ServerToClient.newBuilder.setEvent(Event.newBuilder.setPlayer("thePlayer").setVerb(Gain.present).addAllCard(List("Copper", "Silver").asJava)).build.writeDelimitedTo(_))
+    makeInput(ServerToClient.newBuilder.setEvent(Event.newBuilder.setPlayer(thePlayer).setVerb(Gain.present).addAllCard(List("Copper", "Silver").asJava)).build.writeDelimitedTo(_))
   }
 
   def handInput = {
@@ -52,10 +54,10 @@ object RemotePlayerSpec extends Specification with Mockito {
 
   "remote player" should {
      val outputBuffer = new ByteArrayOutputStream(128)
-    "dispatch the received hand to the wrapped player" in {
+    "dispatch the received event to the wrapped player" in {
       val remotePlayer = RemotePlayer(realPlayer, eventInput, noOutput)
       remotePlayer.readAndForward
-      there was one(realPlayer).playerEvent(StringDescription("thePlayer"), Gain, List(Copper(), Silver()))
+      there was one(realPlayer).playerEvent(StringDescription(thePlayer), Gain, List(Copper(), Silver()))
     }
 
     "present the player with their new hand" in {
