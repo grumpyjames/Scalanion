@@ -52,30 +52,54 @@ object ActionPhaseSpec extends Specification with Mockito {
     actionCard.play(stacks.discardCard(actionCard), player, supply, table) returns result
   }
 
+  def verifyChoiceAndPlay[T](stacks: Stacks, actionCard: ActionCard, table: Table, result: ActionResult, testBody: () => T) : Unit = {
+    player.chooseFrom(stacks.hand.filter(isActionCard(_)), Play, 0, 1) returns List(actionCard)
+    actionCard.play(stacks.discardCard(actionCard), player, supply, table) returns result
+    testBody()
+    there was one(player).chooseFrom(stacks.hand.filter(isActionCard(_)), Play, 0, 1)
+  }
+
+  val oneBuyResult: ActionResult = ActionResult.noTreasure(1, 1, anotherTwoActionHandStack, supply, table)
+
+  val threeBuysResult = ActionResult.noTreasureOrActions(3, oneActionHandStacks, supply, table)
+
+  val runAction: () => Unit = () => {
+    val result = runAction(twoActionHandStack, table)
+    result.buys must_== 4
+  }
+
+  val verifySecondChoiceThenPlayAction: () => Unit = () => {
+    verifyChoiceAndPlay(anotherTwoActionHandStack, secondActionCard, table, threeBuysResult, runAction)
+  }
+
+  def runAction(stacks: Stacks, table: Table) : ActionResult = {
+    ActionPhase(CountVonCount.oneAction, stacks, player, supply, table)
+  }
+
   "the action phase" should {
 
     "offer the player all their remaining actions and then play the selected one" in {
       expectChoiceAndPlay(actionCards, actionCard, table, boringResult)
-      val actionResult = ActionPhase(1, stacks, player, supply, table)
+      val actionResult = runAction(stacks, table)
       there was one(actionCard).play(stacksPostAction, player, supply, table)
     }
 
     "be ok with the player choosing not to play an action" in {
       player.chooseFrom(actionCards, Play, 0, 1) returns List()
-      val actionResult = ActionPhase(1, stacks, player, supply, table)
+      val actionResult = runAction(stacks, table)
       there was one(player).chooseFrom(actionCards, Play, 0, 1)
       actionResult.stacks must_==stacks
     }
 
     "discard the played action card" in {
       expectChoiceAndPlay(actionCards, actionCard, table, boringResult)
-      val result = ActionPhase(1, stacks, player, supply, table)
-      result.stacks.discard.head must_==actionCard
+      val actionResult = runAction(stacks, table)
+      actionResult.stacks.discard.head must_==actionCard
     }
 
     "transmit the played card to the table" in {
       expectChoiceAndPlay(actionCards, actionCard, eventOnlyTable, boringResult)
-      val result = ActionPhase(1, stacks, player, supply, eventOnlyTable)
+      val actionResult = runAction(stacks, eventOnlyTable)
       there was one(anotherPlayer).playerEvent(player, Play, List(actionCard))
     }
 
@@ -83,7 +107,7 @@ object ActionPhaseSpec extends Specification with Mockito {
       expectChoiceAndPlay(actionCards, actionCard, table, ActionResult.noTreasureOrBuys(2, stacksPostAction, supply, eventOnlyTable))
       val handAfterFirstAction = actionCards.filter(_.ne(actionCard))
       player.chooseFrom(handAfterFirstAction, Play, 0, 1) returns List()
-      val result = ActionPhase(1, stacks, player, supply, table)
+      val actionResult = runAction(stacks, table)
       there was one(player).chooseFrom(handAfterFirstAction, Play, 0, 1)
     }
 
@@ -91,14 +115,16 @@ object ActionPhaseSpec extends Specification with Mockito {
       expectChoiceAndPlay(twoActionHandStack, actionCard, table, ActionResult.noTreasureOrBuys(2, anotherTwoActionHandStack, supply, table))
       expectChoiceAndPlay(anotherTwoActionHandStack, secondActionCard, table, remainingActionInHandResult)
       player.chooseFrom(List(thirdActionCard), Play, 0, 1) returns List()
-      val result = ActionPhase(1, twoActionHandStack, player, supply, table)
+      val actionResult = runAction(twoActionHandStack, table)
       there was one(player).chooseFrom(actionCardsOneAndTwo, Play, 0, 1)
       there was one(player).chooseFrom(actionCardsTwoAndThree, Play, 0, 1)
       there was one(player).chooseFrom(List(thirdActionCard), Play, 0, 1)
     }
 
     "aggregates buys across multiple action results" in {
-
+      verifyChoiceAndPlay(twoActionHandStack, actionCard, table, oneBuyResult, {
+        verifySecondChoiceThenPlayAction
+      })
     }
 
     "aggregates treasure across multiple action results" in {
@@ -124,20 +150,21 @@ object ActionPhase {
     }
   }
 
-  def apply(actionCount: Int, stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
-    val actionCards = stacks.hand.filter(isActionCard(_))
-    val chosen = player.chooseFrom(actionCards, Play, 0, 1)
-    chosen.headOption match {
-      case Some(a) => a match {
-        case b : ActionCard => {
-          val actionResult = OneAction(stacks, player, supply, table).play(b)
-          val remainingActions = actionResult.actions + actionCount - 1
-          if (remainingActions > 0) ActionPhase(remainingActions, actionResult.stacks, player, actionResult.supply, actionResult.table)
-          else actionResult
+  def apply(counts: CountVonCount, stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = counts.actions match {
+    case 0 => ActionResult(counts, stacks, supply, table)
+    case _ => {
+      val actionCards = stacks.hand.filter(isActionCard(_))
+      val chosen = player.chooseFrom(actionCards, Play, 0, 1)
+      chosen.headOption match {
+        case Some(a) => a match {
+          case b : ActionCard => {
+            val actionResult = OneAction(stacks, player, supply, table).play(b)
+            ActionPhase(counts + actionResult.count.lessOneAction, actionResult.stacks, player, actionResult.supply, actionResult.table)
+          }
+          case _ => throw new IllegalStateException("Something that wasn't an action card was chosen from a set of action cards.")
         }
-        case _ => throw new IllegalStateException("Something that wasn't an action card was chosen from a set of action cards.")
+        case None => ActionResult.noTreasureOrBuysOrActions(stacks, supply, table)
       }
-      case None => ActionResult.noTreasureOrBuysOrActions(stacks, supply, table)
     }
   }
 

@@ -10,22 +10,45 @@ sealed abstract class Card(cost: Int) extends SelfDescribing {
 }
 
 object ActionResult {
+  def noTreasure(buys: Int, actions: Int, stacks: Stacks, supply: Supply, table: Seq[(Stacks, GenericPlayer[Card])]) : ActionResult = {
+    ActionResult(CountVonCount(0, buys, actions), stacks, supply, table)
+  }
+
   def noTreasureOrBuys(actions: Int, stacks: Stacks, supply: Supply, table: Seq[(Stacks, GenericPlayer[Card])]) : ActionResult = {
-    ActionResult(0, 0, actions, stacks, supply, table)
+    ActionResult(CountVonCount(0, 0, actions), stacks, supply, table)
   }
 
   def noTreasureOrActions(buys: Int, stacks: Stacks, supply: Supply, table: Seq[(Stacks, GenericPlayer[Card])]) : ActionResult = {
-    ActionResult(0, buys, 0, stacks, supply, table)
+    ActionResult(CountVonCount(0, buys, 0), stacks, supply, table)
   }
   def noBuysOrActions(treasure: Int, stacks: Stacks, supply: Supply, table: Seq[(Stacks, GenericPlayer[Card])]) : ActionResult = {
-    ActionResult(treasure, 0, 0, stacks, supply, table)
+    ActionResult(CountVonCount(treasure, 0, 0), stacks, supply, table)
   }
   def noTreasureOrBuysOrActions(stacks: Stacks, supply: Supply, table: Seq[(Stacks, GenericPlayer[Card])]) : ActionResult = {
-    ActionResult(0, 0, 0, stacks, supply, table)
+    ActionResult(CountVonCount(0, 0, 0), stacks, supply, table)
   }
 }
 
-case class ActionResult(treasure: Int, buys: Int, actions: Int, stacks: Stacks, supply: Supply, table: Seq[(Stacks, GenericPlayer[Card])]) {}
+case class ActionResult(count: CountVonCount, stacks: Stacks, supply: Supply, table: Seq[(Stacks, GenericPlayer[Card])]) {
+  // Demeter
+  def buys = count.buys
+  def actions = count.actions
+  def treasure = count.treasure
+}
+
+case class CountVonCount(treasure: Int, buys: Int, actions: Int) {
+  def +(that: CountVonCount) : CountVonCount = {
+    CountVonCount(treasure + that.treasure, buys + that.buys, actions + that.actions)
+  }
+
+  def lessOneAction : CountVonCount = {
+    CountVonCount(treasure, buys, actions - 1)
+  }
+}
+
+object CountVonCount {
+  def oneAction() = CountVonCount(0,0,1)
+}
 
 
 abstract case class ActionCard(cost: Int) extends Card(cost) {
