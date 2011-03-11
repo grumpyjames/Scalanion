@@ -10,6 +10,10 @@ sealed abstract class Card(cost: Int) extends SelfDescribing {
 }
 
 object ActionResult {
+  def noBuys(treasure: Int, actions: Int, stacks: Stacks, supply: Supply, table: Seq[(Stacks, GenericPlayer[Card])]) : ActionResult = {
+    ActionResult(CountVonCount(treasure, 0, actions), stacks, supply, table)
+  }
+
   def noTreasure(buys: Int, actions: Int, stacks: Stacks, supply: Supply, table: Seq[(Stacks, GenericPlayer[Card])]) : ActionResult = {
     ActionResult(CountVonCount(0, buys, actions), stacks, supply, table)
   }

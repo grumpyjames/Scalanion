@@ -122,13 +122,26 @@ object ActionPhaseSpec extends Specification with Mockito {
     }
 
     "aggregates buys across multiple action results" in {
-      verifyChoiceAndPlay(twoActionHandStack, actionCard, table, oneBuyResult, {
-        verifySecondChoiceThenPlayAction
-      })
+      verifyChoiceAndPlay(twoActionHandStack, actionCard, table, oneBuyResult, verifySecondChoiceThenPlayAction)
     }
 
-    "aggregates treasure across multiple action results" in {
+    val twoTreasureTwoActionResult = ActionResult.noBuys(2, 2, anotherTwoActionHandStack, supply, table)
+    val twoTreasureTwoActionResultWithOneActionStacks = ActionResult.noBuys(2, 2, oneActionHandStacks, supply, table)
 
+    val verifyThirdChoiceThenPlay: () => Unit = () => {
+      player.chooseFrom(oneActionHandStacks.hand.filter(isActionCard(_)), Play, 0, 1) returns List()
+      val actionResult = runAction(twoActionHandStack, table)
+      actionResult.treasure must_==4
+    }
+
+    val verifySecondAndThirdChoicesThenPlay: () => Unit = () => {
+      verifyChoiceAndPlay(anotherTwoActionHandStack, secondActionCard, table, twoTreasureTwoActionResultWithOneActionStacks, verifyThirdChoiceThenPlay)
+    }
+
+
+
+    "aggregates treasure across multiple action results" in {
+      verifyChoiceAndPlay(twoActionHandStack, actionCard, table, twoTreasureTwoActionResult, verifySecondAndThirdChoicesThenPlay)
     }
 
   }
@@ -138,43 +151,51 @@ object ActionPhase {
 
   type Table = Seq[(Stacks, GenericPlayer[Card])]
 
-  def isActionCard(c: Card) : Boolean = c match {
+  private def isActionCard(c: Card) : Boolean = c match {
     case a: ActionCard => true
     case _ => false
   }
 
-  private case class OneAction(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) {
-    def play(actionCard: ActionCard) : ActionResult = {
+  private case class ActionExecution(counts: CountVonCount, stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) {
+
+    def performActions() : ActionResult = counts.actions match {
+      case 0 => done
+      case _ => playAction()
+    }
+
+    private def chosenActionCard = {
+      val actionCards = stacks.hand.filter(isActionCard(_))
+      player.chooseFrom(actionCards, Play, 0, 1).headOption
+    }
+
+    private def done : ActionResult = {
+       ActionResult(counts, stacks, supply, table)
+    }
+
+    private def playAction() : ActionResult = {
+      chosenActionCard match {
+        case Some(a) => a match {
+          case b : ActionCard => executeAction(b)
+          case _ => throw new IllegalStateException("Something that wasn't an action card was chosen from a set of action cards.")
+        }
+        case None => done
+      }
+    }
+
+    private def executeAction(actionCard: ActionCard) : ActionResult = {
+      val actionResult = oneAction(actionCard)
+      ActionPhase(counts + actionResult.count.lessOneAction, actionResult.stacks, player, actionResult.supply, actionResult.table)
+    }
+
+    private def oneAction(actionCard: ActionCard) : ActionResult = {
       table.map(_._2.playerEvent(player, Play, List(actionCard)))
       actionCard.play(stacks.discardCard(actionCard), player, supply, table)
     }
+
   }
 
-  private def performAction(counts: CountVonCount, stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table, actionCard: ActionCard) = {
-     val actionResult = OneAction(stacks, player, supply, table).play(actionCard)
-     ActionPhase(counts + actionResult.count.lessOneAction, actionResult.stacks, player, actionResult.supply, actionResult.table)
+  def apply(counts: CountVonCount, stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
+    ActionExecution(counts, stacks, player, supply, table).performActions
   }
-
-
-  private def chooseActionCard(stacks: Stacks, player: GenericPlayer[Card]): Option[Card] = {
-    val actionCards = stacks.hand.filter(isActionCard(_))
-    player.chooseFrom(actionCards, Play, 0, 1).headOption
-  }
-
-  def apply(counts: CountVonCount, stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = counts.actions match {
-    case 0 => ActionResult(counts, stacks, supply, table)
-    case _ => {
-      val chosen = chooseActionCard(stacks, player)
-      chosen match {
-        case Some(a) => a match {
-          case b : ActionCard => performAction(counts, stacks, player, supply, table, b)
-          case _ => throw new IllegalStateException("Something that wasn't an action card was chosen from a set of action cards.")
-        }
-        case None => ActionResult.noTreasureOrBuysOrActions(stacks, supply, table)
-      }
-    }
-  }
-
-  def doNothing() {}
 
 }
