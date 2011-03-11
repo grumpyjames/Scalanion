@@ -7,10 +7,10 @@ import org.grumpysoft.VictoryCards._
 
 object ActionPhaseSpec extends Specification with Mockito {
 
-  val actionCard = mock[ActionCard]
-  val anotherActionCard = mock[ActionCard]
-  val secondActionCard = mock[ActionCard]
-  val thirdActionCard = mock[ActionCard]
+  val actionCard = mockAs[ActionCard]("action card one")
+  val anotherActionCard = mockAs[ActionCard]("another action card")
+  val secondActionCard = mockAs[ActionCard]("action card two")
+  val thirdActionCard = mockAs[ActionCard]("action card three")
   val player = mock[GenericPlayer[Card]]
   val anotherPlayer = mock[GenericPlayer[Card]]
   val supply = mock[Supply]
@@ -22,16 +22,34 @@ object ActionPhaseSpec extends Specification with Mockito {
 
   val actionCards = List(actionCard, anotherActionCard)
   val allCards = actionCards ++ List(Copper(), Silver(), Estate())
-  
 
-  val stacks = Stacks(List(), allCards, List())
+  val stacks = Stacks.handOnly(allCards)
   val stacksPostAction = stacks.discardCard(actionCard)
 
+  val actionCardsOneAndTwo = List(actionCard, secondActionCard)
+  val twoActionHandStack = Stacks.handOnly(actionCardsOneAndTwo)
+
+  val actionCardsTwoAndThree = List(secondActionCard, thirdActionCard)
+  val anotherTwoActionHandStack =  Stacks.handOnly(actionCardsTwoAndThree)
+  val oneActionHandStacks = Stacks.handOnly(List(thirdActionCard))
+
   val boringResult = ActionResult.noTreasureOrBuysOrActions(stacksPostAction, supply, table)
+
+  val remainingActionInHandResult = ActionResult.noTreasureOrBuysOrActions(oneActionHandStacks, supply, table)
+
+  def isActionCard(c: Card) : Boolean = c match {
+    case ActionCard(_) => true
+    case _ => false
+  }
 
   def expectChoiceAndPlay(actionCards: Seq[Card], actionCard: ActionCard, table: Table, result: ActionResult) : Unit = {
     player.chooseFrom(actionCards, Play, 0, 1) returns List(actionCard)
     actionCard.play(stacksPostAction, player, supply, table) returns result
+  }
+
+  def expectChoiceAndPlay(stacks: Stacks, actionCard: ActionCard, table: Table, result: ActionResult) : Unit = {
+    player.chooseFrom(stacks.hand.filter(isActionCard(_)), Play, 0, 1) returns List(actionCard)
+    actionCard.play(stacks.discardCard(actionCard), player, supply, table) returns result
   }
 
   "the action phase" should {
@@ -63,13 +81,20 @@ object ActionPhaseSpec extends Specification with Mockito {
 
     "gracefully deals with opportunities to play more than one action" in {
       expectChoiceAndPlay(actionCards, actionCard, table, ActionResult.noTreasureOrBuys(2, stacksPostAction, supply, eventOnlyTable))
-      player.chooseFrom(actionCards.filter(_.ne(actionCard)), Play, 0, 1) returns List()
+      val handAfterFirstAction = actionCards.filter(_.ne(actionCard))
+      player.chooseFrom(handAfterFirstAction, Play, 0, 1) returns List()
       val result = ActionPhase(1, stacks, player, supply, table)
-      there was one(player).chooseFrom(actionCards.filter(_.ne(actionCard)), Play, 0, 1)
+      there was one(player).chooseFrom(handAfterFirstAction, Play, 0, 1)
     }
 
     "can play three actions consecutively" in {
-
+      expectChoiceAndPlay(twoActionHandStack, actionCard, table, ActionResult.noTreasureOrBuys(2, anotherTwoActionHandStack, supply, table))
+      expectChoiceAndPlay(anotherTwoActionHandStack, secondActionCard, table, remainingActionInHandResult)
+      player.chooseFrom(List(thirdActionCard), Play, 0, 1) returns List()
+      val result = ActionPhase(1, twoActionHandStack, player, supply, table)
+      there was one(player).chooseFrom(actionCardsOneAndTwo, Play, 0, 1)
+      there was one(player).chooseFrom(actionCardsTwoAndThree, Play, 0, 1)
+      there was one(player).chooseFrom(List(thirdActionCard), Play, 0, 1)
     }
 
     "aggregates buys across multiple action results" in {
@@ -106,7 +131,8 @@ object ActionPhase {
       case Some(a) => a match {
         case b : ActionCard => {
           val actionResult = OneAction(stacks, player, supply, table).play(b)
-          if (actionResult.actions > 0) ActionPhase(actionResult.actions, actionResult.stacks, player, actionResult.supply, actionResult.table)
+          val remainingActions = actionResult.actions + actionCount - 1
+          if (remainingActions > 0) ActionPhase(remainingActions, actionResult.stacks, player, actionResult.supply, actionResult.table)
           else actionResult
         }
         case _ => throw new IllegalStateException("Something that wasn't an action card was chosen from a set of action cards.")
