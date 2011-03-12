@@ -3,7 +3,7 @@ package org.grumpysoft
 import java.io.BufferedReader
 
 class StreamedUserInput(val input: BufferedReader) {
-  def read() : Int = {
+  def read() : Seq[Int] = {
     readNext.dropWhile({ a =>
       a match {
         case None => true
@@ -12,13 +12,13 @@ class StreamedUserInput(val input: BufferedReader) {
     }).head.get
   }
 
-  private def readNext() : Stream[Option[Int]] = {
+  private def readNext() : Stream[Option[List[Int]]] = {
     Stream.cons(readOne(), readNext())
   }
 
-  private def readOne() : Option[Int] = {
+  private def readOne() : Option[List[Int]] = {
     try {
-      Some(Integer.parseInt(input.readLine))
+      Some(input.readLine.split(",").toList.map(_.trim).map(Integer.parseInt(_)))
     } catch {
       case e: NumberFormatException => None
       case unknown => throw unknown
