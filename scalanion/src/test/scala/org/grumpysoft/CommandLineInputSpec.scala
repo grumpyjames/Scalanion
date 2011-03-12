@@ -5,7 +5,7 @@ import java.io.ByteArrayInputStream
 import java.io.InputStreamReader
 import org.specs.Specification
 
-class CommandLineInputSpec extends Specification {
+object CommandLineInputSpec extends Specification {
   "a streamed user input, when asked for an int" should {
     "attempt to read, line by line, from the given stream, until a reasonable input is received" in {
       val bytes = "aaga\r\nfsdfnlkn\n3\r\n".getBytes
