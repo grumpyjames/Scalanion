@@ -6,10 +6,10 @@ class StreamedUserInput(val input: BufferedReader) {
   def read() : Int = {
     readNext.dropWhile({ a =>
       a match {
-	case None => true
-	case Some(n) => false
+        case None => true
+        case Some(n) => false
       }
-		      }).head.get
+    }).head.get
   }
 
   private def readNext() : Stream[Option[Int]] = {
@@ -21,7 +21,7 @@ class StreamedUserInput(val input: BufferedReader) {
       Some(Integer.parseInt(input.readLine))
     } catch {
       case e: NumberFormatException => None
-      case unknown => throw unknown 
+      case unknown => throw unknown
     }
   }
 }
