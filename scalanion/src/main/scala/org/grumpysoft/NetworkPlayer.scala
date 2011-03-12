@@ -4,8 +4,8 @@ import scalaj.collection.Imports._
 import java.io.{OutputStream, InputStream}
 import org.grumpysoft.Scalanion.{ServerToClient, Hand, Query => ProtobufQuery, ChooseFrom, ChooseForOtherPlayer => ProtobufChooseForOtherPlayer, Answer, Choices, Event}
 
-case class NetworkPlayer(private val input: InputStream, private val output: OutputStream) extends GenericPlayer[Int] {
-  def describe() = "Network Player"
+case class NetworkPlayer(private val name: String, private val input: InputStream, private val output: OutputStream) extends GenericPlayer[Int] {
+  def describe() = name
 
   def playerEvent(player: SelfDescribing, action: Verb, cards: Seq[Card]) = {
     send(Event.newBuilder.setPlayer(player.describe).setVerb(action.present).addAllCard(cards.map(_.describe).asJava).build)

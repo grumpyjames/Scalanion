@@ -44,3 +44,7 @@ message ServerToClient {
   optional Hand hand = 3;
   optional Event event = 4;
 }
+
+message Introduction {
+  required string playerName = 1;
+}
