@@ -12,6 +12,8 @@ class Market extends ActionCard(5) {
   }
 
   def describe() = "Market"
+
+  protected def copyThyself() = Market()
 }
 
 

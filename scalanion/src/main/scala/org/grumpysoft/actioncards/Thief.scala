@@ -15,6 +15,8 @@ class Thief extends ActionCard(4) {
   }
 
   def describe() = "Thief"
+
+  protected def copyThyself() = Thief()
 }
 
 case class ThiefResult(stacks: Stacks, card: Option[Card]) {}

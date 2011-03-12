@@ -17,4 +17,6 @@ class Remodel extends ActionCard(4) with TransmittableChoices {
     ActionResult.noTreasureOrBuysOrActions(stacks.trash(toRemodel)._2.gain(toRemodelTo), supply.buy(toRemodelTo.head), table)
   }
   def describe() : String = { "Remodel" }
+
+  protected def copyThyself() = Remodel()
 }

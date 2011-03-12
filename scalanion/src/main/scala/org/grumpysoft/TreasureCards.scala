@@ -16,14 +16,17 @@ object TreasureCards {
   
   class Copper extends TreasureCard(0,1) {
     def describe() : String = { "Copper" }
+    protected def copyThyself() = Copper()
   }
 
   class Silver extends TreasureCard(3,2) {
     def describe() : String = { "Silver" }
+    protected def copyThyself() = Silver()
   }
 
   class Gold extends TreasureCard(6,3) {
-      def describe() : String = { "Gold" }
+    def describe() : String = { "Gold" }
+    protected def copyThyself() = Gold()
   }
 
 }

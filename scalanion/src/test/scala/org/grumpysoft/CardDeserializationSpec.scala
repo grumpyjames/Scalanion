@@ -23,8 +23,8 @@ object CardDeserializationSpec extends Specification {
   }
 
   "deserialized cards of the same time" should {
-    "be the same instance" in {
-      fromWire("Copper") mustEq(fromWire("Copper"))
+    "not be the same instance" in {
+      fromWire("Copper") mustNotEq(fromWire("Copper"))
     }
   }
 

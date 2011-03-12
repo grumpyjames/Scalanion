@@ -16,6 +16,8 @@ class Chapel extends ActionCard(2) with TransmittableChoices {
   private def anyEqTo(cards: Seq[Card], candidate: Card): Boolean = {
     !cards.find(b => b.eq(candidate)).isDefined
   }
+
+  protected def copyThyself() = Chapel()
 }
 
 

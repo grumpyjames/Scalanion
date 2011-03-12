@@ -3,8 +3,9 @@ package org.grumpysoft
 sealed abstract class Card(cost: Int) extends SelfDescribing {
   def price() : Int = { cost }
   override def toString() : String = { describe() }
+  protected def copyThyself() : Card;
   def unapply(wireFormat: String) : Option[Card] = {
-    if (this.describe == wireFormat) Some(this)
+    if (this.describe == wireFormat) Some(this.copyThyself)
     else None
   }
 }
@@ -29,9 +30,11 @@ object ActionResult {
   def noTreasureOrActions(buys: Int, stacks: Stacks, supply: Supply, table: Seq[(Stacks, GenericPlayer[Card])]) : ActionResult = {
     ActionResult(CountVonCount(0, buys, 0), stacks, supply, table)
   }
+
   def noBuysOrActions(treasure: Int, stacks: Stacks, supply: Supply, table: Seq[(Stacks, GenericPlayer[Card])]) : ActionResult = {
     ActionResult(CountVonCount(treasure, 0, 0), stacks, supply, table)
   }
+
   def noTreasureOrBuysOrActions(stacks: Stacks, supply: Supply, table: Seq[(Stacks, GenericPlayer[Card])]) : ActionResult = {
     ActionResult(CountVonCount(0, 0, 0), stacks, supply, table)
   }
@@ -75,4 +78,5 @@ abstract case class VictoryCard(cost: Int, victoryPoints: Int) extends Card(cost
 
 case class Curse() extends Card(0) {
   def describe() = "Curse"
+  protected def copyThyself() = Curse()
 }

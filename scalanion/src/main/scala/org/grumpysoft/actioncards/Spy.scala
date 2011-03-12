@@ -38,6 +38,7 @@ class Spy extends ActionCard(4) with TransmittableChoices {
     (stacks, victim)
   }
 
+  protected def copyThyself() = Spy()
 }
 
 

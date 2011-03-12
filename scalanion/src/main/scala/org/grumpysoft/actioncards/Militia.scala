@@ -31,6 +31,8 @@ class Militia extends ActionCard(4) with TransmittableChoices {
   }
 
   def describe() : String = { "Militia" }
+
+  protected def copyThyself() = Militia()
 }
 
 

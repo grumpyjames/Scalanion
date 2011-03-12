@@ -2,7 +2,7 @@ package org.grumpysoft
 
 import java.io.BufferedReader
 
-class StreamedUserInput(val input: BufferedReader) {
+class StreamedUserInput(val input: BufferedReader) extends UserInput {
   def read() : Seq[Int] = {
     readNext.dropWhile({ a =>
       a match {

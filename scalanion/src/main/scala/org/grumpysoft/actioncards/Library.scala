@@ -30,6 +30,8 @@ class Library extends ActionCard(2) {
     case ac: ActionCard => true
     case _ => false
   }
+
+  protected def copyThyself() = Library()
 }
 
 

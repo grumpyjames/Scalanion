@@ -21,6 +21,8 @@ class Chancellor extends ActionCard(3) {
   def describe() : String = {
     "Chancellor"
   }
+
+  protected def copyThyself() = Chancellor()
 }
 
 

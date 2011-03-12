@@ -12,4 +12,6 @@ class CouncilRoom extends ActionCard(5) {
   }
 
   def describe() = "Council Room"
+
+  protected def copyThyself() = CouncilRoom()
 }

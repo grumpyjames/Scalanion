@@ -33,6 +33,8 @@ class Witch extends ActionCard(5) {
   }
 
   def describe() : String = { "Witch" }
+
+  protected def copyThyself() = Witch()
 }
 
 

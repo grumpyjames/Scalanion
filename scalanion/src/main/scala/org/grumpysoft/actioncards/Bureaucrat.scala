@@ -45,6 +45,8 @@ class Bureaucrat extends ActionCard(4) with TransmittableChoices {
   }
 
   def describe() = { "Bureaucrat" }
+
+  protected def copyThyself() = Bureaucrat()
 }
 
 
