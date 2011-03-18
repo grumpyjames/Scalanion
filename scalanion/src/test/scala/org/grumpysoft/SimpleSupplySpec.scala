@@ -3,6 +3,8 @@ package org.grumpysoft
 import org.specs.Specification
 
 import TreasureCards._
+import VictoryCards._
+import org.specs.matcher.Matcher
 
 object SimpleSupplySpec extends Specification {
 
@@ -15,6 +17,43 @@ object SimpleSupplySpec extends Specification {
       val supply = SimpleSupply(List(coppers, silvers, oneGold))
       val newSupply = supply.buy(Gold())
       newSupply.availableCards(11) must_==List(Copper(),Silver())
+    }
+
+    "know itself" in {
+      val supply = SimpleSupply(List(coppers, silvers))
+      supply.available(Copper()) must_==true
+      supply.available(Silver()) must_==true
+      supply.available(Gold()) must_==false
+    }
+  }
+
+  def buy(count: Int, card: Card, supply: Supply) : Supply = {
+    var result = supply
+    Range(0, count).foreach{ a => result = result.buy(card) }
+    result
+  }
+
+  def contain(count: Int, card: Card)(implicit supply: Supply) : Unit = {
+    supply.available(card) must_==true
+    val depletedSupply = buy(count, card, supply)
+    depletedSupply.available(card) must_==false
+  }
+
+  case class beSupplyContaining(count: Int, card: Card) extends Matcher[Supply] {
+    def apply(a: => Supply) = {
+      (a.available(card) && !depleted(a).available(card), "matched", "did not match")
+    }
+
+    def depleted(a : Supply) : Supply = {
+      buy(count, card, a)
+    }
+  }
+
+  "two player supply" should {
+    "contain eight provinces" in {
+      val supply = Supplies.forTwo()
+      println(supply)
+      supply must beSupplyContaining(8, Province())
     }
   }
       

@@ -25,10 +25,13 @@ object GameSpec extends Specification {
 
   "a game, when started with a single player" should {
     val player = new SinkPlayer
+    val game = new Game(List(player))
+    game.takeTurn.takeTurn
     "after two turns, updated the player with 7 coppers and 3 estates" in {
-      val game = new Game(List(player))
-      game.takeTurn.takeTurn
       checkStandardHand(player)
+    }
+    "have passed the correct parameters to the buyphase" in {
+
     }
   }
 
