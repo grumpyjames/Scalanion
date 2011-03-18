@@ -18,6 +18,10 @@ object ActionResult {
     ActionResult(CountVonCount(0, buys, actions), stacks, supply, table)
   }
 
+  def noActions(treasure: Int, buys: Int, stacks: Stacks, supply: Supply, table: Seq[(Stacks, GenericPlayer[Card])]) : ActionResult = {
+    ActionResult(CountVonCount(treasure, buys, 0), stacks, supply, table)
+  }
+
   def noTreasureOrBuys(actions: Int, stacks: Stacks, supply: Supply, table: Seq[(Stacks, GenericPlayer[Card])]) : ActionResult = {
     ActionResult(CountVonCount(0, 0, actions), stacks, supply, table)
   }
@@ -38,6 +42,10 @@ case class ActionResult(count: CountVonCount, stacks: Stacks, supply: Supply, ta
   def buys = count.buys
   def actions = count.actions
   def treasure = count.treasure
+
+  def add(otherCount: CountVonCount) : ActionResult = {
+    ActionResult(this.count + otherCount, stacks, supply, table)
+  }
 }
 
 case class CountVonCount(treasure: Int, buys: Int, actions: Int) {
