@@ -1,15 +1,12 @@
 package org.grumpysoft
 
+import actioncards.CardFilters
+
 object ActionPhase {
 
   type Table = Seq[(Stacks, GenericPlayer[Card])]
 
-  private def isActionCard(c: Card) : Boolean = c match {
-    case a: ActionCard => true
-    case _ => false
-  }
-
-  private case class ActionExecution(counts: CountVonCount, stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) {
+  private case class ActionExecution(counts: CountVonCount, stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) extends CardFilters {
 
     def performActions() : ActionResult = counts.actions match {
       case 0 => done

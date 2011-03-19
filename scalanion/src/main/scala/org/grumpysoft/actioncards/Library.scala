@@ -6,7 +6,7 @@ object Library {
   def apply() : Library = { new Library }
 }
 
-class Library extends ActionCard(2) {
+class Library extends ActionCard(2) with CardFilters {
   def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
     ActionResult.noTreasureOrBuysOrActions(goUntilSeven(stacks, player, table.map(_._2)), supply, table)
   }
@@ -15,20 +15,15 @@ class Library extends ActionCard(2) {
     "Library"
   }
 
-  private def goUntilSeven(stacks: Stacks, player: GenericPlayer[Card], otherPlayers: Seq[GenericPlayer[Card]]) : Stacks = {
-    if (stacks.hand.length == 7) {
-      stacks
-    } else {
+  private def goUntilSeven(stacks: Stacks, player: GenericPlayer[Card], otherPlayers: Seq[GenericPlayer[Card]])
+  : Stacks = stacks.hand.length match {
+    case 7 => stacks
+    case _ => {
       val numberToTake: Int = 7 - stacks.hand.length
       val (actions, others) = stacks.deck.take(numberToTake).partition(isActionCard(_))
       otherPlayers.foreach(_.playerEvent(player, Discard, actions))
       goUntilSeven(Stacks(stacks.deck.drop(numberToTake), stacks.hand ++ others, stacks.discard ++ actions), player, otherPlayers)
     }
-  }
-
-  private def isActionCard(card: Card) : Boolean = card match {
-    case ac: ActionCard => true
-    case _ => false
   }
 
   protected def copyThyself() = Library()

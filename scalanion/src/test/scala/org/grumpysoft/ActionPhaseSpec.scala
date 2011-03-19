@@ -1,11 +1,12 @@
 package org.grumpysoft
 
+import actioncards.CardFilters
 import org.specs.mock.Mockito
 import org.specs.Specification
 import org.grumpysoft.TreasureCards._
 import org.grumpysoft.VictoryCards._
 
-object ActionPhaseSpec extends Specification with Mockito {
+object ActionPhaseSpec extends Specification with Mockito with CardFilters {
 
   val actionCard = mockAs[ActionCard]("action card one")
   val anotherActionCard = mockAs[ActionCard]("another action card")
@@ -36,11 +37,6 @@ object ActionPhaseSpec extends Specification with Mockito {
   val boringResult = ActionResult.noTreasureOrBuysOrActions(stacksPostAction, supply, table)
 
   val remainingActionInHandResult = ActionResult.noTreasureOrBuysOrActions(oneActionHandStacks, supply, table)
-
-  def isActionCard(c: Card) : Boolean = c match {
-    case ActionCard(_) => true
-    case _ => false
-  }
 
   def expectChoiceAndPlay(actionCards: Seq[Card], actionCard: ActionCard, table: Table, result: ActionResult) : Unit = {
     player.chooseFrom(actionCards, Play, 0, 1) returns List(actionCard)
