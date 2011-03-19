@@ -11,7 +11,9 @@ object Game {
   }
 
   def apply(players: List[GenericPlayer[Card]], supply: Supply, buyPhase: BuyPhaseFn) : Game = {
-    Game(players, makeStacks(players.size), supply, buyPhase)
+    val allStacks = makeStacks(players.size)
+    players.zip(allStacks).foreach( ps => ps._1.newHand(ps._2.hand))
+    Game(players, allStacks, supply, buyPhase)
   }
 }
 
@@ -20,17 +22,32 @@ trait BuyPhaseFn {
 }
 
 case class Game(players: List[GenericPlayer[Card]],
-                allStacks:List[Stacks],
+                allStacks: List[Stacks],
                 supply: Supply,
                 private val buyPhase: BuyPhaseFn)  {
 
+
+
+  private case class InnerGame(currentPlayer: GenericPlayer[Card],
+                               currentStacks: Stacks,
+                               otherPlayers: List[GenericPlayer[Card]],
+                               otherStacks: List[Stacks]) {
+    private def doBuyPhase() : (Supply, Seq[Card]) = {
+      val (newSupply, boughtCards) = buyPhase.doBuyPhase(1, Trader.valueHand(currentStacks.hand), currentPlayer, supply)
+      if (!boughtCards.isEmpty) otherPlayers.foreach(_.playerEvent(currentPlayer, Gain, boughtCards))
+      (newSupply, boughtCards)
+    }
+
+    def takeTurn() : Game = {
+      val (newSupply, boughtCards) = doBuyPhase()
+      val finalStacks = currentStacks.gain(boughtCards).endTurn
+      currentPlayer.newHand(finalStacks.hand)
+      Game(otherPlayers ++ List(currentPlayer), otherStacks ++ List(finalStacks), newSupply, buyPhase)
+    }
+  }
+
   def takeTurn() : Game = {
-    val currentStacks = allStacks.head
-    val currentPlayer = players.head
-    currentPlayer.newHand(currentStacks.hand)
-    val buyResult = buyPhase.doBuyPhase(1, Trader.valueHand(currentStacks.hand), currentPlayer, supply)
-    if (!buyResult._2.isEmpty) players.tail.foreach(_.playerEvent(currentPlayer, Gain, buyResult._2))
-    new Game(players.drop(1) ++ List(currentPlayer), allStacks.drop(1) ++ List(currentStacks.gain(buyResult._2).endTurn), buyResult._1, buyPhase)
+    InnerGame(players.head, allStacks.head, players.tail, allStacks.tail).takeTurn
   }
 
   override def toString() : String = {

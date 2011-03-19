@@ -48,12 +48,10 @@ object GameSpec extends Specification with Mockito {
   val defaultBuyResult = (theSupply, Nil)
 
   "a game, when started with a single player" should {
-
-
     val player = new SinkPlayer
     val game = makeGame(List(player))
-    game.takeTurn.takeTurn
-    "after two turns, updated the player with 7 coppers and 3 estates" in {
+    game.takeTurn
+    "after a turn, updated the player with 7 coppers and 3 estates" in {
       checkStandardHand(player)
     }
   }
@@ -61,9 +59,9 @@ object GameSpec extends Specification with Mockito {
   val players = List.fill(4)(new SinkPlayer())
 
   "a game, when given four players" should {
-    "after eight turns, have given seven coppers and estates to each" in {
+    "after a turn each, have given seven coppers and estates to each" in {
       var game = makeGame(players)
-      0.until(8).foreach(a => game = game.takeTurn)
+      0.until(4).foreach(a => game = game.takeTurn)
       players.foreach(checkStandardHand(_))
     }
   }
