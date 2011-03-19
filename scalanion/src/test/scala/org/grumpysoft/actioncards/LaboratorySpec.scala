@@ -26,4 +26,6 @@ class Laboratory extends ActionCard(5) {
   }
 
   def describe() = "Laboratory"
+
+  protected def copyThyself() = Laboratory()
 }

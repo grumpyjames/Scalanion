@@ -8,15 +8,13 @@ object Game {
     )
     stacksBuilder
   }
+
+  def apply(players: List[GenericPlayer[Card]]) : Game = {
+    Game(players, makeStacks(players.size))
+  }
 }
 
-import Game._
-
-class Game(val players: List[GenericPlayer[Card]], private val allStacks:List[Stacks])  {
-
-  def this(players: List[GenericPlayer[Card]]) = {
-    this(players, makeStacks(players.size))
-  }
+case class Game(private val players: List[GenericPlayer[Card]], private val allStacks:List[Stacks])  {
 
   def takeTurn() : Game = {
     val currentStacks = allStacks.head

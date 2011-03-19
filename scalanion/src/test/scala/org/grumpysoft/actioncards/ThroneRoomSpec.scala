@@ -74,4 +74,6 @@ class ThroneRoom extends ActionCard(4) with TransmittableChoices {
   }
 
   def describe() = "ThroneRoom"
+
+  protected def copyThyself() = ThroneRoom()
 }
