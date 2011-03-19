@@ -68,6 +68,7 @@ case class CountVonCount(treasure: Int, buys: Int, actions: Int) {
 
 object CountVonCount {
   def oneAction() = CountVonCount(0,0,1)
+  def zero() = CountVonCount(0,0,0)
 }
 
 

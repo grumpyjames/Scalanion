@@ -1,10 +1,5 @@
 package org.grumpysoft
 
-import org.specs.mock.Mockito
-import org.specs.Specification
-import org.grumpysoft.TreasureCards._
-import org.grumpysoft.VictoryCards._
-
 object ActionPhase {
 
   type Table = Seq[(Stacks, GenericPlayer[Card])]
@@ -54,6 +49,10 @@ object ActionPhase {
 
   def apply(counts: CountVonCount, stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
     ActionExecution(counts, stacks, player, supply, table).performActions
+  }
+
+  def doActionPhase(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
+    ActionExecution(CountVonCount.zero(), stacks, player, supply, table).performActions
   }
 
 }

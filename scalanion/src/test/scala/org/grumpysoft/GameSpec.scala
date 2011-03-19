@@ -4,6 +4,7 @@ import org.specs.Specification
 import org.specs.mock.Mockito
 
 import org.grumpysoft.TreasureCards._
+import org.grumpysoft.actioncards.Remodel
 
 object GameSpec extends Specification with Mockito {
 
@@ -30,24 +31,32 @@ object GameSpec extends Specification with Mockito {
 
   val theSupply = mock[Supply]
   val theBuyPhase = mock[BuyPhaseFn]
+  val theActionPhase = mock[ActionPhaseFn]
 
   def checkStandardHand(player: SinkPlayer) : Unit = {
     player.hands.flatten.groupBy(_.describe).map(a => (a._1, a._2.size)).toList.sortBy(_._2) must_==List(("Estate", 3),("Copper",7))
   }
 
-  case class BoringBuyPhase() extends BuyPhaseFn{
+  case class BoringBuyPhase() extends BuyPhaseFn {
     def doBuyPhase(buys: Int, treasure: Int, player: GenericPlayer[Card], supply: Supply) = {
       (supply, Nil)
     }
   }
 
+  case class BoringActionPhase() extends ActionPhaseFn {
+    def doActionPhase(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
+      ActionResult.noTreasureOrBuysOrActions(stacks, supply, table)
+    }
+  }
+
   def makeGame(players: List[GenericPlayer[Card]]) : Game = {
-    Game(players, theSupply, BoringBuyPhase())
+    Game(players, theSupply, BoringBuyPhase(), BoringActionPhase())
   }
 
   val defaultBuyResult = (theSupply, Nil)
 
   "a game, when started with a single player" should {
+    theSupply.gameOver returns false
     val player = new SinkPlayer
     val game = makeGame(List(player))
     game.takeTurn
@@ -59,6 +68,7 @@ object GameSpec extends Specification with Mockito {
   val players = List.fill(4)(new SinkPlayer())
 
   "a game, when given four players" should {
+    theSupply.gameOver returns false
     "after a turn each, have given seven coppers and estates to each" in {
       var game = makeGame(players)
       0.until(4).foreach(a => game = game.takeTurn)
@@ -77,9 +87,10 @@ object GameSpec extends Specification with Mockito {
   val secondBuyResult = (postBuySupply, Nil)
 
   "a game, when given some canned stacks" should {
+    theSupply.gameOver returns false
     theBuyPhase.doBuyPhase(1, 3, players.head, theSupply) returns buyResult
     theBuyPhase.doBuyPhase(1, 0, players.tail.head, postBuySupply) returns secondBuyResult
-    val game = Game(players, cannedStacks, theSupply, theBuyPhase)
+    val game = Game(players, cannedStacks, theSupply, theBuyPhase, BoringActionPhase())
     val afterOneTurn = game.takeTurn
     val afterTwoTurns = afterOneTurn.takeTurn
 
@@ -94,6 +105,55 @@ object GameSpec extends Specification with Mockito {
 
     "transmit buy events to the other players" in {
       players.tail.foreach(player => player.events must_==List((players.head, Gain, List(Silver()))))
+    }
+  }
+
+  val stacksOne = cannedStacks.head
+  val playerOne = players.head
+  val table = cannedStacks.tail.zip(players.tail)
+  val postActionSupply = mock[Supply]
+  val reversedTableResult = ActionResult.noBuys(1, 2, stacksOne, postActionSupply, table.reverse)
+  val buyAfterActionResult = (postBuySupply, List(Remodel()))
+
+  "a game, when given a meaningful action phase" should {
+    theSupply.gameOver returns false
+    theActionPhase.doActionPhase(stacksOne, playerOne, theSupply, table) returns reversedTableResult
+    theBuyPhase.doBuyPhase(1, 1 + 3, playerOne, postActionSupply) returns buyAfterActionResult
+    val afterOneTurn = Game(players, cannedStacks, theSupply, theBuyPhase, theActionPhase).takeTurn
+
+    "correctly delegate to it once per turn" in {
+      there was one(theActionPhase).doActionPhase(stacksOne, playerOne, theSupply, table)
+      there was one(theBuyPhase).doBuyPhase(1, 1 + 3, playerOne, postActionSupply)
+      afterOneTurn.allStacks.last.discard must_==Remodel() :: stacksOne.hand
+      afterOneTurn.supply must_==postBuySupply
+    }
+  }
+
+  case class ThrowingBuyPhaseFn() extends BuyPhaseFn {
+    def doBuyPhase(buys: Int, treasure: Int, player: GenericPlayer[Card], supply: Supply) : (Supply, Seq[Card]) = {
+       throw new RuntimeException("unexpected invocation of action phase: game is over!")
+    }
+  }
+
+  case class ThrowingActionPhaseFn() extends ActionPhaseFn {
+    def doActionPhase(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
+      throw new RuntimeException("unexpected invocation of action phase: game is over!")
+    }
+  }
+
+  "a game" should {
+    "know when it is over, and not bother with either phase" in {
+      theSupply.gameOver returns true
+      val endOfGame = Game(players, cannedStacks, theSupply, ThrowingBuyPhaseFn(), ThrowingActionPhaseFn()).takeTurn
+      endOfGame.isOver must_==true
+    }
+
+    "not start the buy phase if the action phase finishes the game" in {
+      theSupply.gameOver returns false
+      postActionSupply.gameOver returns true
+      theActionPhase.doActionPhase(stacksOne, playerOne, theSupply, table) returns reversedTableResult
+      val endOfGame = Game(players, cannedStacks, theSupply, ThrowingBuyPhaseFn(), theActionPhase).takeTurn
+      endOfGame.isOver must_==true
     }
   }
 

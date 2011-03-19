@@ -6,6 +6,7 @@ trait Supply {
   def available(card: Card) : Boolean;
   def availableCards(treasure: Int) : Seq[Card];
   def buy(card: Card) : Supply;
+  def gameOver() : Boolean;
 }
 
 case class SimpleSupply(choices : List[List[Card]]) extends Supply {
@@ -29,6 +30,9 @@ case class SimpleSupply(choices : List[List[Card]]) extends Supply {
       case a => Some(String.valueOf(a) + " " + cards.head.describe)
     }).filter(_.isDefined).map(_.get).mkString(",")
   }
+
+  // FIXME: needs test
+  def gameOver() = false
 }
 
 object Supplies {

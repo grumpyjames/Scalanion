@@ -51,6 +51,8 @@ object WitchSpec extends ActionCardSpecBase {
       def available(card: Card) : Boolean = {
         maybeCard.isDefined && maybeCard.get == card
       }
+
+      def gameOver() = false
     }
 
     "only add curses if they are available in the supply" in {
