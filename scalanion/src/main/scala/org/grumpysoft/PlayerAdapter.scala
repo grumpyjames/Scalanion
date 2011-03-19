@@ -22,4 +22,7 @@ class PlayerAdapter[U](val adaptTo: GenericPlayer[U], lift: ((Seq[Card],Seq[U]) 
     adaptTo.describe()
   }
 
+  def gameEvent(event: GameEvent) : Unit = {
+    adaptTo.gameEvent(event)
+  }
 }

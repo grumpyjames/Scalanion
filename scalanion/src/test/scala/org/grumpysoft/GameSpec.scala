@@ -27,6 +27,10 @@ object GameSpec extends Specification with Mockito {
 
     def describe() : String = { "test player" }
     def query(question: Query) = true
+
+    def gameEvent(event: GameEvent) : Unit = {
+      /* just ignore it */
+    }
   }
 
   val theSupply = mock[Supply]

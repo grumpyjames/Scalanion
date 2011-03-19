@@ -18,6 +18,7 @@ object RichPlayerSpec extends Specification {
     def newHand(hand: Seq[Card]) : Unit = {}
     def playerEvent(player: SelfDescribing, action: Verb, cards: Seq[Card]) : Unit = {}
     def describe() : String = {""}
+    def gameEvent(event: GameEvent) : Unit = {}
   }
 
   "when prompted, rich player" should {

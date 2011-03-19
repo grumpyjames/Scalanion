@@ -38,11 +38,30 @@ message Event {
   repeated string card = 3;
 }
 
+message Start {
+  required int64 startTime = 1;
+}
+
+message GameOver {
+  repeated PlayerWithScore playerWithScore = 1;
+}
+
+message PlayerWithScore {
+  required string playerName;
+  required int32 score;
+}
+
+message GameEvent {
+  optional Start start = 1;
+  optional GameOver gameOver = 2;
+}
+
 message ServerToClient {
   optional ChooseFrom chooseFrom = 1;
   optional Query query = 2;
   optional Hand hand = 3;
   optional Event event = 4;
+  optional GameEvent gameEvent = 5;
 }
 
 message Introduction {

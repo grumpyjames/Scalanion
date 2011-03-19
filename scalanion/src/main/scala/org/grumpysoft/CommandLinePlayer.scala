@@ -53,6 +53,8 @@ class CommandLinePlayer(private val name: String, private val userInterface: Pro
     //TODO: implement
     true
   }
+
+  def gameEvent(event: GameEvent) = { /* just ignore it, it'll go away in the end */ }
 }
 
 private case class QuickDescription(val desc: String) extends SelfDescribing {

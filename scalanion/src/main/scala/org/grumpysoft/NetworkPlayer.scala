@@ -59,5 +59,9 @@ case class NetworkPlayer(private val name: String, private val input: InputStrea
   private def send(chooseFrom: ChooseFrom) : Unit = {
     ServerToClient.newBuilder.setChooseFrom(chooseFrom).build.writeDelimitedTo(output)
   }
+
+  def gameEvent(event: GameEvent) : Unit = {
+    // TODO: implement!
+  }
 }
 
