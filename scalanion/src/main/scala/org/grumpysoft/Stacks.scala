@@ -24,7 +24,7 @@ case class Stacks(deck: List[Card], hand: List[Card], discard: List[Card]) {
   }
 
   def gain(cards: Seq[Card]) : Stacks = {
-    Stacks(deck, hand, discard ++ cards)
+    Stacks(deck, hand, cards.toList ++ discard)
   }
 
   def replace(cards: Seq[Card]) : Stacks = {
