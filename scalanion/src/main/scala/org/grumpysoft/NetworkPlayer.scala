@@ -2,7 +2,7 @@ package org.grumpysoft
 
 import scalaj.collection.Imports._
 import java.io.{OutputStream, InputStream}
-import org.grumpysoft.Scalanion.{ServerToClient, Hand, Query => ProtobufQuery, ChooseFrom, ChooseForOtherPlayer => ProtobufChooseForOtherPlayer, Answer, Choices, Event}
+import org.grumpysoft.Scalanion.{ServerToClient, Hand, Query => ProtobufQuery, ChooseFrom, ChooseForOtherPlayer => ProtobufChooseForOtherPlayer, GameEvent => PBGameEvent, Answer, Choices, Event, Start => PBStart, GameOver, PlayerWithScore}
 
 case class NetworkPlayer(private val name: String, private val input: InputStream, private val output: OutputStream) extends GenericPlayer[Int] {
   def describe() = name
@@ -60,8 +60,20 @@ case class NetworkPlayer(private val name: String, private val input: InputStrea
     ServerToClient.newBuilder.setChooseFrom(chooseFrom).build.writeDelimitedTo(output)
   }
 
-  def gameEvent(event: GameEvent) : Unit = {
-    // TODO: implement!
+  private def send(gameEvent: PBGameEvent) : Unit = {
+    ServerToClient.newBuilder.setGameEvent(gameEvent).build.writeDelimitedTo(output)
+  }
+
+  private def buildGameOver(leaderboard: Seq[(SelfDescribing, Int)]) : GameOver = {
+    val playerWithScores = leaderboard.map(pws =>
+      PlayerWithScore.newBuilder.setPlayerName(pws._1.describe).setScore(pws._2).build
+					 ).asJava
+    GameOver.newBuilder.addAllPlayerWithScore(playerWithScores).build      
+  }
+
+  def gameEvent(event: GameEvent) : Unit = event match {
+    case Start(startTime) =>  send(PBGameEvent.newBuilder.setStart(PBStart.newBuilder.setStartTime(startTime)).build)
+    case End(leaderBoard) => send(PBGameEvent.newBuilder.setGameOver(buildGameOver(leaderBoard)).build)
   }
 }
 

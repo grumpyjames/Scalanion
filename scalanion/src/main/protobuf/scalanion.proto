@@ -47,8 +47,8 @@ message GameOver {
 }
 
 message PlayerWithScore {
-  required string playerName;
-  required int32 score;
+  required string playerName = 1;
+  required int32 score = 2;
 }
 
 message GameEvent {

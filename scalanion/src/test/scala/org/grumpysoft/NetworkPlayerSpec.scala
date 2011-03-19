@@ -77,6 +77,7 @@ object NetworkPlayerSpec extends Specification with Mockito {
       transmitted.getCardList.asScala must_==List("Copper", "Silver", "Copper")
     }
 
+    
     "transmit player events" in {
       val networkPlayer = makeNetworkPlayer(noInput, output)
       mockOtherPlayer.describe returns "another player"
@@ -85,6 +86,24 @@ object NetworkPlayerSpec extends Specification with Mockito {
       transmitted.getVerb() must_==Discard.present
       transmitted.getPlayer() must_=="another player"
       transmitted.getCardList.asScala must_==List("Copper", "Silver")
+    }
+
+    "transmit a start event" in {
+      val networkPlayer = makeNetworkPlayer(noInput, output)
+      val currentTime = System.currentTimeMillis()
+      networkPlayer.gameEvent(Start(currentTime))
+      val transmitted = ServerToClient.parseDelimitedFrom(toInput(output)).getGameEvent.getStart
+      transmitted.getStartTime must_==currentTime
+    }
+
+    "transmit a game over event" in {
+      val networkPlayer = makeNetworkPlayer(noInput, output)
+      val leaderBoard = List((StringDescription("foo"), 12), (StringDescription("bar"), 15))
+      networkPlayer.gameEvent(End(leaderBoard))
+      val transmitted = ServerToClient.parseDelimitedFrom(toInput(output)).getGameEvent.getGameOver
+      val playerList = transmitted.getPlayerWithScoreList.asScala
+      playerList.map(_.getPlayerName) must_==leaderBoard.map(_._1.describe)
+      playerList.map(_.getScore) must_==leaderBoard.map(_._2)      
     }
 
     // FIXME: need some tests that show behaviour with bad streams, protobuf occasionally spits out very poor error messages.
