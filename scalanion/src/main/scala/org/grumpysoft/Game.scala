@@ -75,6 +75,10 @@ case class Game(players: List[GenericPlayer[Card]],
     supply.gameOver
   }
 
+  def leaderboard() : List[(SelfDescribing, Int)] = {
+    players.zip(allStacks.map(Scorer.scoreStacks(_))).sortBy(-1 * _._2)
+  }
+
   override def toString() : String = {
     players.zip(allStacks).map(a => a._1.describe + " " + a._2.toString).foldLeft("game: ")(_ + "\n" + _)
   }

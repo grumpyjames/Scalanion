@@ -11,7 +11,7 @@ object Trader {
   }
 }
 
-object Score {
+object Scorer {
   def scoreStacks(stacks: Stacks) : Int = {
     val allCards = stacks.deck ++ stacks.hand ++ stacks.discard
     allCards.map(card => card match {

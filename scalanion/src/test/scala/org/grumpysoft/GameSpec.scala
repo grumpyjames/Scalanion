@@ -4,6 +4,7 @@ import org.specs.Specification
 import org.specs.mock.Mockito
 
 import org.grumpysoft.TreasureCards._
+import org.grumpysoft.VictoryCards._
 import org.grumpysoft.actioncards.Remodel
 
 object GameSpec extends Specification with Mockito {
@@ -158,6 +159,24 @@ object GameSpec extends Specification with Mockito {
       theActionPhase.doActionPhase(stacksOne, playerOne, theSupply, table) returns reversedTableResult
       val endOfGame = Game(players, cannedStacks, theSupply, ThrowingBuyPhaseFn(), theActionPhase).takeTurn
       endOfGame.isOver must_==true
+    }
+
+    val cardsScoringFive = List(Province(), Curse(), Copper())
+    val cardsScoringSix = List(Duchy(), Duchy())
+    val cardsScoringTen = List(Province(), Silver(), Gold(), Duchy(), Estate())
+
+    val stacksScoringTwentyOne = Stacks(cardsScoringFive, cardsScoringTen, cardsScoringSix)
+    val stacksScoringTwelve = Stacks(cardsScoringSix, Nil, cardsScoringSix)
+    val stacksScoringTwentySix = Stacks(cardsScoringTen, cardsScoringSix, cardsScoringTen)
+
+    val associatedPlayers = List.fill(3)(new SinkPlayer)
+    val unorderedStacks = List(stacksScoringTwelve, stacksScoringTwentyOne, stacksScoringTwentySix)
+
+    val expectedLeaderboard = associatedPlayers.reverse.zip(List(26, 21, 12))
+
+    "return the leaderboard sorted in order of highest score" in {
+      val game = Game(associatedPlayers, unorderedStacks, theSupply, ThrowingBuyPhaseFn(), ThrowingActionPhaseFn())
+      game.leaderboard must_==expectedLeaderboard
     }
   }
 
