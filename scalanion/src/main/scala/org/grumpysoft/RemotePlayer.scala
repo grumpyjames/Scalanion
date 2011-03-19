@@ -40,12 +40,23 @@ case class RemotePlayer(private val player: GenericPlayer[Int], private val inpu
     }
   }
 
+  private def passGameEvent(message: Scalanion.ServerToClient) : Unit = {
+    val gameEvent = message.getGameEvent
+    if (gameEvent.hasStart) {
+      player.gameEvent(Start(gameEvent.getStart.getStartTime))
+    } else {
+      val playersWithScores = gameEvent.getGameOver.getPlayerWithScoreList.asScala
+      player.gameEvent(End(playersWithScores.map(a => (StringDescription(a.getPlayerName), a.getScore))))
+    }
+  }
+
   def readAndForward : Unit = {
     val message = ServerToClient.parseDelimitedFrom(input)
     if (message.hasEvent) return passEvent(message)
     if (message.hasHand) return passHand(message)
     if (message.hasChooseFrom) return passChooseFrom(message)
     if (message.hasQuery) return passQuery(message)
+    if (message.hasGameEvent) return passGameEvent(message)
   }
 
   private def liftPlayer(playerName: String) : SelfDescribing = {

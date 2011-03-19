@@ -9,7 +9,7 @@ import collection.Seq
 import java.lang.String
 import org.grumpysoft.TreasureCards._
 import collection.immutable.List
-import org.grumpysoft.Scalanion.{ChooseForOtherPlayer => ProtoCfop, _}
+import org.grumpysoft.Scalanion.{ChooseForOtherPlayer => ProtoCfop, Start => PbStart, GameEvent => PbGameEvent, _}
 
 object RemotePlayerSpec extends Specification with Mockito {
 
@@ -52,6 +52,21 @@ object RemotePlayerSpec extends Specification with Mockito {
     })
   }
 
+  val theStartTime = 8613425L
+  val theStart = PbGameEvent.newBuilder.setStart(PbStart.newBuilder.setStartTime(theStartTime).build).build
+
+  val leaderboard = List( (StringDescription("foo"), 12), (StringDescription("bar"), 432))
+  val playersWithScores = leaderboard.map(pws => PlayerWithScore.newBuilder.setPlayerName(pws._1.describe).setScore(pws._2).build).asJava
+  val theGameOver = GameOver.newBuilder.addAllPlayerWithScore(playersWithScores).build
+  val theLeaderboard = PbGameEvent.newBuilder.setGameOver(theGameOver)
+
+  def gameEventInput = {
+    makeInput({ baos =>
+      ServerToClient.newBuilder.setGameEvent(theStart).build.writeDelimitedTo(baos)
+      ServerToClient.newBuilder.setGameEvent(theLeaderboard).build.writeDelimitedTo(baos)
+    })
+  }
+
   "remote player" should {
      val outputBuffer = new ByteArrayOutputStream(128)
     "dispatch the received event to the wrapped player" in {
@@ -83,6 +98,14 @@ object RemotePlayerSpec extends Specification with Mockito {
       val responses = inputFrom(outputBuffer)
       Answer.parseDelimitedFrom(responses).getAnswer must_==false
       Answer.parseDelimitedFrom(responses).getAnswer must_==true
+    }
+
+    "pass on game events" in {
+      val remotePlayer = RemotePlayer(realPlayer, gameEventInput, noOutput)
+      remotePlayer.readAndForward
+      remotePlayer.readAndForward
+      there was one(realPlayer).gameEvent(Start(theStartTime))
+      there was one(realPlayer).gameEvent(End(leaderboard))
     }
   }
 
