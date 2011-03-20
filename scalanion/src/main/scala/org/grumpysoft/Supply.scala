@@ -17,7 +17,7 @@ case class SimpleSupply(choices : List[List[Card]]) extends Supply {
   }
 
   def availableCards(treasure: Int) : Seq[Card] = {
-    choices.filter(_.size > 0).map(_.head).filter(_.price <= treasure)
+    choices.filter(_.size > 0).map(_.head).filter(_.price <= treasure).sortBy(_.price).reverse
   }
 
   def buy(card: Card) : Supply = {

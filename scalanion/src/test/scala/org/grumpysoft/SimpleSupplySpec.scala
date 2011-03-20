@@ -18,7 +18,7 @@ object SimpleSupplySpec extends Specification {
     "return a new supply with a reduced pile of the card bought" in {
       val supply = SimpleSupply(List(coppers, silvers, oneGold))
       val newSupply = supply.buy(Gold())
-      newSupply.availableCards(11) must_==List(Copper(),Silver())
+      newSupply.availableCards(11) must_==List(Silver(), Copper())
     }
 
     "work the same for action cards" in {
@@ -41,7 +41,12 @@ object SimpleSupplySpec extends Specification {
 
     "only list cards available for the treasure cost provided or less" in {
       val supply = Supplies.forTwo
-      supply.availableCards(1) must_==List(Copper(), Curse())
+      supply.availableCards(1) must_==List(Curse(), Copper())
+    }
+
+    "sort available cards by price" in {
+      val supply = SimpleSupply(List(Gold().times(3), Province().times(3), Copper().times(3), Remodel().times(4)))
+      supply.availableCards(10) must_==List(Province(), Gold(), Remodel(), Copper())
     }
   }
 
