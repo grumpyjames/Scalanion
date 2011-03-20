@@ -7,7 +7,7 @@ class PlayerAdapter[U](val adaptTo: GenericPlayer[U], lift: ((Seq[Card],Seq[U]) 
   }
 
   def query(query: Query) : Boolean = {
-    true
+    adaptTo.query(query)
   }
 
   def newHand(hand: Seq[Card]) : Unit = {
