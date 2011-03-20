@@ -1,6 +1,6 @@
 package scalanion;
 
-option java_package = "org.grumpysoft";
+option java_package = "org.grumpysoft.pb";
 
 message ChooseFrom {
   required string verb = 1;
@@ -38,7 +38,7 @@ message Event {
   repeated string card = 3;
 }
 
-message Start {
+message GameStart {
   required int64 startTime = 1;
 }
 
@@ -52,7 +52,7 @@ message PlayerWithScore {
 }
 
 message GameEvent {
-  optional Start start = 1;
+  optional GameStart start = 1;
   optional GameOver gameOver = 2;
 }
 

@@ -2,7 +2,7 @@ package org.grumpysoft
 
 import scalaj.collection.Imports._
 import java.io.{OutputStream, InputStream}
-import org.grumpysoft.Scalanion.{ServerToClient, Hand, Query => ProtobufQuery, ChooseFrom, ChooseForOtherPlayer => ProtobufChooseForOtherPlayer, GameEvent => PBGameEvent, Answer, Choices, Event, Start => PBStart, GameOver, PlayerWithScore}
+import org.grumpysoft.pb.Scalanion.{ServerToClient, Hand, Query => ProtobufQuery, ChooseFrom, ChooseForOtherPlayer => ProtobufChooseForOtherPlayer, GameEvent => PBGameEvent, Answer, Choices, Event, GameStart => PBStart, GameOver, PlayerWithScore}
 
 case class NetworkPlayer(private val name: String, private val input: InputStream, private val output: OutputStream) extends GenericPlayer[Int] {
   def describe() = name
@@ -34,7 +34,7 @@ case class NetworkPlayer(private val name: String, private val input: InputStrea
     send(ProtobufQuery.newBuilder.setQuestion(rawQuery).build)
   }
 
-  private def makeCfop(cards: scala.Seq[Card], verb: Verb, player: SelfDescribing): Scalanion.ChooseForOtherPlayer = {
+  private def makeCfop(cards: scala.Seq[Card], verb: Verb, player: SelfDescribing): ProtobufChooseForOtherPlayer = {
     ProtobufChooseForOtherPlayer.newBuilder.addAllCard(cards.map(_.describe).asJava).setVerb(verb.present).setPlayer(player.describe).build
   }
 

@@ -4,7 +4,7 @@ import org.specs.Specification
 import scalaj.collection.Imports._
 import java.util.concurrent.CopyOnWriteArrayList
 import java.net.Socket
-import org.grumpysoft.Scalanion.Introduction
+import org.grumpysoft.pb.Scalanion.Introduction
 
 object LobbySpec extends Specification {
 

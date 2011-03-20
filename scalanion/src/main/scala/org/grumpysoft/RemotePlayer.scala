@@ -5,22 +5,22 @@ import java.io.{InputStream, OutputStream}
 import collection.Seq
 import java.lang.String
 import collection.immutable.List
-import org.grumpysoft.Scalanion._
+import org.grumpysoft.pb.Scalanion._
 
 case class RemotePlayer(private val player: GenericPlayer[Int], private val input: InputStream, private val output: OutputStream) {
 
-  private def passEvent(message: Scalanion.ServerToClient): Unit = {
+  private def passEvent(message: ServerToClient): Unit = {
     val event = message.getEvent
     val seq: Seq[String] = event.getCardList.asScala
     player.playerEvent(liftPlayer(event.getPlayer), liftVerb(event.getVerb), liftCards(seq))
   }
 
-  private def passHand(message: Scalanion.ServerToClient) : Unit = {
+  private def passHand(message: ServerToClient) : Unit = {
     val hand = message.getHand
     player.newHand(liftCards(hand.getCardList.asScala))
   }
 
-  private def passChooseFrom(message: Scalanion.ServerToClient) : Unit = {
+  private def passChooseFrom(message: ServerToClient) : Unit = {
     val chooseFrom = message.getChooseFrom
     val responses: scala.Seq[Int] = player.chooseFrom(liftCards(chooseFrom.getCardList.asScala), liftVerb(chooseFrom.getVerb), chooseFrom.getMinimumChoices, chooseFrom.getMaximumChoices)
     Choices.newBuilder.addAllChoice(responses.asJava).build.writeDelimitedTo(output)
@@ -30,7 +30,7 @@ case class RemotePlayer(private val player: GenericPlayer[Int], private val inpu
     Answer.newBuilder.setAnswer(response).build.writeDelimitedTo(output)
   }
 
-  private def passQuery(message: Scalanion.ServerToClient) : Unit = {
+  private def passQuery(message: ServerToClient) : Unit = {
     val query = message.getQuery
     if (query.hasQuestion) {
       sendResponse(player.query(BasicQuestion(query.getQuestion)))
@@ -40,7 +40,7 @@ case class RemotePlayer(private val player: GenericPlayer[Int], private val inpu
     }
   }
 
-  private def passGameEvent(message: Scalanion.ServerToClient) : Unit = {
+  private def passGameEvent(message: ServerToClient) : Unit = {
     val gameEvent = message.getGameEvent
     if (gameEvent.hasStart) {
       player.gameEvent(Start(gameEvent.getStart.getStartTime))

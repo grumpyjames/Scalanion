@@ -5,7 +5,7 @@ import scalaj.collection.Imports._
 import java.io.{OutputStream, ByteArrayInputStream, InputStream, ByteArrayOutputStream}
 import org.grumpysoft.TreasureCards.{Copper, Silver}
 import org.specs.mock.Mockito
-import org.grumpysoft.Scalanion.{Hand, Query => ProtobufQuery, ServerToClient, ChooseForOtherPlayer => ProtobufChooseForOtherPlayer, Answer, Choices, Event}
+import org.grumpysoft.pb.Scalanion.{Hand, Query => ProtobufQuery, ServerToClient, ChooseForOtherPlayer => ProtobufChooseForOtherPlayer, Answer, Choices, Event}
 
 object NetworkPlayerSpec extends Specification with Mockito {
 

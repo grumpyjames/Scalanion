@@ -54,7 +54,18 @@ class CommandLinePlayer(private val name: String, private val userInterface: Pro
     true
   }
 
-  def gameEvent(event: GameEvent) = { /* just ignore it, it'll go away in the end */ }
+  def gameEvent(event: GameEvent) = event match {
+    case Start(startTime) => userInterface.prompt(QuickDescription("The game begins!"))
+    case End(leaderboard) => showLeaderboard(leaderboard)
+  }
+
+  private def showLeaderboard(leaderboard: Seq[(SelfDescribing, Int)]) : Unit = {
+    userInterface.prompt(QuickDescription("The game ended. Scores were:"))
+    leaderboard.indices.zip(leaderboard).foreach(indexAndPlayerScore =>
+      userInterface.prompt(QuickDescription(String.valueOf(indexAndPlayerScore._1 + 1)
+        + ".) " + indexAndPlayerScore._2._1.describe + " : " + String.valueOf(indexAndPlayerScore._2._2)))
+    )
+  }
 }
 
 private case class QuickDescription(val desc: String) extends SelfDescribing {

@@ -83,6 +83,20 @@ class CommandLinePlayerSpec extends Specification {
       prompt.messages.map(_.describe) must_== List("The player Peter discarded: Remodel, Copper, Gold")
     }
 
+    "tell the user about the game starting" in {
+      val (player, prompt) = makeTestWith(Stack(List()))
+      val startTime = System.currentTimeMillis
+      player.gameEvent(Start(startTime))
+      prompt.messages.map(_.describe) must_==List("The game begins!")
+    }
+
+    "tell the user about the game ending" in {
+      val (player, prompt) = makeTestWith(Stack(List()))
+      val leaderboard = List((StringDescription("foo"), 12), (StringDescription("bar"), 11))
+      player.gameEvent(End(leaderboard))
+      prompt.messages.map(_.describe) must_==List("The game ended. Scores were:", "1.) foo : 12", "2.) bar : 11")
+    }
+
   }
 
 

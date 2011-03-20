@@ -1,7 +1,7 @@
 package org.grumpysoft
 
 import java.net.{ServerSocket, Socket}
-import org.grumpysoft.Scalanion.Introduction
+import org.grumpysoft.pb.Scalanion.Introduction
 
 object Lobby {
   def apply(port: Int) : Lobby = {

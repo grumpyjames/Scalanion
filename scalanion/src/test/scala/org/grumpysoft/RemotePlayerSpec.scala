@@ -5,11 +5,10 @@ import org.specs.Specification
 import scalaj.collection.Imports._
 import org.specs.mock.Mockito
 import java.io.{InputStream, OutputStream, ByteArrayInputStream, ByteArrayOutputStream}
-import collection.Seq
 import java.lang.String
 import org.grumpysoft.TreasureCards._
 import collection.immutable.List
-import org.grumpysoft.Scalanion.{ChooseForOtherPlayer => ProtoCfop, Start => PbStart, GameEvent => PbGameEvent, _}
+import org.grumpysoft.pb.Scalanion.{ChooseForOtherPlayer => ProtoCfop, GameStart => PbStart, GameEvent => PbGameEvent, _}
 
 object RemotePlayerSpec extends Specification with Mockito {
 
