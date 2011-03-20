@@ -29,7 +29,7 @@ object LibrarySpec extends ActionCardSpecBase {
       actionResult.stacks.discard must_==discardedActions
     }
     "transmit discard events for those action cards" in {
-      checkEventReceived(playerOne, Discard, discardedActions, eventOnlyTable.map(_._2))
+      checkEventReceived(playerOne, Discard, discardedActions, playerOne :: eventOnlyTable.map(_._2).toList)
     }
 
     val differentActionResult = playLibrary(evenMoreMixedDeckStacks)
@@ -37,8 +37,8 @@ object LibrarySpec extends ActionCardSpecBase {
     val secondDiscard = actionsOf(slightlyDifferentMix).drop(1)
 
     "should deal as many cards as possible, possibly causing multiple event transmissions" in {
-      checkEventReceived(playerOne, Discard, firstDiscard, eventOnlyTable.map(_._2))
-      checkEventReceived(playerOne, Discard, secondDiscard, eventOnlyTable.map(_._2))
+      checkEventReceived(playerOne, Discard, firstDiscard, playerOne :: eventOnlyTable.map(_._2).toList)
+      checkEventReceived(playerOne, Discard, secondDiscard, playerOne :: eventOnlyTable.map(_._2).toList)
     }
   }
 

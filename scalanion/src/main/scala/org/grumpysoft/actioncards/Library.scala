@@ -23,7 +23,7 @@ class Library extends ActionCard(5) with CardFilters {
     case _ => {
       val numberToTake: Int = 7 - stacks.hand.size
       val (actions, others) = stacks.deck.take(numberToTake).partition(isActionCard(_))
-      otherPlayers.foreach(_.playerEvent(player, Discard, actions))
+      (player :: otherPlayers.toList).foreach(_.playerEvent(player, Discard, actions))
       goUntilSeven(Stacks(stacks.deck.drop(numberToTake), stacks.hand ++ others, stacks.discard ++ actions), player, otherPlayers)
     }
   }

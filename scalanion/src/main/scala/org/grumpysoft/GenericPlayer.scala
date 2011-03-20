@@ -20,7 +20,7 @@ trait GenericPlayer[+T] extends SelfDescribing {
   def newHand(hand: Seq[Card]) : Unit;
 
   /**
-   * Notify player of an event caused by another player
+   * Notify of an event caused by a player (possibly this player!)
    */
   def playerEvent(player: SelfDescribing, action: Verb, cards: Seq[Card]) : Unit;
 
