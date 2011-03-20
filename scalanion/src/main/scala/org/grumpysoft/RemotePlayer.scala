@@ -7,6 +7,15 @@ import java.lang.String
 import collection.immutable.List
 import org.grumpysoft.pb.Scalanion._
 
+object RemotePlayer {
+
+  def from(player: GenericPlayer[Int], input: InputStream, output: OutputStream) : RemotePlayer = {
+    Introduction.newBuilder.setPlayerName(player.describe).build.writeDelimitedTo(output)
+    RemotePlayer(player, input, output)
+  }
+
+}
+
 case class RemotePlayer(private val player: GenericPlayer[Int], private val input: InputStream, private val output: OutputStream) {
 
   private def passEvent(message: ServerToClient): Unit = {

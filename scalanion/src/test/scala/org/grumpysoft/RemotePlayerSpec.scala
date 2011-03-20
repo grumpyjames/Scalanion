@@ -31,6 +31,7 @@ object RemotePlayerSpec extends Specification with Mockito {
   }
 
   val thePlayer = "thePlayer"
+  realPlayer.describe returns thePlayer
 
   def eventInput = {
     makeInput(ServerToClient.newBuilder.setEvent(Event.newBuilder.setPlayer(thePlayer).setVerb(Gain.present).addAllCard(List("Copper", "Silver").asJava)).build.writeDelimitedTo(_))
@@ -68,6 +69,11 @@ object RemotePlayerSpec extends Specification with Mockito {
 
   "remote player" should {
      val outputBuffer = new ByteArrayOutputStream(128)
+    "introduce themselves" in {
+      val remotePlayer = RemotePlayer.from(realPlayer, eventInput, outputBuffer)
+      Introduction.parseDelimitedFrom(inputFrom(outputBuffer)).getPlayerName must_==thePlayer
+    }
+
     "dispatch the received event to the wrapped player" in {
       val remotePlayer = RemotePlayer(realPlayer, eventInput, noOutput)
       remotePlayer.readAndForward
