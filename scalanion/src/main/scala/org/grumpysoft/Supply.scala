@@ -21,15 +21,20 @@ case class SimpleSupply(choices : List[List[Card]]) extends Supply {
   }
 
   def buy(card: Card) : Supply = {
-    val (toReduce, unchanged) = choices.partition(_.contains(card))    
+    // FIXME: evil!
+    val (toReduce, unchanged) = choices.partition(_.exists(_.getClass == card.getClass))
     SimpleSupply(toReduce.head.drop(1) :: unchanged.toList)
   }
 
-  override def toString() : String = {
+  def presentable() : String = {
     choices.map(cards => cards.size match {
       case 0 => None
       case a => Some(String.valueOf(a) + " " + cards.head.describe)
     }).filter(_.isDefined).map(_.get).mkString(",")
+  }
+
+  override def toString() : String = {
+    presentable()
   }
 
   def gameOver() : Boolean = {

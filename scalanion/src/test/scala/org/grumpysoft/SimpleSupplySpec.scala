@@ -4,7 +4,7 @@ import org.specs.Specification
 
 import TreasureCards._
 import VictoryCards._
-import actioncards.Remodel
+import actioncards._
 
 import org.specs.matcher.Matcher
 
@@ -22,9 +22,9 @@ object SimpleSupplySpec extends Specification {
     }
 
     "work the same for action cards" in {
-      val supply = SimpleSupply(List(Remodel().times(10)))
+      val supply = SimpleSupply(List(Remodel().times(10), Spy().times(1)))
       val newSupply = supply.buy(Remodel())
-      newSupply.availableCards(4) must_==List(Remodel())
+      newSupply.availableCards(4) must_==List(Remodel(), Spy())
     }
 
     "know itself" in {
