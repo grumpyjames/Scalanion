@@ -49,7 +49,7 @@ object ActionPhase {
   }
 
   def doActionPhase(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
-    ActionExecution(CountVonCount.zero(), stacks, player, supply, table).performActions
+    ActionExecution(CountVonCount.oneAction(), stacks, player, supply, table).performActions
   }
 
 }
