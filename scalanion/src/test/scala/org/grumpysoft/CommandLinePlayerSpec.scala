@@ -20,7 +20,7 @@ class FakePrompter(var responses : Stack[Seq[Int]]) extends Promptable {
   }
 }
 
-class CommandLinePlayerSpec extends Specification {
+object CommandLinePlayerSpec extends Specification {
 
   def checkReceived(description: String, options: Seq[SelfDescribing], prompter: FakePrompter) : Unit = {
     prompter.received.head._1.describe must_==description
@@ -62,6 +62,20 @@ class CommandLinePlayerSpec extends Specification {
       val (player, prompt) = makeTestWith(Stack(List(1,2,3), List(1,2), List(), List(1,2,3,4)))
       player.chooseFrom(threeOptions, Trash, 3, 3) must_== (List(1,2,3))
       checkReceived("Choose 3 cards to trash", threeOptions, prompt, 4)
+    }
+
+    "query the user and retrieve their response" in {
+      val (player, prompt) = makeTestWith(Stack(List(1)))
+      player.query(BasicQuestion("would you like a doughnut?")) must_==true
+      val (query, options) = prompt.received.head
+      (query.describe, options.map(_.describe)) must_==("would you like a doughnut?", List("No", "Yes"))
+    }
+
+    "query the user for another player's choice, and retrieve their response" in {
+      val (player, prompt) = makeTestWith(Stack(List(0)))
+      player.query(ChooseForOtherPlayer(List(Copper(), Silver()), StringDescription("another"), Discard))
+      val (query, options) = prompt.received.head
+      (query.describe, options.map(_.describe)) must_==("Should another discard Copper, Silver?", List("No", "Yes"))
     }
 
     "tell the user what their hand contains" in {

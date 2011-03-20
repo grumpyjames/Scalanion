@@ -27,7 +27,7 @@ class CommandLinePlayer(private val name: String, private val userInterface: Pro
   }
   
   def playerEvent(player: SelfDescribing, action: Verb, cards: Seq[Card]) : Unit = {
-    if (!(player eq this)) 
+    if (!(player eq this) && !cards.isEmpty)
       userInterface.prompt(QuickDescription(player.describe() + " " + action.past + ": " + cards.map(_.describe).reduceLeft(_ + ", " + _)))
   }
 
@@ -61,9 +61,25 @@ class CommandLinePlayer(private val name: String, private val userInterface: Pro
     case a => a.toString + " cards"
   }
 
-  def query(question: Query) : Boolean = {
-    //TODO: implement
-    true
+  private val noAndYes = List(QuickDescription("No"), QuickDescription("Yes"))
+  private val invalidQueryResponse: Seq[Int] => Boolean = result => result.size != 1 && !List(0, 1).contains(result.head)
+
+
+  def doQuery(text: String): Boolean = {
+    nextInput(QuickDescription(text), noAndYes).dropWhile(invalidQueryResponse).head.head match {
+      case 0 => false
+      case _ => true
+    }
+  }
+
+  def query(question: Query) : Boolean = question match {
+    case BasicQuestion(text) => doQuery(text)
+    case ChooseForOtherPlayer(cards, otherPlayer, verb) => {
+      cards.isEmpty match {
+        case true => true
+        case false => doQuery("Should " + otherPlayer.describe + " " + verb.present + " " + cards.map(_.describe).reduceLeft(_ + ", " + _) + "?")
+      }
+    }
   }
 
   def gameEvent(event: GameEvent) = event match {
