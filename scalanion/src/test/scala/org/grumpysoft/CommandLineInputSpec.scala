@@ -22,5 +22,10 @@ object CommandLineInputSpec extends Specification {
       val cli = makeInputToRead("adfsa\r\nfsdfnlkn\n1,3\r\n")
       cli.read must_==List(1,3)
     }
+
+    "read an empty line as an empty list" in {
+      val cli = makeInputToRead("\n")
+      cli.read must_==List()
+    }
   }
 }

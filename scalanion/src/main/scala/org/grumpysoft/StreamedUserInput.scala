@@ -18,7 +18,11 @@ class StreamedUserInput(val input: BufferedReader) extends UserInput {
 
   private def readOne() : Option[List[Int]] = {
     try {
-      Some(input.readLine.split(",").toList.map(_.trim).map(Integer.parseInt(_)))
+      val line = input.readLine
+      line.length match {
+        case 0 => Some(List())
+        case _ => Some(line.split(",").toList.map(_.trim).map(Integer.parseInt(_)))
+      }
     } catch {
       case e: NumberFormatException => None
       case unknown => throw unknown
