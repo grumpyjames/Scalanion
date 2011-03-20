@@ -85,7 +85,14 @@ object ActionPhaseSpec extends Specification with Mockito with CardFilters {
     ActionPhase(CountVonCount.oneAction, stacks, player, supply, table)
   }
 
+  val noActionStacks = Stacks.handOnly(List(Copper(), Silver()))
+
   "the action phase" should {
+
+    "skip itself if there are no action cards in the hand" in {
+      val actionResult = runAction(noActionStacks, table)
+      there was no(player).chooseFrom(any[Seq[Card]], any[Verb], any[Int], any[Int])
+    }
 
     "offer the player all their remaining actions and then play the selected one" in {
       expectChoiceAndPlay(actionCards, actionCard, table, boringResult)

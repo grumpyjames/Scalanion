@@ -15,7 +15,8 @@ object ActionPhase {
 
     private def chosenActionCard = {
       val actionCards = stacks.hand.filter(isActionCard(_))
-      player.chooseFrom(actionCards, Play, 0, 1).headOption
+      if (actionCards.isEmpty) None
+      else player.chooseFrom(actionCards, Play, 0, 1).headOption
     }
 
     private def done : ActionResult = {
