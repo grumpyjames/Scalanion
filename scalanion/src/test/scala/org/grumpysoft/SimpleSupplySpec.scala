@@ -25,6 +25,16 @@ object SimpleSupplySpec extends Specification {
       supply.available(Silver()) must_==true
       supply.available(Gold()) must_==false
     }
+
+    "know when the game is over" in {
+      val supply = Supplies.forTwo
+      buy(8, Province(), supply).gameOver must_==true
+    }
+
+    "only list cards available for the treasure cost provided or less" in {
+      val supply = Supplies.forTwo
+      supply.availableCards(1) must_==List(Copper(), Curse())
+    }
   }
 
   def buy(count: Int, card: Card, supply: Supply) : Supply = {
@@ -52,7 +62,6 @@ object SimpleSupplySpec extends Specification {
   "two player supply" should {
     "contain eight provinces" in {
       val supply = Supplies.forTwo()
-      println(supply)
       supply must beSupplyContaining(8, Province())
     }
   }

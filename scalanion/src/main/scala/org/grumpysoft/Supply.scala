@@ -1,6 +1,7 @@
 package org.grumpysoft
 
 import util.Random
+import org.grumpysoft.VictoryCards.Province
 
 trait Supply {
   def available(card: Card) : Boolean;
@@ -16,7 +17,7 @@ case class SimpleSupply(choices : List[List[Card]]) extends Supply {
   }
 
   def availableCards(treasure: Int) : Seq[Card] = {
-    choices.filter(_.size > 0).map(_.head)
+    choices.filter(_.size > 0).map(_.head).filter(_.price <= treasure)
   }
 
   def buy(card: Card) : Supply = {
@@ -31,8 +32,19 @@ case class SimpleSupply(choices : List[List[Card]]) extends Supply {
     }).filter(_.isDefined).map(_.get).mkString(",")
   }
 
-  // FIXME: needs test
-  def gameOver() = false
+  def gameOver() : Boolean = {
+    noProvinces
+  }
+
+  def noProvinces() : Boolean = {
+    !choices.exists(_.headOption match {
+      case Some(card) => card match {
+        case p: Province => true
+        case _ => false
+      }
+      case None => false
+    })
+  }
 }
 
 object Supplies {
@@ -46,15 +58,19 @@ object Supplies {
   }
 
   def default() : Supply = {
-    SimpleSupply(multiply(Cards.victoryCards, victoryCardCounts) ++ actionsAndTreasure)
+    SimpleSupply(multiply(Cards.victoryCards, victoryCardCounts) ++ actionsAndTreasure ++ curses)
   }
 
   def forTwo() : Supply = {
-    SimpleSupply(multiply(Cards.victoryCards, twoPlayerVictoryCardCounts) ++ actionsAndTreasure)
+    SimpleSupply(multiply(Cards.victoryCards, twoPlayerVictoryCardCounts) ++ actionsAndTreasure ++ curses)
   }
 
   private def actionsAndTreasure() : List[List[Card]] = {
     multiply(Random.shuffle(Cards.actionCards).take(10), actionCardCounts) ++
       multiply(Cards.treasureCards, treasureCardCounts)
+  }
+
+  private def curses() : List[List[Card]] = {
+    List(Curse().times(24))
   }
 }
