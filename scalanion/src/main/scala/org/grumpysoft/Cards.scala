@@ -8,9 +8,13 @@ object Cards {
   val treasureCards = List(Copper(), Silver(), Gold())
   val actionCards = List(Bureaucrat(), Chancellor(), Chapel(), CouncilRoom(), Library(), Market(), Militia(), Remodel(), Spy(), Thief(), Witch())
   val victoryCards = List(Estate(), Duchy(), Province())
-  val cards: List[Card] = treasureCards ++ actionCards ++ victoryCards
+  val cards: List[Card] = Curse() :: treasureCards ++ actionCards ++ victoryCards
 
   def fromWire(wireFormat: String) : Card = {
-    cards.map(_.unapply(wireFormat)).find(_.isDefined).get.get
+    val optionCard = cards.map(_.unapply(wireFormat)).find(_.isDefined)
+    optionCard match {
+      case Some(card) => card.get
+      case None => throw new RuntimeException("Card not found: " + wireFormat)
+    }
   }
 }

@@ -28,4 +28,17 @@ object CardDeserializationSpec extends Specification {
     }
   }
 
+  "unknown cards" should {
+    "fail gracefully" in {
+      try {
+        fromWire("Oops")
+      } catch {
+        case re: RuntimeException => {
+          re.getMessage must_=="Card not found: Oops"
+        }
+        case e => { throw e }
+      }
+    }
+  }
+
 }
