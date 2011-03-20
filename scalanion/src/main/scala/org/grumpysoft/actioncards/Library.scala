@@ -6,7 +6,7 @@ object Library {
   def apply() : Library = { new Library }
 }
 
-class Library extends ActionCard(2) with CardFilters {
+class Library extends ActionCard(5) with CardFilters {
   def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
     ActionResult.noTreasureOrBuysOrActions(goUntilSeven(stacks, player, table.map(_._2)), supply, table)
   }
