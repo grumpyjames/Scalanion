@@ -11,12 +11,17 @@ case class Stacks(deck: List[Card], hand: List[Card], discard: List[Card]) {
     Stacks(deck, List(), discard ++ hand).addCards(5)
   }
 
+  def recycleDiscard() : Stacks = {
+    Stacks(shuffle(discard), hand, Nil)
+  }
+
   def addCards(count: Int) : Stacks = {
-    val newHand = deck.take(count) ++ hand
-    if (deck.size < count)
-      Stacks(shuffle(discard), newHand, List()).addCards(count - deck.size)
-    else
-      Stacks(deck.drop(count), newHand, discard)
+    if (deck.size < count) {
+      Stacks(Nil, deck ++ hand, discard).recycleDiscard.addCards(count - deck.size)
+    }
+    else {
+      Stacks(deck.drop(count), deck.take(count) ++ hand, discard)
+    }
   }
 
   def gainOne(card: Card) : Stacks = {

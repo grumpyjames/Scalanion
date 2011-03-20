@@ -19,10 +19,15 @@ class Spy extends ActionCard(4) with TransmittableChoices {
   }
 
   private def spyOn(spy: GenericPlayer[Card], others: List[GenericPlayer[Card]], stacksWithPlayer: StacksWithPlayer) : StacksWithPlayer = {
-    val topCard = stacksWithPlayer._1.deck.take(1)
+    val stacksToUse = stacksWithPlayer._1.deck.isEmpty match {
+      case true => stacksWithPlayer._1.recycleDiscard
+      case false => stacksWithPlayer._1
+    }
+
+    val topCard = stacksToUse.deck.take(1)
     spy.query(ChooseForOtherPlayer(topCard, stacksWithPlayer._2, Discard)) match {
-      case true => doDiscard(stacksWithPlayer, spy :: others)
-      case false => doReveal(stacksWithPlayer, spy :: others)
+      case true => doDiscard((stacksToUse, stacksWithPlayer._2), spy :: others)
+      case false => doReveal((stacksToUse, stacksWithPlayer._2), spy :: others)
     }
   }
 

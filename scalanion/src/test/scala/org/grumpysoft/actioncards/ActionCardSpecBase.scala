@@ -12,6 +12,7 @@ abstract class ActionCardSpecBase extends Specification with Mockito {
   protected val playerTwo = mockAs[GenericPlayer[Card]]("Player Two")
   protected val playerThree = mockAs[GenericPlayer[Card]]("Player Three")
   protected val playerFour = mockAs[GenericPlayer[Card]]("Player Four")
+  protected val playerFive = mockAs[GenericPlayer[Card]]("Player Five")
 
   protected val threeCoppersAndAnEstate = List(Copper(), Copper(), Copper(), Estate())
   protected val twoCoppers = List(Copper(), Copper())
@@ -23,6 +24,8 @@ abstract class ActionCardSpecBase extends Specification with Mockito {
   protected val copperDuchyAndEstate = Copper() :: estateAndDuchy
   protected val witchAndDuchy = List(Witch(), Duchy())
   protected val copperEstateAndGold = List(Copper(), Estate(), Gold())
+  protected val emptyDeckStacks = Stacks(Nil, copperDuchyAndEstate, twoEstates)
+  protected val oneCardDeckStacks = Stacks(oneRemodel, twoEstates, Nil)
 
   protected val mixOfAllTypes = List(Remodel(), Copper(), Witch(), Gold(), Estate(), Copper(), Copper())
 
