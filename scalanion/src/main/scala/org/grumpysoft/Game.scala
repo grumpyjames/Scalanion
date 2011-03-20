@@ -11,6 +11,10 @@ object Game {
     players.zip(allStacks).foreach(ps => ps._1.newHand(ps._2.hand))
     Game(players, allStacks, supply, buyPhase, actionPhase)
   }
+
+  def standardGame(players: List[GenericPlayer[Card]], supply: Supply) : Game = {
+    Game(players, supply, DefaultBuyPhaseFn, DefaultActionPhaseFn)
+  }
 }
 
 trait BuyPhaseFn {
@@ -20,6 +24,18 @@ trait BuyPhaseFn {
 trait ActionPhaseFn {
   type Table = Seq[(Stacks, GenericPlayer[Card])]
   def doActionPhase(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult;
+}
+
+private case object DefaultBuyPhaseFn extends BuyPhaseFn {
+  def doBuyPhase(buys: Int, treasure: Int, player: GenericPlayer[Card], supply: Supply) = {
+    BuyPhase(buys, treasure, player, supply)
+  }
+}
+
+private case object DefaultActionPhaseFn extends ActionPhaseFn {
+  def doActionPhase(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) = {
+    ActionPhase.doActionPhase(stacks, player, supply, table)
+  }
 }
 
 

@@ -1,5 +1,17 @@
 package org.grumpysoft
 
+import java.io.{InputStreamReader, BufferedReader}
+
+object CommandLinePlayer {
+  def forStdInAndOut(name: String) = {
+    new CommandLinePlayer(name, new FormattedPrompter(new StreamedUserInput(new BufferedReader(new InputStreamReader(System.in))), StdOutPrinter, new OptionFormatter))
+  }
+
+  private case object StdOutPrinter extends Printer {
+    def println(s: String) = System.out.println(s)
+  }
+}
+
 class CommandLinePlayer(private val name: String, private val userInterface: Promptable) extends Player {
 
   def describe() : String = {
