@@ -88,6 +88,13 @@ object NetworkPlayerSpec extends Specification with Mockito {
       transmitted.getCardList.asScala must_==List("Copper", "Silver")
     }
 
+    "quietly swallow events concerning no cards" in {
+      val networkPlayer = makeNetworkPlayer(noInput, output)
+      mockOtherPlayer.describe returns "moo"
+      networkPlayer.playerEvent(mockOtherPlayer, Discard, Nil)
+      output.toByteArray.length must_==0
+    }
+
     "transmit a start event" in {
       val networkPlayer = makeNetworkPlayer(noInput, output)
       val currentTime = System.currentTimeMillis()

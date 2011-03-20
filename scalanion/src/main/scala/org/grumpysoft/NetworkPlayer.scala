@@ -8,7 +8,8 @@ case class NetworkPlayer(private val name: String, private val input: InputStrea
   def describe() = name
 
   def playerEvent(player: SelfDescribing, action: Verb, cards: Seq[Card]) = {
-    send(Event.newBuilder.setPlayer(player.describe).setVerb(action.present).addAllCard(cards.map(_.describe).asJava).build)
+    if (!cards.isEmpty)
+      send(Event.newBuilder.setPlayer(player.describe).setVerb(action.present).addAllCard(cards.map(_.describe).asJava).build)
   }
 
   def newHand(hand: Seq[Card]) = {
