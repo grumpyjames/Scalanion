@@ -4,7 +4,7 @@ import org.grumpysoft._
 
 object Remodel {
   def apply() : Remodel = {
-    new Remodel
+    new Remodel()
   }
 }
 
