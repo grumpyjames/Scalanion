@@ -16,20 +16,20 @@ abstract class ActionCardSpecBase extends Specification with Mockito {
 
   protected val threeCoppersAndAnEstate = List(Copper(), Copper(), Copper(), Estate())
   protected val twoCoppers = List(Copper(), Copper())
-  protected val oneRemodel = List(Remodel())
+  protected val oneRemodel = List(Remodel().toActionCard)
   protected val copperAndSilver = List(Copper(), Silver())
-  protected val silverRemodelAndTwoCoppers = Copper() :: Remodel() :: copperAndSilver
+  protected val silverRemodelAndTwoCoppers = Copper() :: Remodel().toActionCard :: copperAndSilver
   protected val twoEstates = List(Estate(), Estate())
   protected val estateAndDuchy = List(Estate(), Duchy())
   protected val copperDuchyAndEstate = Copper() :: estateAndDuchy
-  protected val witchAndDuchy = List(Witch(), Duchy())
+  protected val witchAndDuchy = List(Witch().toActionCard, Duchy())
   protected val copperEstateAndGold = List(Copper(), Estate(), Gold())
   protected val emptyDeckStacks = Stacks(Nil, copperDuchyAndEstate, twoEstates)
   protected val oneCardDeckStacks = Stacks(oneRemodel, twoEstates, Nil)
 
-  protected val mixOfAllTypes = List(Remodel(), Copper(), Witch(), Gold(), Estate(), Copper(), Copper())
+  protected val mixOfAllTypes = List(Remodel().toActionCard, Copper(), Witch().toActionCard, Gold(), Estate(), Copper(), Copper())
 
-  protected val slightlyDifferentMix = List(Copper(), Remodel(), Copper(), Gold(), Estate(), Witch(), Copper())
+  protected val slightlyDifferentMix = List(Copper(), Remodel().toActionCard, Copper(), Gold(), Estate(), Witch().toActionCard, Copper())
 
   val fourCardHand = List(Copper(), Copper(), Estate(), Copper())
 

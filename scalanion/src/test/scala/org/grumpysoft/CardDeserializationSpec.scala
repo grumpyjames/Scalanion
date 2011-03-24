@@ -17,8 +17,8 @@ object CardDeserializationSpec extends Specification {
 
   "action cards" should {
     "deserialize" in {
-      fromWire("Witch") must_==Witch()
-      fromWire("Remodel") must_==Remodel()
+      fromWire("Witch") must_==Witch().toActionCard
+      fromWire("Remodel") must_==Remodel().toActionCard
     }
   }
 

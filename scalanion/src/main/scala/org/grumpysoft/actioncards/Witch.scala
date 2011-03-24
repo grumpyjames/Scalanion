@@ -2,11 +2,7 @@ package org.grumpysoft.actioncards
 
 import org.grumpysoft._
 
-object Witch {
-  def apply() = { new Witch }
-}
-
-class Witch extends ActionCard(5) {
+case class Witch() extends ActionCardImpl {
 
   def curseAndTransmit(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, otherPlayers: Seq[GenericPlayer[Card]]) : (Stacks, Supply) = {
     otherPlayers.foreach(_.playerEvent(player, Gain, List(Curse())))
@@ -33,8 +29,7 @@ class Witch extends ActionCard(5) {
   }
 
   def describe() : String = { "Witch" }
-
-  protected def copyThyself() = Witch()
+  def cost = 5
 }
 
 

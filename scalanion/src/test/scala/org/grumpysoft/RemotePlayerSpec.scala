@@ -14,7 +14,7 @@ object RemotePlayerSpec extends Specification with Mockito {
 
   private val noOutput = new ByteArrayOutputStream(0)
   private val realPlayer = mock[GenericPlayer[Int]]
-  private val choiceCards: List[ActionCard] = List(Witch(), Remodel(), Remodel())
+  private val choiceCards: List[ActionCard] = List(Witch(), Remodel(), Remodel()).map(_.toActionCard)
 
   private val simpleQuery: String = "are you dave?"
   private val justGold: List[Gold] = List(Gold())
@@ -38,7 +38,7 @@ object RemotePlayerSpec extends Specification with Mockito {
   }
 
   def handInput = {
-    makeInput(ServerToClient.newBuilder.setHand(Hand.newBuilder.addAllCard(List(Copper(), Witch(), Gold(), Copper()).map(_.describe).asJava).build).build.writeDelimitedTo(_))
+    makeInput(ServerToClient.newBuilder.setHand(Hand.newBuilder.addAllCard(List(Copper(), Witch().toActionCard, Gold(), Copper()).map(_.describe).asJava).build).build.writeDelimitedTo(_))
   }
 
   def choiceInput = {

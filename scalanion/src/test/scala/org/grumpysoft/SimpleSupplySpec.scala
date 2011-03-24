@@ -2,6 +2,7 @@ package org.grumpysoft
 
 import org.specs.Specification
 
+import Card._
 import TreasureCards._
 import VictoryCards._
 import actioncards._
@@ -24,7 +25,7 @@ object SimpleSupplySpec extends Specification {
     "work the same for action cards" in {
       val supply = SimpleSupply(List(Remodel().times(10), Spy().times(1)))
       val newSupply = supply.buy(Remodel())
-      newSupply.availableCards(4) must_==List(Remodel(), Spy())
+      newSupply.availableCards(4) must_==List(Remodel().toActionCard, Spy().toActionCard).reverse
     }
 
     "know itself" in {
@@ -46,7 +47,7 @@ object SimpleSupplySpec extends Specification {
 
     "sort available cards by price" in {
       val supply = SimpleSupply(List(Gold().times(3), Province().times(3), Copper().times(3), Remodel().times(4)))
-      supply.availableCards(10) must_==List(Province(), Gold(), Remodel(), Copper())
+      supply.availableCards(10) must_==List(Province(), Gold(), Remodel().toActionCard, Copper())
     }
   }
 

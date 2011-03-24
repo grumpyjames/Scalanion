@@ -1,5 +1,9 @@
 package org.grumpysoft
 
+object Card {
+  implicit def toCard(impl: ActionCardImpl) : Card = { ActionCard(impl.cost, impl) }
+}
+
 sealed abstract class Card(cost: Int) extends SelfDescribing {
   def price() : Int = { cost }
   override def toString() : String = { describe() }
@@ -71,11 +75,24 @@ object CountVonCount {
   def zero() = CountVonCount(0,0,0)
 }
 
-
-abstract case class ActionCard(cost: Int) extends Card(cost) {
+trait ActionCardImpl extends SelfDescribing {
   type StacksWithPlayer = (Stacks, GenericPlayer[Card])
   type Table = Seq[StacksWithPlayer]
   def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult;
+  def cost() : Int;
+  def toActionCard : ActionCard = { ActionCard(cost, this) }
+}
+
+case class ActionCard(cost: Int, impl: ActionCardImpl) extends Card(cost) {
+  type StacksWithPlayer = (Stacks, GenericPlayer[Card])
+  type Table = Seq[StacksWithPlayer]
+
+  def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
+    impl.play(stacks, player, supply, table)
+  }
+
+  protected def copyThyself() = { this.copy(cost, impl) }
+  def describe() = { impl.describe }
 }
 
 abstract case class TreasureCard(cost: Int, value: Int) extends Card(cost) {}

@@ -2,11 +2,7 @@ package org.grumpysoft.actioncards
 
 import org.grumpysoft._
 
-object ThroneRoom {
- def apply() = new ThroneRoom()
-}
-
-class ThroneRoom extends ActionCard(4) with TransmittableChoices with CardFilters {
+case class ThroneRoom() extends ActionCardImpl with TransmittableChoices with CardFilters {
   private def toActionCard(card: Card) = card match {
     case ac: ActionCard => ac
     case _ => error("ffs")
@@ -22,8 +18,7 @@ class ThroneRoom extends ActionCard(4) with TransmittableChoices with CardFilter
   }
 
   def describe() = "ThroneRoom"
-
-  protected def copyThyself() = ThroneRoom()
+  def cost = 4
 }
 
 

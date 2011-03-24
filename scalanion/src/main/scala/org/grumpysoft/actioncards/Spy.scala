@@ -2,12 +2,9 @@ package org.grumpysoft.actioncards
 
 import org.grumpysoft._
 
-object Spy {
-  def apply() : Spy = { new Spy }
-}
-
-class Spy extends ActionCard(4) with TransmittableChoices {
-  def describe() = "Spy"
+case class Spy() extends ActionCardImpl with TransmittableChoices {
+  def describe = "Spy"
+  def cost = 4
 
   def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
     val newTable = table.map(a => spyOn(player, table.map(_._2).filter(_.ne(a._2)).toList, a))
@@ -42,8 +39,6 @@ class Spy extends ActionCard(4) with TransmittableChoices {
     otherPlayers.map(_.playerEvent(victim, Reveal, stacks.deck.take(1)))
     (stacks, victim)
   }
-
-  protected def copyThyself() = Spy()
 }
 
 

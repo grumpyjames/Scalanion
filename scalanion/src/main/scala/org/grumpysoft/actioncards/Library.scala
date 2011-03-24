@@ -2,11 +2,7 @@ package org.grumpysoft.actioncards
 
 import org.grumpysoft._
 
-object Library {
-  def apply() : Library = { new Library }
-}
-
-class Library extends ActionCard(5) with CardFilters {
+case class Library() extends ActionCardImpl with CardFilters {
   def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
     val newStacks = goUntilSeven(stacks, player, table.map(_._2))
     player.newHand(newStacks.hand)
@@ -16,6 +12,8 @@ class Library extends ActionCard(5) with CardFilters {
   def describe() = {
     "Library"
   }
+
+  def cost = 5
 
   private def goUntilSeven(stacks: Stacks, player: GenericPlayer[Card], otherPlayers: Seq[GenericPlayer[Card]])
   : Stacks = stacks.hand.size match {
@@ -27,8 +25,6 @@ class Library extends ActionCard(5) with CardFilters {
       goUntilSeven(Stacks(stacks.deck.drop(numberToTake), stacks.hand ++ others, stacks.discard ++ actions), player, otherPlayers)
     }
   }
-
-  protected def copyThyself() = Library()
 }
 
 

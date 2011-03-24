@@ -37,7 +37,7 @@ object CommandLinePlayerSpec extends Specification {
     (player, prompt)
   }
 
-  val threeOptions = List(Remodel(), Copper(), Gold())
+  val threeOptions : List[Card] = List(Remodel().toActionCard, Copper(), Gold())
 
   "a command line player" should {
     "print the correct instructions, and then return a well formed input, for precisely one card" in {

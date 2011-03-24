@@ -4,12 +4,8 @@ import org.grumpysoft.TreasureCards.Silver
 import collection.immutable.List
 import org.grumpysoft._
 
-object Bureaucrat {
-  def apply() : Bureaucrat = { new Bureaucrat }
-}
-
-class Bureaucrat extends ActionCard(4) with TransmittableChoices {
-  type stacksWithPlayer = Tuple2[Stacks, GenericPlayer[Card]]
+case class Bureaucrat() extends ActionCardImpl with TransmittableChoices {
+  type stacksWithPlayer = (Stacks, GenericPlayer[Card])
   val oneSilver: List[Silver] = List(Silver())
 
   def attack(stacksAndPlayer: stacksWithPlayer, otherPlayers: Seq[GenericPlayer[Card]]) : stacksWithPlayer = {
@@ -46,7 +42,7 @@ class Bureaucrat extends ActionCard(4) with TransmittableChoices {
 
   def describe() = { "Bureaucrat" }
 
-  protected def copyThyself() = Bureaucrat()
+  def cost = 4
 }
 
 

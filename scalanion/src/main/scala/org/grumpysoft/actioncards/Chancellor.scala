@@ -3,11 +3,7 @@ package org.grumpysoft.actioncards
 import collection.immutable.List
 import org.grumpysoft._
 
-object Chancellor {
- def apply() : Chancellor = { new Chancellor }
-}
-
-class Chancellor extends ActionCard(3) {
+case class Chancellor() extends ActionCardImpl {
   def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
     player.query(BasicQuestion("do you want to discard your deck?")) match {
       case true => {
@@ -18,11 +14,11 @@ class Chancellor extends ActionCard(3) {
     }
   }
 
+  def cost = 3
+
   def describe() : String = {
     "Chancellor"
   }
-
-  protected def copyThyself() = Chancellor()
 }
 
 

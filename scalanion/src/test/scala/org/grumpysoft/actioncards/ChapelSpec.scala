@@ -19,7 +19,7 @@ object ChapelSpec extends ActionCardSpecBase {
     "trash the selected cards" in {
       playerOne.chooseFrom(silverRemodelAndTwoCoppers, Trash, 0, 4) returns copperAndSilver
       val actionResult = Chapel().play(stacks, playerOne, supply, eventOnlyTable)
-      actionResult.stacks.hand must_==List(Copper(), Remodel())
+      actionResult.stacks.hand must_==List(Copper(), Remodel().toActionCard)
       actionResult.treasure must_==0
       checkEventReceived(playerOne, Trash, copperAndSilver, eventOnlyTable.map(_._2))
     }

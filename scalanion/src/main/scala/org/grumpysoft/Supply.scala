@@ -21,8 +21,7 @@ case class SimpleSupply(choices : List[List[Card]]) extends Supply {
   }
 
   def buy(card: Card) : Supply = {
-    // FIXME: evil!
-    val (toReduce, unchanged) = choices.partition(_.exists(_.getClass == card.getClass))
+    val (toReduce, unchanged) = choices.partition(_.exists(_ == card))
     SimpleSupply(toReduce.head.drop(1) :: unchanged.toList)
   }
 

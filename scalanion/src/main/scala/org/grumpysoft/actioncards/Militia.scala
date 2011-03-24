@@ -3,11 +3,7 @@ package org.grumpysoft.actioncards
 import collection.immutable.List
 import org.grumpysoft._
 
-object Militia {
-  def apply() = { new Militia }
-}
-
-class Militia extends ActionCard(4) with TransmittableChoices {
+case class Militia() extends ActionCardImpl with TransmittableChoices {
 
   type stacksWithPlayer = (Stacks, GenericPlayer[Card])
 
@@ -32,7 +28,7 @@ class Militia extends ActionCard(4) with TransmittableChoices {
 
   def describe() : String = { "Militia" }
 
-  protected def copyThyself() = Militia()
+  def cost = 4
 }
 
 

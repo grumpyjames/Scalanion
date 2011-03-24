@@ -118,7 +118,7 @@ object GameSpec extends Specification with Mockito {
   val table = cannedStacks.tail.zip(players.tail)
   val postActionSupply = mock[Supply]
   val reversedTableResult = ActionResult.noBuys(1, 2, stacksOne, postActionSupply, table.reverse)
-  val buyAfterActionResult = (postBuySupply, List(Remodel()))
+  val buyAfterActionResult = (postBuySupply, List(Remodel().toActionCard))
 
   "a game, when given a meaningful action phase" should {
     theSupply.gameOver returns false
@@ -129,7 +129,7 @@ object GameSpec extends Specification with Mockito {
     "correctly delegate to it once per turn" in {
       there was one(theActionPhase).doActionPhase(stacksOne, playerOne, theSupply, table)
       there was one(theBuyPhase).doBuyPhase(1, 1 + 3, playerOne, postActionSupply)
-      afterOneTurn.allStacks.last.discard must_==Remodel() :: stacksOne.hand
+      afterOneTurn.allStacks.last.discard must_==Remodel().toActionCard :: stacksOne.hand
       afterOneTurn.supply must_==postBuySupply
     }
   }

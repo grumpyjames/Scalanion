@@ -50,7 +50,7 @@ object SpySpec extends ActionCardSpecBase {
       val actionResult = Spy().play(playerOneStacks, playerOne, supply, table ++ fourAndFive)
       val interestingStacks = actionResult.table.drop(2).map(_._1)
       interestingStacks.head.discard must_==List(Estate())
-      interestingStacks.last.discard must_==Remodel() :: oneCardDeckStacks.discard
+      interestingStacks.last.discard must_==Remodel().toActionCard :: oneCardDeckStacks.discard
     }
 
   }

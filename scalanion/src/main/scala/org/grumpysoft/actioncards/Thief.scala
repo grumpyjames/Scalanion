@@ -2,11 +2,7 @@ package org.grumpysoft.actioncards
 
 import org.grumpysoft._
 
-object Thief {
-  def apply() : Thief = { new Thief }
-}
-
-class Thief extends ActionCard(4) {
+case class Thief() extends ActionCardImpl {
 
   def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
     val thiefResults = table.map(a => Thieve(player, a._2, a._1, table.map(_._2)))
@@ -15,8 +11,7 @@ class Thief extends ActionCard(4) {
   }
 
   def describe() = "Thief"
-
-  protected def copyThyself() = Thief()
+  def cost = 4
 }
 
 case class ThiefResult(stacks: Stacks, card: Option[Card]) {}

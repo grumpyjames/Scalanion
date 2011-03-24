@@ -24,7 +24,7 @@ object RichPlayerSpec extends Specification {
   "when prompted, rich player" should {
     "upcast responses back to rich types" in {
       val richie = new RichPlayer(new FakePlayer)
-      val cards = List(Witch(), Militia(), Province())
+      val cards = List(Witch().toActionCard, Militia().toActionCard, Province())
       richie.chooseFrom(cards, Discard, 2, 2) must_==cards.take(2)
     }
   }
