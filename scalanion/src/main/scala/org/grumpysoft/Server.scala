@@ -2,9 +2,9 @@ package org.grumpysoft
 
 object Server {
   def main(args: Array[String]) = {
-    val completeLobby = Lobby(8080).waitFor(2)
+    val completeLobby = Lobby(8080).waitFor(1)
     completeLobby.close
-    val players = completeLobby.players.map(new RichPlayer(_))
+    val players = new RichPlayer(new TreasureOnlyPlayer) :: completeLobby.players.map(new RichPlayer(_))
 
     players.foreach(_.gameEvent(Start(System.currentTimeMillis)))
 
