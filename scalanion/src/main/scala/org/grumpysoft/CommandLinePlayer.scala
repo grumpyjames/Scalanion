@@ -67,8 +67,9 @@ class CommandLinePlayer(private val name: String, private val userInterface: Pro
 
   def doQuery(text: String): Boolean = {
     nextInput(QuickDescription(text), noAndYes).dropWhile(invalidQueryResponse).head.head match {
-      case 0 => false
-      case _ => true
+      case 1 => false
+      case 2 => true
+      case _ => error("wtf")
     }
   }
 

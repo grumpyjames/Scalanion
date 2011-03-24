@@ -65,15 +65,15 @@ object CommandLinePlayerSpec extends Specification {
     }
 
     "query the user and retrieve their response" in {
-      val (player, prompt) = makeTestWith(Stack(List(1)))
+      val (player, prompt) = makeTestWith(Stack(List(2)))
       player.query(BasicQuestion("would you like a doughnut?")) must_==true
       val (query, options) = prompt.received.head
       (query.describe, options.map(_.describe)) must_==("would you like a doughnut?", List("No", "Yes"))
     }
 
     "query the user for another player's choice, and retrieve their response" in {
-      val (player, prompt) = makeTestWith(Stack(List(0)))
-      player.query(ChooseForOtherPlayer(List(Copper(), Silver()), StringDescription("another"), Discard))
+      val (player, prompt) = makeTestWith(Stack(List(1)))
+      player.query(ChooseForOtherPlayer(List(Copper(), Silver()), StringDescription("another"), Discard)) must_==false
       val (query, options) = prompt.received.head
       (query.describe, options.map(_.describe)) must_==("Should another discard Copper, Silver?", List("No", "Yes"))
     }
