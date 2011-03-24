@@ -41,6 +41,10 @@ object SpySpec extends ActionCardSpecBase {
       checkEventReceived(playerThree, Reveal, playerThreeTopCard, List(playerOne, playerTwo))
     }
 
+    "have told the player what their new hand is" in {
+      there was one(playerOne).newHand(actionResult.stacks.hand)
+    }
+
     val fourAndFive = List(emptyDeckStacks, oneCardDeckStacks).zip(List(playerFour, playerFive))
 
     "behave ok when someone who is spied on has a deck of only one card, or no cards at all" in {

@@ -2,11 +2,13 @@ package org.grumpysoft.actioncards
 
 import org.grumpysoft._
 
-case class Laboratory() extends ActionCardImpl {
+case class Laboratory() extends LaboratoryImpl with PlusCards {
+  def count = 2
+}
+
+class LaboratoryImpl extends ActionCardImpl {
   def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
-    val newStacks = stacks.addCards(2)
-    player.newHand(newStacks.hand)
-    ActionResult.noTreasureOrBuys(1, newStacks, supply, table)
+    ActionResult.noTreasureOrBuys(1, stacks, supply, table)
   }
 
   def describe() = "Laboratory"

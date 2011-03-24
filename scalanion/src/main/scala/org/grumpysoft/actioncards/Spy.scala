@@ -2,16 +2,20 @@ package org.grumpysoft.actioncards
 
 import org.grumpysoft._
 
-case class Spy() extends ActionCardImpl with TransmittableChoices {
+case class Spy() extends SpyImpl with PlusCards {
+  def count = 1
+}
+
+class SpyImpl extends ActionCardImpl with TransmittableChoices {
   def describe = "Spy"
   def cost = 4
 
+
   def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
     val newTable = table.map(a => spyOn(player, table.map(_._2).filter(_.ne(a._2)).toList, a))
-    val plusOneCard = stacks.addCards(1)
-    chooseThenTransmit(player, plusOneCard.deck.take(1), Discard, 0, 1, table.map(_._2)).size > 0 match {
-      case false => ActionResult.noTreasureOrBuys(1, plusOneCard, supply, newTable)
-      case true => ActionResult.noTreasureOrBuys(1, Stacks(plusOneCard.deck.tail, plusOneCard.hand, plusOneCard.deck.head :: plusOneCard.discard), supply, newTable)
+    chooseThenTransmit(player, stacks.deck.take(1), Discard, 0, 1, table.map(_._2)).size > 0 match {
+      case false => ActionResult.noTreasureOrBuys(1, stacks, supply, newTable)
+      case true => ActionResult.noTreasureOrBuys(1, Stacks(stacks.deck.tail, stacks.hand, stacks.deck.head :: stacks.discard), supply, newTable)
     }
   }
 
