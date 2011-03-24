@@ -8,7 +8,7 @@ case class Laboratory() extends ActionCardImpl {
   }
 
   def describe() = "Laboratory"
-  def cost = 3
+  def cost = 5
 }
 
 
