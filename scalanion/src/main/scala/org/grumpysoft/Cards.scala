@@ -6,7 +6,7 @@ import actioncards._
 
 object Cards {
   val treasureCards = List(Copper(), Silver(), Gold())
-  val actionCards = List(Bureaucrat(), Chancellor(), Chapel(), CouncilRoom(), Library(), Market(), Militia(), Remodel(), Spy(), Thief(), Witch()).map(_.toActionCard)
+  val actionCards = List(Bureaucrat(), Chancellor(), Chapel(), CouncilRoom(), Laboratory(), Library(), Market(), Militia(), Remodel(), Spy(), Thief(), ThroneRoom(), Witch()).map(_.toActionCard)
   val victoryCards = List(Estate(), Duchy(), Province())
   val cards: List[Card] = Curse() :: treasureCards ++ actionCards ++ victoryCards
 
