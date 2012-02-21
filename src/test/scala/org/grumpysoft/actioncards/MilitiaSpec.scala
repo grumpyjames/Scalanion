@@ -26,7 +26,7 @@ object MilitiaSpec extends ActionCardSpecBase {
       )
     }
     "leave the player's hand untouched" in {
-      actionResult.stacks mustEq(playerOneStacks)
+      actionResult.stacks mustEqual(playerOneStacks)
     }
   }
 

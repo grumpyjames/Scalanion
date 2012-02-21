@@ -3,7 +3,7 @@ package org.grumpysoft
 import java.io.BufferedReader
 import java.io.ByteArrayInputStream
 import java.io.InputStreamReader
-import org.specs.Specification
+import org.specs2.mutable.Specification
 
 object CommandLineInputSpec extends Specification {
   def makeInputToRead(raw: String): StreamedUserInput = {

@@ -1,10 +1,10 @@
 package org.grumpysoft
 
-import org.specs.Specification
-import scalaj.collection.Imports._
+import org.specs2.mutable.Specification
+import scala.collection.JavaConversions._
 import java.io.{OutputStream, ByteArrayInputStream, InputStream, ByteArrayOutputStream}
 import org.grumpysoft.TreasureCards.{Copper, Silver}
-import org.specs.mock.Mockito
+import org.specs2.mock.Mockito
 import org.grumpysoft.pb.Scalanion.{Hand, Query => ProtobufQuery, ServerToClient, ChooseForOtherPlayer => ProtobufChooseForOtherPlayer, Answer, Choices, Event}
 
 object NetworkPlayerSpec extends Specification with Mockito {
@@ -52,7 +52,7 @@ object NetworkPlayerSpec extends Specification with Mockito {
       val networkPlayerOutput = toInput(output)
 
       val transmitted = ServerToClient.parseDelimitedFrom(networkPlayerOutput).getChooseFrom
-      transmitted.getCardList.asScala must_==List("Copper", "Silver", "Silver", "Copper")
+      transmitted.getCardList must_==List("Copper", "Silver", "Silver", "Copper")
       transmitted.getMinimumChoices must_==0
       transmitted.getMaximumChoices must_==2
       transmitted.getVerb must_=="discard"
@@ -65,16 +65,14 @@ object NetworkPlayerSpec extends Specification with Mockito {
       mockOtherPlayer.describe returns "another player"
       networkPlayer.query(ChooseForOtherPlayer(List(Copper(), Silver()), mockOtherPlayer, Gain)) must_==false
       val transmitted = ServerToClient.parseDelimitedFrom(toInput(output)).getQuery.getChooseForOtherPlayer
-      transmitted.getPlayer must_=="another player"
-      transmitted.getVerb must_=="gain"
-      transmitted.getCardList.asScala must_==List("Copper", "Silver")
+      (transmitted.getPlayer must_=="another player") and (transmitted.getVerb must_=="gain") and (transmitted.getCardList must_==List("Copper", "Silver"))
     }
 
     "transmit hand contents" in {
       val networkPlayer = makeNetworkPlayer(noInput, output)
       networkPlayer.newHand(List(Copper(), Silver(), Copper()))
       val transmitted = ServerToClient.parseDelimitedFrom(toInput(output)).getHand
-      transmitted.getCardList.asScala must_==List("Copper", "Silver", "Copper")
+      transmitted.getCardList must_==List("Copper", "Silver", "Copper")
     }
 
     
@@ -83,20 +81,19 @@ object NetworkPlayerSpec extends Specification with Mockito {
       mockOtherPlayer.describe returns "another player"
       networkPlayer.playerEvent(mockOtherPlayer, Discard, List(Copper(), Silver()))
       val transmitted = ServerToClient.parseDelimitedFrom(toInput(output)).getEvent
-      transmitted.getVerb() must_==Discard.present
-      transmitted.getPlayer() must_=="another player"
-      transmitted.getCardList.asScala must_==List("Copper", "Silver")
+      (transmitted.getVerb must_==Discard.present) and (transmitted.getPlayer must_=="another player") and
+        (transmitted.getCardList must_==List("Copper", "Silver"))
     }
 
     "quietly swallow events concerning no cards" in {
-      val networkPlayer = makeNetworkPlayer(noInput, output)
+      val networkPlayer = makeNetworkPlayer(noInput(), output)
       mockOtherPlayer.describe returns "moo"
       networkPlayer.playerEvent(mockOtherPlayer, Discard, Nil)
       output.toByteArray.length must_==0
     }
 
     "transmit a start event" in {
-      val networkPlayer = makeNetworkPlayer(noInput, output)
+      val networkPlayer = makeNetworkPlayer(noInput(), output)
       val currentTime = System.currentTimeMillis()
       networkPlayer.gameEvent(Start(currentTime))
       val transmitted = ServerToClient.parseDelimitedFrom(toInput(output)).getGameEvent.getStart
@@ -104,13 +101,12 @@ object NetworkPlayerSpec extends Specification with Mockito {
     }
 
     "transmit a game over event" in {
-      val networkPlayer = makeNetworkPlayer(noInput, output)
+      val networkPlayer = makeNetworkPlayer(noInput(), output)
       val leaderBoard = List((StringDescription("foo"), 12), (StringDescription("bar"), 15))
       networkPlayer.gameEvent(End(leaderBoard))
       val transmitted = ServerToClient.parseDelimitedFrom(toInput(output)).getGameEvent.getGameOver
-      val playerList = transmitted.getPlayerWithScoreList.asScala
-      playerList.map(_.getPlayerName) must_==leaderBoard.map(_._1.describe)
-      playerList.map(_.getScore) must_==leaderBoard.map(_._2)      
+      val playerList = transmitted.getPlayerWithScoreList
+      (playerList.map(_.getPlayerName) must_==leaderBoard.map(_._1.describe())) and (playerList.map(_.getScore) must_==leaderBoard.map(_._2))
     }
 
     // FIXME: need some tests that show behaviour with bad streams, protobuf occasionally spits out very poor error messages.

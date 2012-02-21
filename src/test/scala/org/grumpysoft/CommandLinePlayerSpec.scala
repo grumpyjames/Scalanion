@@ -4,7 +4,7 @@ import actioncards.Remodel
 import scala.collection.mutable.Stack
 
 import TreasureCards._
-import org.specs.Specification
+import org.specs2.mutable.Specification
 
 class FakePrompter(var responses : Stack[Seq[Int]]) extends Promptable {
   var received : List[(SelfDescribing, Seq[SelfDescribing])] = Nil

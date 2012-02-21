@@ -1,6 +1,6 @@
 package org.grumpysoft
 
-import org.specs.Specification
+import org.specs2.mutable.Specification
 
 import TreasureCards._
 

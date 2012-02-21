@@ -34,7 +34,7 @@ object WitchSpec extends ActionCardSpecBase {
     "have taken the curses from the supply" in {
       there was one(supply).buy(Curse())
       there was one(anotherSupply).buy(Curse())
-      actionResult.supply mustEq(supply)
+      actionResult.supply mustEqual(supply)
     }
     case class OneCardSupply(maybeCard: Option[Card]) extends Supply {
       def buy(card: Card) : Supply = {

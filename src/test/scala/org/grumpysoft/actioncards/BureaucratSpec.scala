@@ -14,6 +14,8 @@ object BureaucratSpec extends ActionCardSpecBase {
 
   val table = makeTable(stacksTwo, stacksThree)
 
+  supply.available(Silver()) returns true
+  supply.buy(Silver()) returns anotherSupply
 
   "bureaucrat" should {
 
@@ -22,16 +24,11 @@ object BureaucratSpec extends ActionCardSpecBase {
       Bureaucrat().play(stacks, playerOne, supply, table)
     }
 
-    doBefore {
-      supply.available(Silver()) returns true
-      supply.buy(Silver()) returns anotherSupply
-    }
-
     "place a silver (from the supply) on top of the player's deck" in {
       val actionResult = Bureaucrat().play(stacks, playerOne, supply, emptyTable)
 
       there was one(supply).buy(Silver())
-      actionResult.supply mustEq(anotherSupply)
+      actionResult.supply mustEqual(anotherSupply)
       actionResult.stacks must_==deckOnly(List(Silver()) ++ threeCoppersAndAnEstate)
       actionResult.treasure must_==0
     }

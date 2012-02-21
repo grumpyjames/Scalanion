@@ -1,6 +1,6 @@
 package org.grumpysoft
 
-import org.specs.Specification
+import org.specs2.mutable.Specification
 
 object OptionFormatterSpec extends Specification {
   val unformatted = List(StringDescription("forum"),StringDescription("quorum"),StringDescription("no"))

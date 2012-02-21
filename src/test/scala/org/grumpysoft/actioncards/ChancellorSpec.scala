@@ -21,7 +21,7 @@ object ChancellorSpec extends ActionCardSpecBase {
       playerOne.query(discardYourDeck) returns false
       val actionResult = Chancellor().play(stacks, playerOne, supply, eventOnlyTable)
       actionResult.treasure must_==2
-      actionResult.stacks mustEq(stacks)
+      actionResult.stacks mustEqual(stacks)
     }
 
   }

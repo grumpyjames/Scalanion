@@ -1,8 +1,8 @@
 package org.grumpysoft
 
 import actioncards.CardFilters
-import org.specs.mock.Mockito
-import org.specs.Specification
+import org.specs2.mock.Mockito
+import org.specs2.mutable.Specification
 import org.grumpysoft.TreasureCards._
 import org.grumpysoft.VictoryCards._
 
@@ -48,7 +48,7 @@ object ActionPhaseSpec extends Specification with Mockito with CardFilters {
     actionCard.play(stacks.discardCard(actionCard), player, supply, table) returns result
   }
 
-  def verifyChoiceAndPlay[T](stacks: Stacks, actionCard: ActionCard, table: Table, result: ActionResult, testBody: () => T) : Unit = {
+  def verifyChoiceAndPlay[T](stacks: Stacks, actionCard: ActionCard, table: Table, result: ActionResult, testBody: () => T) = {
     player.chooseFrom(stacks.hand.filter(isActionCard(_)), Play, 0, 1) returns List(actionCard)
     actionCard.play(stacks.discardCard(actionCard), player, supply, table) returns result
     testBody()
@@ -132,9 +132,9 @@ object ActionPhaseSpec extends Specification with Mockito with CardFilters {
       expectChoiceAndPlay(anotherTwoActionHandStack, secondActionCard, table, remainingActionInHandResult)
       player.chooseFrom(List(thirdActionCard), Play, 0, 1) returns List()
       val actionResult = runAction(twoActionHandStack, table)
-      there was one(player).chooseFrom(actionCardsOneAndTwo, Play, 0, 1)
-      there was one(player).chooseFrom(actionCardsTwoAndThree, Play, 0, 1)
-      there was one(player).chooseFrom(List(thirdActionCard), Play, 0, 1)
+      (there was one(player).chooseFrom(actionCardsOneAndTwo, Play, 0, 1)) and
+        (there was one(player).chooseFrom(actionCardsTwoAndThree, Play, 0, 1)) and
+        (there was one(player).chooseFrom(List(thirdActionCard), Play, 0, 1))
     }
 
     "aggregates buys across multiple action results" in {

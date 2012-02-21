@@ -22,13 +22,13 @@ object RemodelSpec extends ActionCardSpecBase {
       there was one(playerOne).chooseFrom(witchAndDuchy, Gain, 1, 1)
     }
     "trash the first chosen card" in {
-      (actionResult.stacks.hand ++ actionResult.stacks.discard) must notExist(_.eq(copperAndSilver.last))
+      (actionResult.stacks.hand ++ actionResult.stacks.discard) must not contain(copperAndSilver.last)
     }
     "adds the remodelled card to the discard deck of the player" in {
-      actionResult.stacks.discard.head mustEq(witchAndDuchy.last)
+      actionResult.stacks.discard.head mustEqual(witchAndDuchy.last)
     }
     "return the correct supply" in {
-      actionResult.supply mustEq(anotherSupply)
+      actionResult.supply mustEqual(anotherSupply)
     }
     "fire the correct events" in {
       there was one(playerTwo).playerEvent(playerOne, Trash, copperAndSilver.drop(1))

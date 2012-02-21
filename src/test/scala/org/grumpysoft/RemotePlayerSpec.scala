@@ -1,9 +1,9 @@
 package org.grumpysoft
 
 import actioncards.{Remodel, Witch}
-import org.specs.Specification
-import scalaj.collection.Imports._
-import org.specs.mock.Mockito
+import org.specs2.mutable.Specification
+import scala.collection.JavaConversions._
+import org.specs2.mock.Mockito
 import java.io.{InputStream, OutputStream, ByteArrayInputStream, ByteArrayOutputStream}
 import java.lang.String
 import org.grumpysoft.TreasureCards._
@@ -34,21 +34,22 @@ object RemotePlayerSpec extends Specification with Mockito {
   realPlayer.describe returns thePlayer
 
   def eventInput = {
-    makeInput(ServerToClient.newBuilder.setEvent(Event.newBuilder.setPlayer(thePlayer).setVerb(Gain.present).addAllCard(List("Copper", "Silver").asJava)).build.writeDelimitedTo(_))
+    makeInput(ServerToClient.newBuilder.setEvent(Event.newBuilder.setPlayer(thePlayer).setVerb(Gain.present).addAllCard(List("Copper", "Silver"))).build.writeDelimitedTo(_))
   }
 
   def handInput = {
-    makeInput(ServerToClient.newBuilder.setHand(Hand.newBuilder.addAllCard(List(Copper(), Witch().toActionCard, Gold(), Copper()).map(_.describe).asJava).build).build.writeDelimitedTo(_))
+    makeInput(ServerToClient.newBuilder.setHand(Hand.newBuilder.addAllCard(List(Copper(), Witch().toActionCard, Gold(), Copper()).map(_.describe())).build).build.writeDelimitedTo(_))
   }
 
   def choiceInput = {
-    makeInput(ServerToClient.newBuilder.setChooseFrom(ChooseFrom.newBuilder.setVerb(Play.present).setMinimumChoices(2).setMaximumChoices(2).addAllCard(choiceCards.map(_.describe).asJava).build).build.writeDelimitedTo(_))
+    makeInput(ServerToClient.newBuilder.setChooseFrom(ChooseFrom.newBuilder.setVerb(Play.present).setMinimumChoices(2).setMaximumChoices(2).addAllCard(choiceCards.map(_.describe)).build).build.writeDelimitedTo(_))
   }
 
   def queryInput = {
     makeInput({baos =>
       ServerToClient.newBuilder.setQuery(Query.newBuilder.setQuestion(simpleQuery)).build.writeDelimitedTo(baos)
-      ServerToClient.newBuilder.setQuery(Query.newBuilder.setChooseForOtherPlayer(ProtoCfop.newBuilder.setPlayer(playerDave.describe).setVerb(Trash.present).addAllCard(justGold.map(_.describe).asJava))).build.writeDelimitedTo(baos)
+      ServerToClient.newBuilder.setQuery(Query.newBuilder.setChooseForOtherPlayer(ProtoCfop.newBuilder.setPlayer(playerDave.describe())
+        .setVerb(Trash.present).addAllCard(justGold.map(_.describe())))).build.writeDelimitedTo(baos)
     })
   }
 
@@ -56,7 +57,7 @@ object RemotePlayerSpec extends Specification with Mockito {
   val theStart = PbGameEvent.newBuilder.setStart(PbStart.newBuilder.setStartTime(theStartTime).build).build
 
   val leaderboard = List( (StringDescription("foo"), 12), (StringDescription("bar"), 432))
-  val playersWithScores = leaderboard.map(pws => PlayerWithScore.newBuilder.setPlayerName(pws._1.describe).setScore(pws._2).build).asJava
+  val playersWithScores = leaderboard.map(pws => PlayerWithScore.newBuilder.setPlayerName(pws._1.describe).setScore(pws._2).build)
   val theGameOver = GameOver.newBuilder.addAllPlayerWithScore(playersWithScores).build
   val theLeaderboard = PbGameEvent.newBuilder.setGameOver(theGameOver)
 
@@ -91,7 +92,7 @@ object RemotePlayerSpec extends Specification with Mockito {
       val remotePlayer = RemotePlayer(realPlayer, choiceInput, outputBuffer)
       remotePlayer.readAndForward
       there was one(realPlayer).chooseFrom(choiceCards, Play, 2, 2)
-      Choices.parseDelimitedFrom(inputFrom(outputBuffer)).getChoiceList.asScala must_==(List(0,2))
+      Choices.parseDelimitedFrom(inputFrom(outputBuffer)).getChoiceList must_==(List(0,2))
     }
 
     "retrieve answers to queries" in {
@@ -101,8 +102,7 @@ object RemotePlayerSpec extends Specification with Mockito {
       remotePlayer.readAndForward
       remotePlayer.readAndForward
       val responses = inputFrom(outputBuffer)
-      Answer.parseDelimitedFrom(responses).getAnswer must_==false
-      Answer.parseDelimitedFrom(responses).getAnswer must_==true
+      (Answer.parseDelimitedFrom(responses).getAnswer must_==false) and (Answer.parseDelimitedFrom(responses).getAnswer must_==true)
     }
 
     "pass on game events" in {

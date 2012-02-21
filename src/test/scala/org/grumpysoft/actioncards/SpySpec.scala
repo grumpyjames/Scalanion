@@ -31,7 +31,7 @@ object SpySpec extends ActionCardSpecBase {
 
     "have used player one's choices about everyone's top cards" in {
       actionResult.table.head._1.discard must_==copperDuchyAndEstate.take(1)
-      actionResult.table.tail.head._1.deck mustEq(mixOfAllTypes)
+      actionResult.table.tail.head._1.deck mustEqual(mixOfAllTypes)
       actionResult.stacks.discard must_==justDuchy
     }
 

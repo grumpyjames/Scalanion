@@ -1,7 +1,7 @@
 package org.grumpysoft
 
-import org.specs.Specification
-import org.specs.mock.Mockito
+import org.specs2.mutable.Specification
+import org.specs2.mock.Mockito
 
 import org.grumpysoft.TreasureCards._
 import org.grumpysoft.VictoryCards._
@@ -38,7 +38,7 @@ object GameSpec extends Specification with Mockito {
   val theBuyPhase = mock[BuyPhaseFn]
   val theActionPhase = mock[ActionPhaseFn]
 
-  def checkStandardHand(player: SinkPlayer) : Unit = {
+  def checkStandardHand(player: SinkPlayer) = {
     player.hands.flatten.groupBy(_.describe).map(a => (a._1, a._2.size)).toList.sortBy(_._2) must_==List(("Estate", 3),("Copper",7))
   }
 
@@ -77,7 +77,7 @@ object GameSpec extends Specification with Mockito {
     "after a turn each, have given seven coppers and estates to each" in {
       var game = makeGame(players)
       0.until(4).foreach(a => game = game.takeTurn)
-      players.foreach(checkStandardHand(_))
+      players.map(checkStandardHand(_)).reduceLeft(_ and _)
     }
   }
 
@@ -100,8 +100,8 @@ object GameSpec extends Specification with Mockito {
     val afterTwoTurns = afterOneTurn.takeTurn
 
     "end up passing the correct supply and treasure to the buy phase" in {
-      there was one(theBuyPhase).doBuyPhase(1, 3, players.head, theSupply)
-      there was one(theBuyPhase).doBuyPhase(1, 0, players.tail.head, postBuySupply)
+      (there was one(theBuyPhase).doBuyPhase(1, 3, players.head, theSupply)) and
+        (there was one(theBuyPhase).doBuyPhase(1, 0, players.tail.head, postBuySupply))
     }
 
     "add the bought cards to the buying player's discard" in {
@@ -109,7 +109,7 @@ object GameSpec extends Specification with Mockito {
     }
 
     "transmit buy events to the other players" in {
-      players.tail.foreach(player => player.events must_==List((players.head, Gain, List(Silver()))))
+      players.tail.map(player => player.events must_==List((players.head, Gain, List(Silver())))).reduceLeft(_ and _)
     }
   }
 
@@ -127,10 +127,10 @@ object GameSpec extends Specification with Mockito {
     val afterOneTurn = Game(players, cannedStacks, theSupply, theBuyPhase, theActionPhase).takeTurn
 
     "correctly delegate to it once per turn" in {
-      there was one(theActionPhase).doActionPhase(stacksOne, playerOne, theSupply, table)
-      there was one(theBuyPhase).doBuyPhase(1, 1 + 3, playerOne, postActionSupply)
-      afterOneTurn.allStacks.last.discard must_==Remodel().toActionCard :: stacksOne.hand
-      afterOneTurn.supply must_==postBuySupply
+      (there was one(theActionPhase).doActionPhase(stacksOne, playerOne, theSupply, table)) and
+        (there was one(theBuyPhase).doBuyPhase(1, 1 + 3, playerOne, postActionSupply)) and
+        (afterOneTurn.allStacks.last.discard must_==Remodel().toActionCard :: stacksOne.hand) and
+        (afterOneTurn.supply must_==postBuySupply)
     }
   }
 

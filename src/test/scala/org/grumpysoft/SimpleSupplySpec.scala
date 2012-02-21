@@ -1,13 +1,12 @@
 package org.grumpysoft
 
-import org.specs.Specification
+import org.specs2.mutable.Specification
 
 import Card._
 import TreasureCards._
 import VictoryCards._
 import actioncards._
-
-import org.specs.matcher.Matcher
+import org.specs2.matcher.{MatchResult, Expectable}
 
 object SimpleSupplySpec extends Specification {
 
@@ -63,9 +62,13 @@ object SimpleSupplySpec extends Specification {
     depletedSupply.available(card) must_==false
   }
 
-  case class beSupplyContaining(count: Int, card: Card) extends Matcher[Supply] {
-    def apply(a: => Supply) = {
-      (a.available(card) && !depleted(a).available(card), "matched", "did not match")
+  case class beSupplyContaining(count: Int, card: Card) extends org.specs2.matcher.Matcher[Supply] {
+    /**
+     * apply this matcher to an Expectable
+     * @return a MatchResult describing the outcome of the match
+     */
+    def apply[S <: Supply](a: Expectable[S]): MatchResult[S] = {
+      result(a.value.available(card) && !depleted(a.value).available(card), "matched", "did not match", a)
     }
 
     def depleted(a : Supply) : Supply = {

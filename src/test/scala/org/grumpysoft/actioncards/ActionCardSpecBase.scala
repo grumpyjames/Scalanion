@@ -1,7 +1,7 @@
 package org.grumpysoft.actioncards
 
-import org.specs.mock.Mockito
-import org.specs.Specification
+import org.specs2.mock.Mockito
+import org.specs2.mutable.Specification
 import org.grumpysoft.TreasureCards._
 import org.grumpysoft.VictoryCards._
 import org.grumpysoft._
@@ -53,8 +53,8 @@ abstract class ActionCardSpecBase extends Specification with Mockito {
     return List(stacksTwo, stacksThree, stacksFour).zip(List(playerTwo, playerThree, playerFour))
   }
 
-  def checkEventReceived(player: GenericPlayer[Card], verb: Verb, cards: Seq[Card], players: Seq[GenericPlayer[Card]]) : Unit = {
-    players.foreach(otherPlayer => there was one(otherPlayer).playerEvent(player, verb, cards))
+  def checkEventReceived(player: GenericPlayer[Card], verb: Verb, cards: Seq[Card], players: Seq[GenericPlayer[Card]]) = {
+    players.map(otherPlayer => there was one(otherPlayer).playerEvent(player, verb, cards)).reduceLeft(_ and _)
   }
 
   def actionCardFilter(wantActions : Boolean) : Card => Boolean = {

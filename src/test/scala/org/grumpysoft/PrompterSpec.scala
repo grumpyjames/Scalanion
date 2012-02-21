@@ -2,7 +2,7 @@ package org.grumpysoft
 
 import scala.collection.mutable.Stack
 
-import org.specs.Specification
+import org.specs2.mutable.Specification
 
 class FakePrinter extends Printer {
   var printedLines : List[String] = List()
@@ -103,8 +103,8 @@ object PrompterSpec extends Specification {
     user.cannedInputs.isEmpty must_==true
   }
 
-  def expectPromptOf(message: String) : Unit = {
-    val (user, printer, player) = createFixture(Stack(Nil))
+  def expectPromptOf(message: String) = {
+    val (_, printer, player) = createFixture(Stack(Nil))
     player.prompt(StringDescription(message))
     printer.printedLines must_==List(message)
   }

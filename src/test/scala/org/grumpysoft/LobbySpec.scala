@@ -1,7 +1,7 @@
 package org.grumpysoft
 
-import org.specs.Specification
-import scalaj.collection.Imports._
+import org.specs2.mutable.Specification
+import scala.collection.JavaConversions._
 import java.util.concurrent.CopyOnWriteArrayList
 import java.net.Socket
 import org.grumpysoft.pb.Scalanion.Introduction
@@ -30,7 +30,7 @@ object LobbySpec extends Specification {
   def sendPlayerIntroductions(names: List[String]) : Unit = {
     runInOtherThread (new Runnable() {
       def run = {
-        playerSockets.asScala.zip(names).map(a => Introduction.newBuilder().setPlayerName(a._2).build.writeDelimitedTo(a._1.getOutputStream))
+        playerSockets.zip(names).map(a => Introduction.newBuilder().setPlayerName(a._2).build.writeDelimitedTo(a._1.getOutputStream))
       }
     })
   }
