@@ -2,3 +2,4 @@
 project/boot/*
 target/*
 project/build/target/*
+project/target
