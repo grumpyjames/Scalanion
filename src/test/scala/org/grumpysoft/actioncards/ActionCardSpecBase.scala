@@ -6,7 +6,7 @@ import org.grumpysoft.TreasureCards._
 import org.grumpysoft.VictoryCards._
 import org.grumpysoft._
 
-abstract class ActionCardSpecBase extends Specification with Mockito {
+trait ActionCardSpecBase extends Specification with Mockito {
 
   protected val playerOne = mockAs[GenericPlayer[Card]]("Player One")
   protected val playerTwo = mockAs[GenericPlayer[Card]]("Player Two")
@@ -46,11 +46,11 @@ abstract class ActionCardSpecBase extends Specification with Mockito {
    * make a table of player two and player three, giving them the appropriate stacks
    */
   protected def makeTable(stacksTwo: Stacks, stacksThree: Stacks) : Table = {
-    return List(stacksTwo, stacksThree).zip(List(playerTwo, playerThree))
+    List(stacksTwo, stacksThree).zip(List(playerTwo, playerThree))
   }
 
   protected def makeTable(stacksTwo: Stacks, stacksThree: Stacks, stacksFour: Stacks) : Table = {
-    return List(stacksTwo, stacksThree, stacksFour).zip(List(playerTwo, playerThree, playerFour))
+    List(stacksTwo, stacksThree, stacksFour).zip(List(playerTwo, playerThree, playerFour))
   }
 
   def checkEventReceived(player: GenericPlayer[Card], verb: Verb, cards: Seq[Card], players: Seq[GenericPlayer[Card]]) = {
