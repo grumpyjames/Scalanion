@@ -4,60 +4,18 @@ import scala.collection.mutable.Stack
 
 import org.specs2.mutable.Specification
 
-class FakePrinter extends Printer {
-  var printedLines : List[String] = List()
-  def println(s: String) : Unit = { printedLines = s :: printedLines }
-}
-
-class FakeUserInput(var cannedInputs : Stack[Seq[Int]]) extends UserInput {
-  def read() : Seq[Int] = {
-    cannedInputs.pop
-  }
-}
-
-object Magic {
-  val returnValue = 5;
-}
-
-trait DevNullPrompter extends Promptable {
-  def prompt(message: SelfDescribing) : Unit = {}
-}
-
-object FormattedPromptableSpec extends Specification {
-  class TestPrompterWithFormatter(expectedGreeting: String, formatted: List[String], cannedFormatter: Formatter) extends DevNullPrompter {
-    def prompt(greeting: SelfDescribing, options: Seq[SelfDescribing]) : Seq[Int] = {
-      val stringOptions = options.map(_.describe)
-      greeting.describe must_==expectedGreeting
-      stringOptions must_==formatted
-      List(Magic.returnValue);
-    }
-
-    protected def formatter() : Formatter = { cannedFormatter }
-  }
-
-  val unformatted = List(StringDescription("some"), StringDescription("bloody"), StringDescription("strings"))
-  val formatted = List("formatted", "strings")
-  val greeting = "Hello"
-
-  val cannedFormatter = new Formatter() {
-    def format(options: Seq[SelfDescribing]) = {
-      options must_==unformatted
-      formatted.map(StringDescription(_))
-    }
-  }
-  val prompter = new TestPrompterWithFormatter(greeting, formatted, cannedFormatter) with FormattedPrompts
-  prompter.prompt(StringDescription(greeting), unformatted).head must_== Magic.returnValue
-}
-
-object UniquererSpec extends Specification {
-  "uniquerer" should {
-    "settify a sequence" in {
-      uniquery.toSet(List(1,1,1,3,4,5,4,6)) must_==List(1,3,4,5,6)
-    }
-  }
-}
-
 object PrompterSpec extends Specification {
+
+  class FakePrinter extends Printer {
+    var printedLines : List[String] = List()
+    def println(s: String) { printedLines = s :: printedLines }
+  }
+
+  class FakeUserInput(var cannedInputs : Stack[Seq[Int]]) extends UserInput {
+    def read() : Seq[Int] = {
+      cannedInputs.pop()
+    }
+  }
 
   val options = List(StringDescription("one"),StringDescription("two"),StringDescription("three"))
   val greeting = "Good day to you, sir!"
@@ -74,21 +32,21 @@ object PrompterSpec extends Specification {
     }
 
     "reject reads that don't match an option, and retry until a valid option is given" in {
-      val (user, printer, player) = createFixture(Stack(List(2),List(5),List(4)))
+      val (user, printer, player) = createFixture(Stack(List(4),List(5),List(2)))
       val index = player.prompt(StringDescription(greeting), options)
-      index.head must_== 2
-      printer.printedLines.reverse must_== expectedOutput ++ expectedOutput ++ expectedOutput
-      user.cannedInputs.isEmpty must_== true
+      (index.head must_== 2) and
+        (printer.printedLines.reverse must_== (expectedOutput ++ expectedOutput ++ expectedOutput)) and
+        (user.cannedInputs.isEmpty must_== true)
     }
 
     "reject reads returning multiple choices if one or more of them is invalid" in {
       val expectedReturn = List(2,3)
-      promptExpectingReturn(greeting, options, expectedReturn, Stack(List(2,3), List(2,55), List(0,2), List(5)))
+      promptExpectingReturn(greeting, options, expectedReturn, Stack(List(2,55), List(0,2), List(5), List(2,3)))
     }
 
     "merge identical results" in {
       val expectedReturn = List(2,1)
-      promptExpectingReturn(greeting, options, expectedReturn, Stack(List(2,2,1,1), List(4,5,1), List(2,9)))
+      promptExpectingReturn(greeting, options, expectedReturn, Stack(List(4,5,1), List(2,9), List(2,2,1,1)))
     }
 
     "just print update messages verbatim" in {
@@ -96,11 +54,10 @@ object PrompterSpec extends Specification {
     }
   }
 
-  def promptExpectingReturn(greeting: String, options: Seq[SelfDescribing], expectedResult: Seq[Int], inputs: Stack[Seq[Int]]) : Unit = {
-    val (user, printer, player) = createFixture(inputs)
+  def promptExpectingReturn(greeting: String, options: Seq[SelfDescribing], expectedResult: Seq[Int], inputs: Stack[Seq[Int]]) = {
+    val (user, _, player) = createFixture(inputs)
     val result = player.prompt(StringDescription(greeting), options)
-    result must_==expectedResult
-    user.cannedInputs.isEmpty must_==true
+    (result must_==expectedResult) and (user.cannedInputs must beEmpty)
   }
 
   def expectPromptOf(message: String) = {
