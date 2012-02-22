@@ -8,36 +8,42 @@ import org.grumpysoft.pb.Scalanion.Introduction
 
 object LobbySpec extends Specification {
 
-  val playerSockets = new CopyOnWriteArrayList[Socket]
+  trait TestState extends org.specs2.specification.Scope {
+    val playerSockets = new CopyOnWriteArrayList[Socket]
 
-  val lobbyPort = 9090
+    val lobbyPort = 9090
 
-  def connectTwoPlayers: Unit = {
-    runInOtherThread(new Runnable() {
-      def run = {
-        playerSockets.add(new Socket("localhost", lobbyPort))
-        playerSockets.add(new Socket("localhost", lobbyPort))
-      }
-    })
+    def connectTwoPlayers() {
+      runInOtherThread(new Runnable() {
+        def run = {
+          playerSockets.add(new Socket("localhost", lobbyPort))
+          playerSockets.add(new Socket("localhost", lobbyPort))
+        }
+      })
+    }
+
+    def runInOtherThread(r : Runnable) {
+      val otherThread = new Thread(r)
+      otherThread.start
+      otherThread.join
+    }
+
+    def sendPlayerIntroductions(names: List[String]) {
+      runInOtherThread (new Runnable() {
+        def run() {
+          playerSockets.zip(names).map(a => Introduction.newBuilder().setPlayerName(a._2).build.writeDelimitedTo(a._1.getOutputStream))
+        }
+      })
+    }
+
+    val playerNames = List("geoff", "peter")
   }
 
-  def runInOtherThread(r : Runnable) : Unit = {
-    val otherThread = new Thread(r)
-    otherThread.start
-    otherThread.join
-  }
-
-  def sendPlayerIntroductions(names: List[String]) : Unit = {
-    runInOtherThread (new Runnable() {
-      def run = {
-        playerSockets.zip(names).map(a => Introduction.newBuilder().setPlayerName(a._2).build.writeDelimitedTo(a._1.getOutputStream))
-      }
-    })
-  }
+  sequential
 
   "the lobby" should {
-    val playerNames = List("geoff", "peter")
-    "treat incoming connections as players" in {
+
+    "treat incoming connections as players" in new TestState {
       val lobby = Lobby(lobbyPort)
       try {
         connectTwoPlayers
@@ -48,7 +54,7 @@ object LobbySpec extends Specification {
         lobby.close
       }
     }
-    "work out the connected players' names from their introductions" in {
+    "work out the connected players' names from their introductions" in new TestState {
       val lobby = Lobby(lobbyPort)
       try {
         connectTwoPlayers
