@@ -11,7 +11,7 @@ libraryDependencies ++= Seq(
     "org.hamcrest" % "hamcrest-core" % "1.3.RC2" % "test->default",
     "org.hamcrest" % "hamcrest-library" % "1.3.RC2" % "test->default",
     "org.mockito" % "mockito-all" % "1.8.5" % "test",
-    "org.scalatest" % "scalatest" % "1.3",
+    "org.scalatest" %% "scalatest" % "1.7.1" % "test",
     "org.specs2" %% "specs2" % "1.8.2" % "test"
 )
  
