@@ -6,28 +6,28 @@ import scala.collection.mutable.Stack
 import TreasureCards._
 import org.specs2.mutable.Specification
 
-class FakePrompter(var responses : Stack[Seq[Int]]) extends Promptable {
-  var received : List[(SelfDescribing, Seq[SelfDescribing])] = Nil
-  var messages : List[SelfDescribing] = Nil
-
-  def prompt(greeting: SelfDescribing, options : Seq[SelfDescribing]) : Seq[Int] = {
-    received = received ++ List((greeting, options))
-    responses.pop
-  }
-
-  def prompt(message: SelfDescribing) : Unit = {
-    messages = messages ++ List(message)
-  }
-}
-
 object CommandLinePlayerSpec extends Specification {
 
-  def checkReceived(description: String, options: Seq[SelfDescribing], prompter: FakePrompter) : Unit = {
-    prompter.received.head._1.describe must_==description
-    prompter.received.head._2 must_==options
+  class FakePrompter(var responses : Stack[Seq[Int]]) extends Promptable {
+    var received : List[(SelfDescribing, Seq[SelfDescribing])] = Nil
+    var messages : List[SelfDescribing] = Nil
+
+    def prompt(greeting: SelfDescribing, options : Seq[SelfDescribing]) : Seq[Int] = {
+      received = received ++ List((greeting, options))
+      responses.pop
+    }
+
+    def prompt(message: SelfDescribing) : Unit = {
+      messages = messages ++ List(message)
+    }
   }
 
-  def checkReceived(description: String, options: Seq[SelfDescribing], prompter: FakePrompter, count: Int) : Unit = {
+  def checkReceived(description: String, options: Seq[SelfDescribing], prompter: FakePrompter) = {
+    (prompter.received.head._1.describe must_==description) and
+      (prompter.received.head._2 must_==options)
+  }
+
+  def checkReceived(description: String, options: Seq[SelfDescribing], prompter: FakePrompter, count: Int) = {
     prompter.received.map(a => (a._1.describe, a._2)) must_==List.fill(4)(description, options)
   }
 
@@ -59,7 +59,7 @@ object CommandLinePlayerSpec extends Specification {
     }
 
     "badger the user until they select exactly the right number of cards" in {
-      val (player, prompt) = makeTestWith(Stack(List(1,2,3), List(1,2), List(), List(1,2,3,4)))
+      val (player, prompt) = makeTestWith(Stack(List(1,2), List(), List(1,2,3,4), List(1,2,3)))
       player.chooseFrom(threeOptions, Trash, 3, 3) must_== (List(1,2,3))
       checkReceived("Choose 3 cards to trash", threeOptions, prompt, 4)
     }
