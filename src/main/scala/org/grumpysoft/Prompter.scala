@@ -5,8 +5,8 @@ class Prompter(input: UserInput, output: Printer) extends Promptable {
     uniquery.toSet(readNext(greeting, options).dropWhile({response => invalidReturn(options, response)}).head)
   }
 
-  def prompt(message: SelfDescribing) : Unit = {
-    output.println(message.describe)
+  def prompt(message: SelfDescribing) {
+    output.println(message.describe())
   }
 
   private def invalidReturn(options : Seq[SelfDescribing], result : Seq[Int]) : Boolean = {
@@ -15,22 +15,19 @@ class Prompter(input: UserInput, output: Printer) extends Promptable {
 
   private def readNext(greeting: SelfDescribing, options: Seq[SelfDescribing]) : Stream[Seq[Int]] = {
     doPrompt(greeting, options)
-    Stream.cons(input.read, readNext(greeting, options))
+    Stream.cons(input.read(), readNext(greeting, options))
   }
 
-  private def doPrompt(greeting: SelfDescribing, options: Seq[SelfDescribing]) : Unit = {
-    output.println(greeting.describe)
-    options.foreach(selfDescribing => output.println(selfDescribing.describe))
+  private def doPrompt(greeting: SelfDescribing, options: Seq[SelfDescribing]) {
+    output.println(greeting.describe())
+    options.foreach(opt => output.println(opt.describe()))
   }
 }
 
-// TODO: this must be useful elsewhere! (and get rid of the reverse?)
+// TODO: get rid of the reverse
 object uniquery {
-  def toSet[A](stream : Seq[A]) : Seq[A] = {
-    val aList : List[A] = List()
-    stream.foldLeft(aList) ( (acc,el) =>
-      if (acc.contains(el)) acc else el :: acc
-    ).reverse
+  def toSet(seq : Seq[Int]) : Seq[Int] = {
+    seq.toSet.toList.sorted
   }
 }
 

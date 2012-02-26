@@ -45,7 +45,7 @@ object PrompterSpec extends Specification {
     }
 
     "merge identical results" in {
-      val expectedReturn = List(2,1)
+      val expectedReturn = List(1,2)
       promptExpectingReturn(greeting, options, expectedReturn, Stack(List(4,5,1), List(2,9), List(2,2,1,1)))
     }
 
