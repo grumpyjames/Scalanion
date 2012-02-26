@@ -4,7 +4,7 @@ import TreasureCards._
 import VictoryCards._
 import org.specs2.mutable.Specification
 
-class StacksSpec extends Specification {
+object StacksSpec extends Specification {
 
   val cards = List(Copper(), Copper(), Estate(), Copper(), Estate(), Copper(), Estate())
   val twoCoppers = List(Copper(), Copper())
