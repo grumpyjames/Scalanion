@@ -7,21 +7,11 @@ import org.grumpysoft.TreasureCards._
 import org.grumpysoft.VictoryCards._
 import org.grumpysoft.actioncards.Remodel
 
-object GameSpec extends Specification with Mockito {
+object GameSpec extends Specification with Mockito with GameSpecState {
 
   val supply = mock[Supply]
   val buyPhase = mock[BuyPhaseFn]
   val actionPhase = mock[ActionPhaseFn]
-
-  def checkStandardHand(player: SinkPlayer) = {
-    player.hands.flatten.groupBy(_.describe()).map(a => (a._1, a._2.size)).toList.sortBy(_._2) must_==List(("Estate", 3),("Copper",7))
-  }
-
-  def defaultDeck() = { Copper().times(10) }
-
-  def deckOnly : Stacks = {
-    Stacks.deckOnly(defaultDeck())
-  }
 
   val players = List.fill(4)(new SinkPlayer())
 

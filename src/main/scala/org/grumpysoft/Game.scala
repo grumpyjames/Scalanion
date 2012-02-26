@@ -40,6 +40,8 @@ private case object DefaultActionPhaseFn extends ActionPhaseFn {
 
 
 // TODO: possibly a misnomer here?
+// This is actually the state of the game, bundled with some wiring of how it is played.
+// perhaps these concerns could be disassociated?
 case class Game(players: List[GenericPlayer[Card]],
                 allStacks: List[Stacks],
                 supply: Supply,

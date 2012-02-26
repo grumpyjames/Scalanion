@@ -5,7 +5,7 @@ import org.grumpysoft.TreasureCards._
 
 object GamePhaseSpec extends org.specs2.mutable.Specification with org.specs2.mock.Mockito {
 
-  trait TestState extends org.specs2.specification.Scope {
+  trait TestState extends GameSpecState {
     val supply = mockAs[Supply]("initial supply")
     val postBuySupply = mockAs[Supply]("supply after the first buy phase")
     val buyPhase = mock[BuyPhaseFn]
@@ -17,21 +17,10 @@ object GamePhaseSpec extends org.specs2.mutable.Specification with org.specs2.mo
     val playerOneHand = List(Copper(), Silver())
     val cannedStacks = Stacks(defaultDeck(), playerOneHand, Nil) :: otherStacks
 
-    def defaultDeck() = { Copper().times(10) }
-
-    def deckOnly : Stacks = {
-      Stacks.deckOnly(defaultDeck())
-    }
-
-    case class BoringActionPhase() extends ActionPhaseFn {
-      def doActionPhase(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
-        ActionResult.noTreasureOrBuysOrActions(stacks, supply, table)
-      }
-    }
-
     supply.gameOver returns false
     buyPhase.doBuyPhase(1, 3, players.head, supply) returns buyResult
     buyPhase.doBuyPhase(1, 0, players(1), postBuySupply) returns secondBuyResult
+
     val game = Game(players, cannedStacks, supply, buyPhase, BoringActionPhase())
     val afterOneTurn = game.takeTurn
     val afterTwoTurns = afterOneTurn.takeTurn
@@ -40,8 +29,7 @@ object GamePhaseSpec extends org.specs2.mutable.Specification with org.specs2.mo
   "a game, when given some canned stacks" should {
 
     "end up passing the correct supply and treasure to the buy phase" in new TestState {
-      (afterOneTurn.supply must be(postBuySupply)) and
-        (there was one(buyPhase).doBuyPhase(1, 3, players.head, supply)) and
+      (there was one(buyPhase).doBuyPhase(1, 3, players.head, supply)) and
         (there was one(buyPhase).doBuyPhase(1, 0, players(1), postBuySupply))
     }
 
