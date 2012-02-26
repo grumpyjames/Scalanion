@@ -3,7 +3,7 @@ package org.grumpysoft
 
 object Game {
   private def makeStacks(count: Int) : List[Stacks] = {
-    List.fill(count)(Stacks.base)
+    List.fill(count)(Stacks.base())
   }
 
   def apply(players: List[GenericPlayer[Card]], supply: Supply, buyPhase: BuyPhaseFn, actionPhase: ActionPhaseFn) : Game = {
@@ -66,11 +66,11 @@ case class Game(players: List[GenericPlayer[Card]],
 
     def takeTurn(currentStacks: Stacks) : Game = {
       val actionResult = actionPhase.doActionPhase(currentStacks, currentPlayer, supply, otherStacks.zip(otherPlayers))
-      actionResult.supply.gameOver match {
+      actionResult.supply.gameOver() match {
         case true => nextGame(currentPlayer :: otherPlayers, actionResult.stacks :: otherStacks, actionResult.supply)
         case false => {
           val (nextSupply, boughtCards) = doBuyPhase(actionResult.treasure, 1 + actionResult.buys, actionResult.supply, actionResult.stacks.hand)
-          val finalStacks = actionResult.stacks.gain(boughtCards).endTurn
+          val finalStacks = actionResult.stacks.gain(boughtCards).endTurn()
           currentPlayer.newHand(finalStacks.hand)
           nextGame(nextPlayers(actionResult), nextStacks(actionResult, finalStacks), nextSupply)
         }
@@ -83,19 +83,19 @@ case class Game(players: List[GenericPlayer[Card]],
   }
 
   def takeTurn : Game = {
-    if (!isOver()) InnerGame(players.head, players.tail, allStacks.tail).takeTurn(allStacks.head)
+    if (!isOver) InnerGame(players.head, players.tail, allStacks.tail).takeTurn(allStacks.head)
     else this
   }
 
-  def isOver() : Boolean = {
-    supply.gameOver
+  def isOver: Boolean = {
+    supply.gameOver()
   }
 
   def leaderboard() : List[(SelfDescribing, Int)] = {
     players.zip(allStacks.map(Scorer.scoreStacks(_))).sortBy(-1 * _._2)
   }
 
-  override def toString() : String = {
+  override def toString: String = {
     players.zip(allStacks).map(a => a._1.describe + " " + a._2.toString).foldLeft("game: ")(_ + "\n" + _)
   }
 

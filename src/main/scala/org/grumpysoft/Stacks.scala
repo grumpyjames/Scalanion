@@ -8,7 +8,7 @@ import VictoryCards.Estate
 case class Stacks(deck: List[Card], hand: List[Card], discard: List[Card]) {
 
   def endTurn() : Stacks = {
-    Stacks(deck, List(), discard ++ hand).addCards(5)
+    Stacks(deck, Nil, discard ++ hand).addCards(5)
   }
 
   def recycleDiscard() : Stacks = {
@@ -17,7 +17,7 @@ case class Stacks(deck: List[Card], hand: List[Card], discard: List[Card]) {
 
   def addCards(count: Int) : Stacks = {
     if (deck.size < count) {
-      Stacks(Nil, deck ++ hand, discard).recycleDiscard.addCards(count - deck.size)
+      Stacks(Nil, deck ++ hand, discard).recycleDiscard().addCards(count - deck.size)
     }
     else {
       Stacks(deck.drop(count), deck.take(count) ++ hand, discard)
@@ -48,7 +48,7 @@ case class Stacks(deck: List[Card], hand: List[Card], discard: List[Card]) {
 
   def discardCard(card: Card) : Stacks = hand.find(_.eq(card)) match {
     case Some(a) => Stacks(deck, hand.filter(_.ne(a)), a :: discard)
-    case None => error("argh")
+    case None => sys.error("argh")
   }
 
   def discardCards(cards: Seq[Card]) : Stacks = {
@@ -56,12 +56,12 @@ case class Stacks(deck: List[Card], hand: List[Card], discard: List[Card]) {
     Stacks(deck, newHand, toDiscard ++ discard)
   }
 
-  override def toString() : String = {
+  override def toString: String = {
     asString(deck, "deck") + " " + asString(hand, "hand") + " " + asString(discard, "discard")
   }
 
   private def asString(cards: List[Card], name: String) : String = {
-    cards.map(_.describe).foldLeft(name + ":")(_ + " " + _)
+    cards.map(_.describe()).foldLeft(name + ":")(_ + " " + _)
   }
 
 }
@@ -70,18 +70,18 @@ object Stacks {
 
   def base() : Stacks = {
     val deck = List(Copper(), Copper(), Copper(), Copper(), Copper(), Copper(), Copper(), Estate(), Estate(), Estate())
-    deckOnly(shuffle(deck)).endTurn
+    deckOnly(shuffle(deck)).endTurn()
   }
 
   def empty() : Stacks = {
-    Stacks(List(), List(), List())
+    Stacks(Nil, Nil, Nil)
   }
 
   def handOnly(hand: List[Card]) = {
-    Stacks(List(), hand, List())
+    Stacks(Nil, hand, Nil)
   }
 
   def deckOnly(deck: List[Card]) = {
-    Stacks(deck, List(), List())
+    Stacks(deck, Nil, Nil)
   }
 }

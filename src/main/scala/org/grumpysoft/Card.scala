@@ -6,16 +6,16 @@ object Card {
 
 sealed abstract class Card(cost: Int) extends SelfDescribing {
   def price() : Int = { cost }
-  override def toString() : String = { describe() }
+  override def toString: String = { describe() }
   protected def copyThyself() : Card;
 
   def unapply(wireFormat: String) : Option[Card] = {
-    if (this.describe == wireFormat) Some(this.copyThyself)
+    if (this.describe == wireFormat) Some(this.copyThyself())
     else None
   }
 
   def times(count: Int) : List[Card] = {
-    List.iterate(this, count)(_.copyThyself)
+    List.iterate(this, count)(_.copyThyself())
   }
 }
 
