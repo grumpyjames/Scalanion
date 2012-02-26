@@ -1,8 +1,13 @@
 package org.grumpysoft
 
 class Prompter(input: UserInput, output: Printer) extends Promptable {
+  private def asSortedSetAsSeq(seq : Seq[Int]) : Seq[Int] = {
+    seq.toSet.toList.sorted
+  }
+
+
   def prompt(greeting: SelfDescribing, options : Seq[SelfDescribing]) : Seq[Int] = {
-    uniquery.toSet(readNext(greeting, options).dropWhile({response => invalidReturn(options, response)}).head)
+    asSortedSetAsSeq(readNext(greeting, options).dropWhile({response => invalidReturn(options, response)}).head)
   }
 
   def prompt(message: SelfDescribing) {
@@ -21,13 +26,6 @@ class Prompter(input: UserInput, output: Printer) extends Promptable {
   private def doPrompt(greeting: SelfDescribing, options: Seq[SelfDescribing]) {
     output.println(greeting.describe())
     options.foreach(opt => output.println(opt.describe()))
-  }
-}
-
-// TODO: get rid of the reverse
-object uniquery {
-  def toSet(seq : Seq[Int]) : Seq[Int] = {
-    seq.toSet.toList.sorted
   }
 }
 
