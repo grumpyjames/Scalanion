@@ -26,6 +26,13 @@ trait BuyPhaseFn {
 
 trait ActionPhaseFn {
   type Table = Seq[(Stacks, GenericPlayer[Card])]
+  /**
+   * @param stacks : The stacks of the currently active player
+   * @param player : The currently active player
+   * @param supply : The currently active supply
+   * @param table : The remaining 'passive' players with their stacks
+   * @return the result of this action phase
+   */
   def doActionPhase(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult;
 }
 
@@ -60,6 +67,7 @@ case class Game(state: GameState,
   private case class InnerGame(currentPlayer: GenericPlayer[Card],
                                otherPlayers: List[GenericPlayer[Card]],
                                otherStacks: List[Stacks]) {
+    val defaultBuyCount: Int = 1
 
     private def nextPlayers(actionResult: ActionResult): List[GenericPlayer[Card]] = {
       actionResult.table.map(_._2).toList ++ List(currentPlayer)
@@ -69,22 +77,22 @@ case class Game(state: GameState,
       actionResult.table.map(_._1).toList ++ List(finalStacks)
     }
 
-    private def doBuyPhase(treasure: Int, buys: Int, buySupply: Supply, hand: List[Card]) : (Supply, Seq[Card]) = {
-      val (newSupply, boughtCards) = buyPhase.doBuyPhase(buys, treasure + Trader.valueHand(hand), currentPlayer, buySupply)
+    private def doBuyPhase(result: ActionResult) : (Supply, Seq[Card]) = {
+      val (buys, supply, hand) = (defaultBuyCount + result.buys, result.supply, result.stacks.hand)
+      val (newSupply, boughtCards) = buyPhase.doBuyPhase(buys, result.treasure + Trader.valueHand(hand), currentPlayer, supply)
       if (!boughtCards.isEmpty) otherPlayers.foreach(_.playerEvent(currentPlayer, Gain, boughtCards))
       (newSupply, boughtCards)
     }
 
     def takeTurn(currentStacks: Stacks) : Game = {
       val actionResult = actionPhase.doActionPhase(currentStacks, currentPlayer, state.supply, otherStacks.zip(otherPlayers))
-      actionResult.supply.gameOver() match {
-        case true => nextGame(currentPlayer :: otherPlayers, actionResult.stacks :: otherStacks, actionResult.supply)
-        case false => {
-          val (nextSupply, boughtCards) = doBuyPhase(actionResult.treasure, 1 + actionResult.buys, actionResult.supply, actionResult.stacks.hand)
-          val finalStacks = actionResult.stacks.gain(boughtCards).endTurn()
-          currentPlayer.newHand(finalStacks.hand)
-          nextGame(nextPlayers(actionResult), nextStacks(actionResult, finalStacks), nextSupply)
-        }
+      if (actionResult.supply.gameOver()) {
+        nextGame(currentPlayer :: otherPlayers, actionResult.stacks :: otherStacks, actionResult.supply)
+      } else {
+        val (nextSupply, boughtCards) = doBuyPhase(actionResult)
+        val finalStacks = actionResult.stacks.gain(boughtCards).endTurn()
+        currentPlayer.newHand(finalStacks.hand)
+        nextGame(nextPlayers(actionResult), nextStacks(actionResult, finalStacks), nextSupply)
       }
     }
   }
