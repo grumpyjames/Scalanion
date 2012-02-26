@@ -8,7 +8,9 @@ object CommandLinePlayer {
   }
 
   private case object StdOutPrinter extends Printer {
-    def println(s: String) = System.out.println(s)
+    def println(s: String) {
+      System.out.println(s)
+    }
   }
 }
 
@@ -22,13 +24,13 @@ class CommandLinePlayer(private val name: String, private val userInterface: Pro
     nextInput(buildDescription(purpose, minChoices, maxChoices), cards).dropWhile(invalid(minChoices, maxChoices, _)).head
   }
 
-  def newHand(hand: Seq[Card]) : Unit = {
-    userInterface.prompt(QuickDescription("Your hand now contains: " + hand.map(_.describe).reduceLeft(_ + ", " + _)))
+  def newHand(hand: Seq[Card]) {
+    userInterface.prompt(QuickDescription("Your hand now contains: " + hand.map(_.describe()).reduceLeft(_ + ", " + _)))
   }
   
-  def playerEvent(player: SelfDescribing, action: Verb, cards: Seq[Card]) : Unit = {
+  def playerEvent(player: SelfDescribing, action: Verb, cards: Seq[Card]) {
     if (!(player eq this) && !cards.isEmpty)
-      userInterface.prompt(QuickDescription(player.describe() + " " + action.past + ": " + cards.map(_.describe).reduceLeft(_ + ", " + _)))
+      userInterface.prompt(QuickDescription(player.describe() + " " + action.past + ": " + cards.map(_.describe()).reduceLeft(_ + ", " + _)))
   }
 
   private def nextInput(greeting: SelfDescribing, options: Seq[SelfDescribing]) : Stream[Seq[Int]] = {
@@ -49,7 +51,7 @@ class CommandLinePlayer(private val name: String, private val userInterface: Pro
     else if (minChoices == 0)
       description("Choose up to", maxChoices, purpose)
     else
-      error("don't know how to build this description")
+      sys.error("Don't know how to build this description: minChoices was < 0")
   }
 
   private def description(prefix: String, choiceCount: Int, purpose: Verb) : SelfDescribing = {
@@ -69,7 +71,7 @@ class CommandLinePlayer(private val name: String, private val userInterface: Pro
     nextInput(QuickDescription(text), noAndYes).dropWhile(invalidQueryResponse).head.head match {
       case 1 => false
       case 2 => true
-      case _ => error("wtf")
+      case _ => sys.error("only gave two options, and we rely on filtered return; bail!")
     }
   }
 
@@ -78,17 +80,19 @@ class CommandLinePlayer(private val name: String, private val userInterface: Pro
     case ChooseForOtherPlayer(cards, otherPlayer, verb) => {
       cards.isEmpty match {
         case true => true
-        case false => doQuery("Should " + otherPlayer.describe + " " + verb.present + " " + cards.map(_.describe).reduceLeft(_ + ", " + _) + "?")
+        case false => doQuery("Should " + otherPlayer.describe + " " + verb.present + " " + cards.map(_.describe()).reduceLeft(_ + ", " + _) + "?")
       }
     }
   }
 
-  def gameEvent(event: GameEvent) = event match {
-    case Start(startTime) => userInterface.prompt(QuickDescription("The game begins!"))
-    case End(leaderboard) => showLeaderboard(leaderboard)
+  def gameEvent(event: GameEvent) {
+    event match {
+      case Start(startTime) => userInterface.prompt(QuickDescription("The game begins!"))
+      case End(leaderboard) => showLeaderboard(leaderboard)
+    }
   }
 
-  private def showLeaderboard(leaderboard: Seq[(SelfDescribing, Int)]) : Unit = {
+  private def showLeaderboard(leaderboard: Seq[(SelfDescribing, Int)]) {
     userInterface.prompt(QuickDescription("The game ended. Scores were:"))
     leaderboard.indices.zip(leaderboard).foreach(indexAndPlayerScore =>
       userInterface.prompt(QuickDescription(String.valueOf(indexAndPlayerScore._1 + 1)
@@ -97,7 +101,7 @@ class CommandLinePlayer(private val name: String, private val userInterface: Pro
   }
 }
 
-private case class QuickDescription(val desc: String) extends SelfDescribing {
+private case class QuickDescription(desc: String) extends SelfDescribing {
   def describe() : String = { desc }
 }
 

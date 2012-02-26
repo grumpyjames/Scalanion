@@ -5,7 +5,7 @@ import org.grumpysoft._
 case class ThroneRoom() extends ActionCardImpl with TransmittableChoices with CardFilters {
   private def toActionCard(card: Card) = card match {
     case ac: ActionCard => ac
-    case _ => error("ffs")
+    case _ => sys.error("Only call this function with a card you *know* is an action card. Bailing.")
   }
 
   def play(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
