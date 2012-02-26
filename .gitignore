@@ -4,3 +4,5 @@ target/*
 project/build/target/*
 project/target
 .idea*
+project/plugins/project/
+project/plugins/target/

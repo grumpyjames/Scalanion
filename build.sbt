@@ -1,8 +1,14 @@
+import sbtprotobuf.{ProtobufPlugin=>PB}
+
+seq(PB.protobufSettings: _*)
+
 name := "Scalanion"
 
 version := "0.2"
 
 scalaVersion := "2.9.1"
+
+version in PB.protobufConfig := "2.4.0a"
 
 libraryDependencies ++= Seq(
     "com.google.protobuf" % "protobuf-java" % "2.4.0a",
