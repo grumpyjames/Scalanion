@@ -15,9 +15,9 @@ object GameSpec extends Specification with Mockito with GameSpecState {
 
   val players = List.fill(4)(new SinkPlayer())
 
-  val otherStacks = List.fill[Stacks](3)(deckOnly)
-
   val playerOneHand = List(Copper(), Silver())
+
+  val otherStacks = List.fill[Stacks](3)(deckOnly)
   val cannedStacks = Stacks(defaultDeck(), playerOneHand, List()) :: otherStacks
   val postBuySupply = mock[Supply]
 
@@ -42,33 +42,7 @@ object GameSpec extends Specification with Mockito with GameSpecState {
     }
   }
 
-  case class ThrowingBuyPhaseFn() extends BuyPhaseFn {
-    def doBuyPhase(buys: Int, treasure: Int, player: GenericPlayer[Card], supply: Supply) : (Supply, Seq[Card]) = {
-       throw new RuntimeException("unexpected invocation of action phase: game is over!")
-    }
-  }
-
-  case class ThrowingActionPhaseFn() extends ActionPhaseFn {
-    def doActionPhase(stacks: Stacks, player: GenericPlayer[Card], supply: Supply, table: Table) : ActionResult = {
-      throw new RuntimeException("unexpected invocation of action phase: game is over!")
-    }
-  }
-
   "a game" should {
-    "know when it is over, and not bother with either phase" in {
-      supply.gameOver returns true
-      val endOfGame = Game(players, cannedStacks, supply, ThrowingBuyPhaseFn(), ThrowingActionPhaseFn()).takeTurn
-      endOfGame.isOver must_==true
-    }
-
-    "not start the buy phase if the action phase finishes the game" in {
-      supply.gameOver returns false
-      postActionSupply.gameOver returns true
-      actionPhase.doActionPhase(stacksOne, playerOne, supply, table) returns reversedTableResult
-      val endOfGame = Game(players, cannedStacks, supply, ThrowingBuyPhaseFn(), actionPhase).takeTurn
-      endOfGame.isOver must_==true
-    }
-
     val cardsScoringFive = List(Province(), Curse(), Copper())
     val cardsScoringSix = List(Duchy(), Duchy())
     val cardsScoringTen = List(Province(), Silver(), Gold(), Duchy(), Estate())
@@ -83,7 +57,7 @@ object GameSpec extends Specification with Mockito with GameSpecState {
     val expectedLeaderboard = associatedPlayers.reverse.zip(List(26, 21, 12))
 
     "return the leaderboard sorted in order of highest score" in {
-      val game = Game(associatedPlayers, unorderedStacks, supply, ThrowingBuyPhaseFn(), ThrowingActionPhaseFn())
+      val game = Game(associatedPlayers, unorderedStacks, supply, null, null)
       game.leaderboard must_==expectedLeaderboard
     }
   }
