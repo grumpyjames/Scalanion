@@ -11,17 +11,6 @@ object Trader {
   }
 }
 
-object Scorer {
-  def scoreStacks(stacks: Stacks) : Int = {
-    val allCards = stacks.deck ++ stacks.hand ++ stacks.discard
-    allCards.map(card => card match {
-      case VictoryCard(_, victoryPoints) => victoryPoints
-      case c : Curse => -1
-      case _ => 0
-    }).sum
-  }
-}
-
 object BuyPhase {
   def apply(buys: Int, treasure: Int, player: GenericPlayer[Card], supply: Supply) : (Supply, Seq[Card]) = {
     trGo(buys, treasure, player, supply, List())

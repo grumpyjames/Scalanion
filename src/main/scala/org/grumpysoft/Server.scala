@@ -10,8 +10,8 @@ object Server {
 
     val game = Game.standardGame(players, Supplies.forTwo())
 
-    val endGame = turns(game).dropWhile(!_.isOver)
-    players.foreach(_.gameEvent(End(endGame.head.leaderboard())))
+    val finishedGame = turns(game).dropWhile(!_.isOver).head
+    players.foreach(_.gameEvent(End(Scorer.leaderboard(finishedGame.table))))
   }
 
   private def turns(startGame: Game) : Stream[Game] = {

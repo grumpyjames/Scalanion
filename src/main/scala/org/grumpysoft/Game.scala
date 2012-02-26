@@ -53,7 +53,7 @@ case class GameState(table: List[(GenericPlayer[Card], Stacks)], supply: Supply)
 case class Game(state: GameState,
                 private val buyPhase: BuyPhaseFn,
                 private val actionPhase: ActionPhaseFn)  {
-
+  val table = state.table
   private val players = state.players
   private val stacks = state.stacks
 
@@ -98,13 +98,7 @@ case class Game(state: GameState,
     else this
   }
 
-  def isOver: Boolean = {
-    state.supply.gameOver()
-  }
-
-  def leaderboard() : List[(SelfDescribing, Int)] = {
-    players.zip(stacks.map(Scorer.scoreStacks(_))).sortBy(-1 * _._2)
-  }
+  def isOver = state.supply.gameOver()
 
   override def toString: String = {
     players.zip(stacks).map(a => a._1.describe + " " + a._2.toString).foldLeft("game: ")(_ + "\n" + _)
