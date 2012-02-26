@@ -13,7 +13,7 @@ case class Bureaucrat() extends ActionCardImpl with TransmittableChoices {
     val victoryCards = stacks.hand.filter(isVictoryCard(_))
     if (victoryCards.size > 0) {
       val toReplace = chooseThenTransmit(player, victoryCards, PlaceOnDeck, 1, 1, otherPlayers)
-      return (stacks.replace(toReplace), player)
+      (stacks.replace(toReplace), player)
     } else {
       otherPlayers.map(_.playerEvent(player, RevealHand, stacks.hand))
       stacksAndPlayer

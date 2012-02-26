@@ -9,7 +9,7 @@ object WitchSpec extends ActionCardSpecBase {
     val playerTwoStacks = Stacks.empty()
     val playerThreeStacks = Stacks.empty()
 
-    val aCurse = List(Curse())
+    val oneCurse = List(Curse())
 
     supply.available(Curse()) returns true
     supply.buy(Curse()) returns anotherSupply
@@ -41,12 +41,12 @@ object WitchSpec extends ActionCardSpecBase {
 
   "witch" should {
     "curse the other players" in new TestState {
-      actionResult.table.map(_._1.discard must_==aCurse)
+      actionResult.table.map(_._1.discard must_==oneCurse)
     }
 
     "transmit events correctly" in new TestState {
-      checkEventReceived(playerThree, Gain, aCurse, List(playerOne, playerTwo))
-      checkEventReceived(playerTwo, Gain, aCurse, List(playerOne, playerThree))
+      checkEventReceived(playerThree, Gain, oneCurse, List(playerOne, playerTwo))
+      checkEventReceived(playerTwo, Gain, oneCurse, List(playerOne, playerThree))
     }
 
     "add two cards to the player's hand" in new TestState {
@@ -54,8 +54,7 @@ object WitchSpec extends ActionCardSpecBase {
     }
 
     "provide neither treasure nor buys" in new TestState {
-      actionResult.treasure must_==0
-      actionResult.buys must_==0
+      (actionResult.treasure must_==0) and (actionResult.buys must_==0)
     }
 
     "have taken the curses from the supply" in new TestState {
@@ -68,8 +67,7 @@ object WitchSpec extends ActionCardSpecBase {
     "only add curses if they are available in the supply" in new TestState {
       val secondActionResult = Witch().play(playerOneStacks, playerOne, OneCardSupply(Some(Curse())), makeTable(playerTwoStacks, playerThreeStacks))
       val resultStacks = secondActionResult.table.map(_._1)
-      resultStacks.head.discard must_==aCurse
-      resultStacks.last.discard must_==List()
+      (resultStacks.head.discard must_==oneCurse) and (resultStacks.last.discard must_==List())
     }
   }
 
