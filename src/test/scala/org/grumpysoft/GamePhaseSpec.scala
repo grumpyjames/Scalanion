@@ -15,18 +15,18 @@ object GamePhaseSpec extends org.specs2.mutable.Specification with org.specs2.mo
     val players = List.fill(4)(new SinkPlayer())
     val otherStacks = List.fill[Stacks](3)(deckOnly)
     val playerOneHand = List(Copper(), Silver())
-    val cannedStacks = Stacks(defaultDeck(), playerOneHand, Nil) :: otherStacks
+    val allStacks = Stacks(defaultDeck(), playerOneHand, Nil) :: otherStacks
 
     supply.gameOver returns false
     buyPhase.doBuyPhase(1, 3, players.head, supply) returns buyResult
     buyPhase.doBuyPhase(1, 0, players(1), postBuySupply) returns secondBuyResult
 
-    val game = Game(players, cannedStacks, supply, buyPhase, BoringActionPhase())
+    val game = Game(GameState(players zip allStacks, supply), buyPhase, BoringActionPhase())
     val afterOneTurn = game.takeTurn
     val afterTwoTurns = afterOneTurn.takeTurn
   }
 
-  "a game, when given some canned stacks" should {
+  "a game, when given some stacks" should {
 
     "end up passing the correct supply and treasure to the buy phase" in new TestState {
       (there was one(buyPhase).doBuyPhase(1, 3, players.head, supply)) and
@@ -34,7 +34,7 @@ object GamePhaseSpec extends org.specs2.mutable.Specification with org.specs2.mo
     }
 
     "add the bought cards to the buying player's discard" in new TestState {
-      afterOneTurn.allStacks.last.discard must_==Silver() :: playerOneHand
+      afterOneTurn.state.stacks.last.discard must_==Silver() :: playerOneHand
     }
 
     "transmit buy events to the other players" in new TestState {

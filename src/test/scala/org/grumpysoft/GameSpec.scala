@@ -18,12 +18,12 @@ object GameSpec extends Specification with Mockito with GameSpecState {
   val playerOneHand = List(Copper(), Silver())
 
   val otherStacks = List.fill[Stacks](3)(deckOnly)
-  val cannedStacks = Stacks(defaultDeck(), playerOneHand, List()) :: otherStacks
+  val allStacks = Stacks(defaultDeck(), playerOneHand, List()) :: otherStacks
   val postBuySupply = mock[Supply]
 
-  val stacksOne = cannedStacks.head
+  val stacksOne = allStacks.head
   val playerOne = players.head
-  val table = cannedStacks.tail.zip(players.tail)
+  val table = allStacks.tail.zip(players.tail)
   val postActionSupply = mock[Supply]
   val reversedTableResult = ActionResult.noBuys(1, 2, stacksOne, postActionSupply, table.reverse)
   val buyAfterActionResult = (postBuySupply, List(Remodel().toActionCard))
@@ -32,13 +32,13 @@ object GameSpec extends Specification with Mockito with GameSpecState {
     supply.gameOver returns false
     actionPhase.doActionPhase(stacksOne, playerOne, supply, table) returns reversedTableResult
     buyPhase.doBuyPhase(1, 1 + 3, playerOne, postActionSupply) returns buyAfterActionResult
-    val afterOneTurn = Game(players, cannedStacks, supply, buyPhase, actionPhase).takeTurn
+    val afterOneTurn = Game(GameState(players zip allStacks, supply), buyPhase, actionPhase).takeTurn
 
     "correctly delegate to it once per turn" in {
       (there was one(actionPhase).doActionPhase(stacksOne, playerOne, supply, table)) and
         (there was one(buyPhase).doBuyPhase(1, 1 + 3, playerOne, postActionSupply)) and
-        (afterOneTurn.allStacks.last.discard must_==Remodel().toActionCard :: stacksOne.hand) and
-        (afterOneTurn.supply must_==postBuySupply)
+        (afterOneTurn.state.stacks.last.discard must_==Remodel().toActionCard :: stacksOne.hand) and
+        (afterOneTurn.state.supply must_==postBuySupply)
     }
   }
 
@@ -57,7 +57,7 @@ object GameSpec extends Specification with Mockito with GameSpecState {
     val expectedLeaderboard = associatedPlayers.reverse.zip(List(26, 21, 12))
 
     "return the leaderboard sorted in order of highest score" in {
-      val game = Game(associatedPlayers, unorderedStacks, supply, null, null)
+      val game = Game(GameState(associatedPlayers zip unorderedStacks, supply), null, null)
       game.leaderboard must_==expectedLeaderboard
     }
   }

@@ -1,17 +1,17 @@
 package org.grumpysoft
 
 object Server {
-  def main(args: Array[String]) = {
+  def main(args: Array[String]) {
     val completeLobby = Lobby(8080).waitFor(1)
-    completeLobby.close
+    completeLobby.close()
     val players = new RichPlayer(new TreasureOnlyPlayer) :: completeLobby.players.map(new RichPlayer(_))
 
     players.foreach(_.gameEvent(Start(System.currentTimeMillis)))
 
-    val game = Game.standardGame(players, Supplies.forTwo)
+    val game = Game.standardGame(players, Supplies.forTwo())
 
     val endGame = turns(game).dropWhile(!_.isOver)
-    players.foreach(_.gameEvent(End(endGame.head.leaderboard)))
+    players.foreach(_.gameEvent(End(endGame.head.leaderboard())))
   }
 
   private def turns(startGame: Game) : Stream[Game] = {

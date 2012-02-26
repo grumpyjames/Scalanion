@@ -35,7 +35,7 @@ object GameEndSpec extends org.specs2.mutable.Specification with org.specs2.mock
   "a game" should {
     "know when it is over, and not bother with either phase" in new TestState {
       supply.gameOver returns true
-      val endOfGame = Game(players, allStacks, supply, ThrowingBuyPhaseFn(), ThrowingActionPhaseFn()).takeTurn
+      val endOfGame = Game(GameState(players.zip(allStacks), supply), ThrowingBuyPhaseFn(), ThrowingActionPhaseFn()).takeTurn
       endOfGame.isOver must_==true
     }
 
@@ -43,7 +43,7 @@ object GameEndSpec extends org.specs2.mutable.Specification with org.specs2.mock
       supply.gameOver returns false
       postActionSupply.gameOver returns true
       actionPhase.doActionPhase(allStacks.head, players.head, supply, table) returns gameOverResult
-      val endOfGame = Game(players, allStacks, supply, ThrowingBuyPhaseFn(), actionPhase).takeTurn
+      val endOfGame = Game(GameState(players.zip(allStacks), supply), ThrowingBuyPhaseFn(), actionPhase).takeTurn
       endOfGame.isOver must_==true
     }
   }

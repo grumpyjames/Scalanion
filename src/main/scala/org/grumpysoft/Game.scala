@@ -1,5 +1,7 @@
 package org.grumpysoft
 
+import collection.immutable.List
+
 
 object Game {
   private def makeStacks(count: Int) : List[Stacks] = {
@@ -8,8 +10,9 @@ object Game {
 
   def apply(players: List[GenericPlayer[Card]], supply: Supply, buyPhase: BuyPhaseFn, actionPhase: ActionPhaseFn) : Game = {
     val allStacks = makeStacks(players.size)
-    players.zip(allStacks).foreach(ps => ps._1.newHand(ps._2.hand))
-    Game(players, allStacks, supply, buyPhase, actionPhase)
+    val table: List[(GenericPlayer[Card], Stacks)] = players.zip(allStacks)
+    table.foreach(ps => ps._1.newHand(ps._2.hand))
+    Game(GameState(table, supply), buyPhase, actionPhase)
   }
 
   def standardGame(players: List[GenericPlayer[Card]], supply: Supply) : Game = {
@@ -38,15 +41,21 @@ private case object DefaultActionPhaseFn extends ActionPhaseFn {
   }
 }
 
+case class GameState(table: List[(GenericPlayer[Card], Stacks)], supply: Supply) {
+  val players = table.map(_._1)
+  val stacks = table.map(_._2)
+}
+
 
 // TODO: possibly a misnomer here?
 // This is actually the state of the game, bundled with some wiring of how it is played.
 // perhaps these concerns could be disassociated?
-case class Game(players: List[GenericPlayer[Card]],
-                allStacks: List[Stacks],
-                supply: Supply,
+case class Game(state: GameState,
                 private val buyPhase: BuyPhaseFn,
                 private val actionPhase: ActionPhaseFn)  {
+
+  private val players = state.players
+  private val stacks = state.stacks
 
   private case class InnerGame(currentPlayer: GenericPlayer[Card],
                                otherPlayers: List[GenericPlayer[Card]],
@@ -67,7 +76,7 @@ case class Game(players: List[GenericPlayer[Card]],
     }
 
     def takeTurn(currentStacks: Stacks) : Game = {
-      val actionResult = actionPhase.doActionPhase(currentStacks, currentPlayer, supply, otherStacks.zip(otherPlayers))
+      val actionResult = actionPhase.doActionPhase(currentStacks, currentPlayer, state.supply, otherStacks.zip(otherPlayers))
       actionResult.supply.gameOver() match {
         case true => nextGame(currentPlayer :: otherPlayers, actionResult.stacks :: otherStacks, actionResult.supply)
         case false => {
@@ -81,24 +90,24 @@ case class Game(players: List[GenericPlayer[Card]],
   }
 
   private def nextGame(players: List[GenericPlayer[Card]], allStacks: List[Stacks], supply: Supply) = {
-    Game(players, allStacks, supply, buyPhase, actionPhase)
+    Game(GameState(players.zip(allStacks), supply), buyPhase, actionPhase)
   }
 
   def takeTurn : Game = {
-    if (!isOver) InnerGame(players.head, players.tail, allStacks.tail).takeTurn(allStacks.head)
+    if (!isOver) InnerGame(players.head, players.tail, stacks.tail).takeTurn(stacks.head)
     else this
   }
 
   def isOver: Boolean = {
-    supply.gameOver()
+    state.supply.gameOver()
   }
 
   def leaderboard() : List[(SelfDescribing, Int)] = {
-    players.zip(allStacks.map(Scorer.scoreStacks(_))).sortBy(-1 * _._2)
+    players.zip(stacks.map(Scorer.scoreStacks(_))).sortBy(-1 * _._2)
   }
 
   override def toString: String = {
-    players.zip(allStacks).map(a => a._1.describe + " " + a._2.toString).foldLeft("game: ")(_ + "\n" + _)
+    players.zip(stacks).map(a => a._1.describe + " " + a._2.toString).foldLeft("game: ")(_ + "\n" + _)
   }
 
 }
