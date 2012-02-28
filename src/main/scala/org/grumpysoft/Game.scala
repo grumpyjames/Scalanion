@@ -53,10 +53,6 @@ case class GameState(table: List[(GenericPlayer[Card], Stacks)], supply: Supply)
   val stacks = table.map(_._2)
 }
 
-
-// TODO: possibly a misnomer here?
-// This is actually the state of the game, bundled with some wiring of how it is played.
-// perhaps these concerns could be disassociated?
 case class Game(state: GameState,
                 private val buyPhase: BuyPhaseFn,
                 private val actionPhase: ActionPhaseFn)  {

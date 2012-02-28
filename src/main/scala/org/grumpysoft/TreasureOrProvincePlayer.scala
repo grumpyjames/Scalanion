@@ -4,12 +4,16 @@ import TreasureCards._
 import VictoryCards._
 import annotation.tailrec
 
-class TreasureOnlyPlayer extends GenericPlayer[Int] {
-  def describe() = { "treasure only player" }
+object TreasureOrProvincePlayer {
+  val description = "buys treasure unless can buy a province"
+}
 
-  def gameEvent(event: GameEvent) = {}
-  def playerEvent(player: SelfDescribing, action: Verb, cards: Seq[Card]) = {}
-  def newHand(hand: Seq[Card]) = {}
+class TreasureOrProvincePlayer extends GenericPlayer[Int] {
+  def describe() = TreasureOrProvincePlayer.description
+
+  def gameEvent(event: GameEvent) {}
+  def playerEvent(player: SelfDescribing, action: Verb, cards: Seq[Card]) {}
+  def newHand(hand: Seq[Card]) {}
   def query(question: Query) = { false }
 
   @tailrec
@@ -22,7 +26,7 @@ class TreasureOnlyPlayer extends GenericPlayer[Int] {
   }
 
   def discard(cards: Seq[Card], minChoices: Int) = {
-    cards.toList.indices.zip(cards).sortBy(_._2.price).take(minChoices).map(_._1)
+    cards.toList.indices.zip(cards).sortBy(_._2.price()).take(minChoices).map(_._1)
   }
 
   def chooseFrom(cards: Seq[Card], purpose: Verb, minChoices: Int, maxChoices: Int) : Seq[Int] = {
